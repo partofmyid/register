@@ -1,0 +1,10 @@
+{
+    "owner": {
+        "email": "admin@stefdp.lol",
+        "username": "Stef-00012"
+    },
+    "record": {
+        "CNAME": "proxy.stefdp.lol"
+    },
+    "proxied": false
+}
