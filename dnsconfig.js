@@ -7,7 +7,6 @@ var providerCf = DnsProvider(NewDnsProvider("cloudflare", "CLOUDFLAREAPI", {
 }));
 
 var rootDomain = 'part-of.my.id';
-var registerSite = 'register-site.pages.dev';
 var proxy = {
   on: { "cloudflare_proxy": "on" },
   off: { "cloudflare_proxy": "off" }
