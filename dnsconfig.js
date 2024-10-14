@@ -106,11 +106,14 @@ for (var idx in domains) {
   //     );
   //   }
   // }
+
+  if ('ALIAS' in domainData.record) {
+    commits.push(
+      ALIAS(subdomain, domainData.record.ALIAS + ".", proxyState)
+    );
+  }
 }
 
-commits.push(
-  // CF_REDIRECT("*", "https://" + rootDomain + '/unregistered'),
-  ALIAS("@", registerSite + ".", proxy.on)
-);
+// commits.push();
 
 D(rootDomain, regNone, providerCf, commits);
