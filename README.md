@@ -8,9 +8,8 @@ your id on the web
 
 ```json
 {
-    "description": "Project Description",
+    "description": "Project Description (optional)",
     "owner": {
-        "repo": "https://github.com/username/repo",
         "email": "hello@example.com",
         "username": "github-username"
     },
