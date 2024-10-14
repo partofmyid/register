@@ -1,0 +1,12 @@
+
+    "description": "Project Description",
+    "owner": {
+        "repo": "https://github.com/CuteDog5695/cutedog5695.github.io",
+        "email": "cutedog5695@gmail.com",
+        "username": "CuteDog5695"
+    },
+    "record": {
+        "CNAME": "edge.redirect.pizza"
+    },
+    "proxied": false
+}
