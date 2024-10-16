@@ -10,7 +10,6 @@ your id on the web
 {
     "description": "Project Description (optional)",
     "owner": {
-        "email": "hello@example.com",
         "username": "github-username"
     },
     "record": {
