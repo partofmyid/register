@@ -19,9 +19,7 @@ function getDomainsList(filesPath) {
 
   for (var i = 0; i < files.length; i++) {
     var basename = files[i].split('/').reverse()[0];
-    console.log(basename)
     var name = basename.split('.').slice(0,-1).join('.');
-    console.log(name)
     result.push({ name: name, data: require(files[i]) });
   }
   return result;
