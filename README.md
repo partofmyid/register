@@ -1,6 +1,9 @@
 # part-of-my-id
 your id on the web
 
+> [!WARNING]
+> Project is in ALPHA. Bugs and big changes to registration format are expected.
+
 ## registration
 1. **Star** and **[Fork](https://github.com/partofmyid/register/fork)** this repository.
 2. Add a new file called `your-name.json` in the `/domains` folder to register `your-name.part-of.my.id` subdomain (replace `your-name` with whatever subdomain you want).
