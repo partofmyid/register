@@ -1,8 +1,12 @@
-# part-of-my-id
-your id on the web
+<p align="center">
+    <img alt="banner" src="https://raw.githubusercontent.com/partofmyid/.github/refs/heads/main/profile/image.png">
+</p>
+<h1 align="center">part-of.my.id</h1>
 
 > [!WARNING]
 > Project is in ALPHA. Bugs and big changes to registration format are expected.
+
+<a href="https://discord.gg/rFyRF3MMhc"><img alt="Discord Server" src="https://invidget.switchblade.xyz/rFyRF3MMhc"></a>
 
 ## registration
 1. **Star** and **[Fork](https://github.com/partofmyid/register/fork)** this repository.
