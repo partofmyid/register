@@ -1,0 +1,84 @@
+{
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        }
+      },
+      "required": ["username"]
+    },
+    "record": {
+      "type": "object",
+      "properties": {
+        "A": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "ipv4"
+          }
+        },
+        "AAAA": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "ipv6"
+          }
+        },
+        "CNAME": {
+          "type": "string"
+        },
+        "MX": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "TXT": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "SRV": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "priority": {
+                "type": "integer"
+              },
+              "weight": {
+                "type": "integer"
+              },
+              "port": {
+                "type": "integer"
+              },
+              "target": {
+                "type": "string"
+              }
+            },
+            "required": ["priority", "weight", "port", "target"]
+          }
+        }
+      },
+      "anyOf": [
+        { "required": ["A"] },
+        { "required": ["AAAA"] },
+        { "required": ["CNAME"] },
+        { "required": ["MX"] },
+        { "required": ["TXT"] },
+        { "required": ["SRV"] }
+      ]
+    },
+    "proxied": {
+      "type": "boolean"
+    }
+  },
+  "required": ["owner", "record", "proxied"]
+}
