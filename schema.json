@@ -76,6 +76,7 @@
       },
       "required": [],
       "anyOf": [
+        { "required": ["ALIAS"] },
         { "required": ["A"] },
         { "required": ["AAAA"] },
         { "required": ["CNAME"] },
