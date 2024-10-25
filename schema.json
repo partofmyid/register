@@ -20,6 +20,9 @@
     "record": {
       "type": "object",
       "properties": {
+        "ALIAS": {
+          "type": "string"
+        },
         "A": {
           "type": "array",
           "items": {
