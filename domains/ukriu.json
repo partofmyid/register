@@ -1,0 +1,11 @@
+{
+    "description": "my website",
+    "owner": {
+        "email": "partofmyid@ukriu.com",
+        "username": "ukriu"
+    },
+    "record": {
+        "CNAME": "ukriu.pages.dev"
+    },
+    "proxied": false
+}
