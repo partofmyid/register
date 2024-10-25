@@ -1,0 +1,10 @@
+{
+    "description": "my website",
+    "owner": {
+        "username": "ukriu"
+    },
+    "record": {
+        "CNAME": "ukriu.pages.dev"
+    },
+    "proxied": false
+}
