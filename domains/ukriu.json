@@ -1,6 +1,7 @@
 {
     "description": "my website",
     "owner": {
+        "email": "partofmyid@ukriu.com",
         "username": "ukriu"
     },
     "record": {
