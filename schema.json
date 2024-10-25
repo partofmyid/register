@@ -85,5 +85,5 @@
       "type": "boolean"
     }
   },
-  "required": ["owner", "record", "proxied"]
+  "required": ["owner", "record"]
 }
