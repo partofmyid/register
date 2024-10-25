@@ -1,4 +1,5 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
     "description": {
@@ -11,11 +12,17 @@
           "type": "string"
         }
       },
-      "required": ["username"]
+      "required": ["username"],
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "record": {
       "type": "object",
       "properties": {
+        "ALIAS": {
+          "type": "string"
+        },
         "A": {
           "type": "array",
           "items": {
@@ -67,7 +74,9 @@
           }
         }
       },
+      "required": [],
       "anyOf": [
+        { "required": ["ALIAS"] },
         { "required": ["A"] },
         { "required": ["AAAA"] },
         { "required": ["CNAME"] },
@@ -80,5 +89,5 @@
       "type": "boolean"
     }
   },
-  "required": ["owner", "record", "proxied"]
+  "required": ["owner", "record"]
 }
