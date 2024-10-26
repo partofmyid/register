@@ -36,7 +36,7 @@ jobs:
                   pattern: "\\.json$"
               env:
                   BASE: "domains/"
-            - name: Validate action.yml against a remote schema
+            - name: Validate JSON Schema
               uses: cardinalby/schema-validator-action@v3
               with:
                 file: 'domains/*.json'
