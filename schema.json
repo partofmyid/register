@@ -51,27 +51,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "SRV": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "priority": {
-                "type": "integer"
-              },
-              "weight": {
-                "type": "integer"
-              },
-              "port": {
-                "type": "integer"
-              },
-              "target": {
-                "type": "string"
-              }
-            },
-            "required": ["priority", "weight", "port", "target"]
-          }
         }
       },
       "required": [],
