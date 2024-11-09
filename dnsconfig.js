@@ -89,14 +89,14 @@ for (var idx in domains) {
   //   }
   // }
 
-  if ('SRV' in domainData.record) {
-    for (var srv in domainData.record.SRV) {
-      var srvRecord = domainData.record.SRV[srv];
-      commits.push(
-        SRV(subdomain, srvRecord.priority, srvRecord.weight, srvRecord.port, srvRecord.target + ".")
-      );
-    }
-  }
+  // if ('SRV' in domainData.record) {
+  //   for (var srv in domainData.record.SRV) {
+  //     var srvRecord = domainData.record.SRV[srv];
+  //     commits.push(
+  //       SRV(subdomain, srvRecord.priority, srvRecord.weight, srvRecord.port, srvRecord.target + ".")
+  //     );
+  //   }
+  // }
 
   // if ('PTR' in domainData.record) {
   //   for (var ptr in domainData.record.PTR) {
