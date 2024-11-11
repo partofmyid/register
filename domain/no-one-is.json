@@ -1,0 +1,10 @@
+{
+  "owner": {
+    "username": "EducatedSuddenBucket",
+    "email": ["me@esb.is-a.dev","hi@esb.is-a.dev","educatedsuddenbucket@duck.com","educatedsuddenbucket@gmail.com"]
+  },
+  "record": {
+    "CNAME": "educatedsuddenbucket-github-io.onrender.com"
+  },
+  "proxy": false
+}
