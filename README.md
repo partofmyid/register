@@ -8,4 +8,4 @@
 > <a href="https://discord.gg/rFyRF3MMhc"><img alt="Discord Server" src="https://invidget.switchblade.xyz/rFyRF3MMhc"></a>
 
 > [!WARNING]
-> *Domains used for illegal purposes will be removed and permanently banned. Please, provide a clear description of your resource in the pull request.*
+> *Domains used for illegal purposes will be removed and permanently banned. Please provide a clear description of your resource in the pull request.*
