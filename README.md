@@ -1,7 +1,5 @@
-<p align="center">
-    <img alt="banner" src="https://raw.githubusercontent.com/partofmyid/.github/refs/heads/main/profile/image.png">
-</p>
-<h1 align="center">part-of.my.id</h1>
+> [!CAUTION]
+> We currently **DO NOT** support Vercel, Netlify, Cloudflare, and other services that requires us to be on the [PSL](https://github.com/publicsuffix/list). _We will apply to be on the list only if theres high demand_, so be patient and invite some of your friends!
 
 > [!NOTE]
 > Documentation is all on our website [here](https://part-of.my.id/docs#structure). Join our discord server to recieve updates and get support:
