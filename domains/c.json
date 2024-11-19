@@ -1,0 +1,10 @@
+{
+  "owner": {
+    "username": "orangci",
+    "discord": "orangc"
+  },
+  "record": {
+    "CNAME": "edge.redirect.pizza."
+  },
+  "proxy": false
+}
