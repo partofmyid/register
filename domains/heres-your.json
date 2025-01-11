@@ -1,0 +1,9 @@
+{
+  "owner": {
+    "username": "fuloid"
+  },
+  "record": {
+    "CNAME": "edge.redirect.pizza"
+  },
+  "proxy": true
+}
