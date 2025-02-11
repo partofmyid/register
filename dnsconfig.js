@@ -31,8 +31,8 @@ var commits = [];
 for (var idx in domains) {
   var domainData = domains[idx].data;
   var subdomain = domains[idx].name;
-  var proxyState = proxy.on;
-  if (domainData.proxied === false) proxyState = proxy.off;
+  var proxyState = proxy.off;
+  if (domainData.proxied === true) proxyState = proxy.on;
 
   if ('A' in domainData.record) {
     for (var a in domainData.record.A) {
