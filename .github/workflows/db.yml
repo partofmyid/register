@@ -52,7 +52,7 @@ jobs:
 
             - name: Commit and push database.json to database repository
               run: |
-                  ls -la
+                  ls -la database.json
                   cp database.json db/database.json -f
                   cd db
                   git add database.json
