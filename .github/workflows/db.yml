@@ -36,19 +36,23 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
+              
+            - name: Clone database repository
+              run: |
+                git clone https://github.com/partofmyid/database.git db
+                cd db
+                git config --global user.name 'github-actions'
+                git config --global user.email 'github-actions@github.com'
+
             - name: Download database artifact
               uses: actions/download-artifact@v4
               with:
                   name: database
-                  path: database.json
+                  path: ./database.json
 
             - name: Commit and push database.json to database repository
               run: |
-                  git clone https://github.com/partofmyid/database.git db
-                  cd db
-                  git config --global user.name 'github-actions'
-                  git config --global user.email 'github-actions@github.com'
-                  mv ../database.json ./database.json -f
+                  ls -al
                   git add database.json
                   git commit -m 'Update database.json'
                   git push
