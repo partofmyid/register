@@ -36,7 +36,7 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
-              
+
             - name: Clone database repository
               run: |
                 git clone https://github.com/partofmyid/database.git db
@@ -48,11 +48,12 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                   name: database
-                  path: ./database.json
+                  path: ./db/database.json
 
             - name: Commit and push database.json to database repository
               run: |
-                  ls -al
+                  ls -al db
+                  cd db
                   git add database.json
                   git commit -m 'Update database.json'
                   git push
