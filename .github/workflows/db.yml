@@ -9,6 +9,8 @@ on:
             - "dbgen.js"
             - ".github/workflows/db.yml"
 
+
+            
 jobs:
     generate:
         runs-on: ubuntu-latest
@@ -24,39 +26,10 @@ jobs:
             - name: Generate database
               run: node dbgen.js > database.json
 
-            - name: Upload database artifact
-              uses: actions/upload-artifact@v4
-              with:
-                  name: database
-                  path: database.json
-
-    upload:
-        needs: generate
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
-
-            - name: Clone database repository
+            - name: Commit changes
               run: |
-                git clone https://github.com/partofmyid/database.git db
-                git config --global user.name ${{ secrets.GH_COMMIT_USER }}
-                git config --global user.email ${{ secrets.GH_COMMIT_EMAIL }}
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
-
-            - name: Download database artifact
-              uses: actions/download-artifact@v4
-              with:
-                  name: database
-                  path: ./artifact
-
-            - name: Commit and push database.json to database repository
-              run: |
-                  mv artifact/database.json db/database.json -f
-                  cd db
+                  git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git config --global user.name "github-actions[bot]"
                   git add database.json
-                  git commit -m '[automated] update database.json'
+                  git commit -m "Update database.json"
                   git push
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
