@@ -14,10 +14,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
 
             - name: Set up Node.js
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v4
               with:
                   node-version: '14'
 
@@ -28,7 +28,7 @@ jobs:
               run: node dbgen.js > database.json
 
             - name: Upload database artifact
-              uses: actions/upload-artifact@v2
+              uses: actions/upload-artifact@v4
               with:
                   name: database
                   path: database.json
@@ -38,10 +38,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
 
             - name: Download database artifact
-              uses: actions/download-artifact@v2
+              uses: actions/download-artifact@v4
               with:
                   name: database
                   path: database.json
