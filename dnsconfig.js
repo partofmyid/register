@@ -1,6 +1,7 @@
 // @ts-check
-/// <reference path="types-dnscontrol.d.ts" />
+/// <reference path="types-dnscontrol.d.ts"/>
 // ^^^^^^ https://docs.dnscontrol.org/getting-started/typescript
+
 var regNone = NewRegistrar("none");
 var providerCf = DnsProvider(NewDnsProvider("cloudflare", "CLOUDFLAREAPI", {
   // manage_redirects: true,
