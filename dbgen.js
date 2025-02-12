@@ -1,9 +1,11 @@
+const fs = require('fs');
+
 console.log(
     JSON.stringify(
-        require('fs').readdirSync('./domains').map(f => 
+        fs.readdirSync('./domains').map(f => 
             [
                 f.split('.').slice(0, -1).join('.'), // subdomain
-                require(`./domains/${f}`).owner.username // owner
+                JSON.parse(fs.readFileSync(`./domains/${f}`, 'utf8')).owner.username // owner
             ]
         )
     )
