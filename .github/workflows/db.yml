@@ -48,7 +48,7 @@ jobs:
                   cd db
                   git config --global user.name 'github-actions'
                   git config --global user.email 'github-actions@github.com'
-                  mv ../database.json . -f
+                  mv ../database.json ./database.json -f
                   git add database.json
                   git commit -m 'Update database.json'
                   git push
