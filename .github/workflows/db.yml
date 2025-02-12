@@ -48,11 +48,11 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                   name: database
-                  path: ./db/database.json
+                  path: ./database.json
 
             - name: Commit and push database.json to database repository
               run: |
-                  ls -al db
+                  cp database.json db/database.json -f
                   cd db
                   git add database.json
                   git commit -m 'Update database.json'
