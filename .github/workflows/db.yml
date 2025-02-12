@@ -6,6 +6,8 @@ on:
         branches: [main]
         paths:
             - "domains/**"
+            - "dbgen.js"
+            - ".github/workflows/db.yml"
 
 jobs:
     generate:
