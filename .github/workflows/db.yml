@@ -9,10 +9,11 @@ on:
             - "dbgen.js"
             - ".github/workflows/db.yml"
 
+permissions:
+    contents: write
 
-            
 jobs:
-    generate:
+    sync:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
