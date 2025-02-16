@@ -8,7 +8,8 @@ on:
         paths:
             - "domains/**"
             - ".github/workflows/validation.yml"
-            - "dnsconfig.js"
+            - "scripts/dnsconfig.js"
+            - "scripts/schema.json"
 
 concurrency:
     group: ${{ github.ref }}-validation
@@ -24,7 +25,7 @@ jobs:
               uses: koenrh/dnscontrol-action@v3
               with:
                   args: check
-                  config_file: "dnsconfig.js"
+                  config_file: "scripts/dnsconfig.js"
     json:
         name: JSON
         runs-on: ubuntu-latest
@@ -40,4 +41,4 @@ jobs:
               uses: cardinalby/schema-validator-action@v3
               with:
                 file: 'domains/*.json'
-                schema: 'schema.json'
+                schema: 'scripts/schema.json'

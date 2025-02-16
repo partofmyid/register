@@ -1,5 +1,5 @@
 // @ts-check
-/// <reference path="types-dnscontrol.d.ts"/>
+/// <reference path="./types-dnscontrol.d.ts"/>
 // ^^^^^^ https://docs.dnscontrol.org/getting-started/typescript
 
 var regNone = NewRegistrar("none");
@@ -26,7 +26,7 @@ function getDomainsList(filesPath) {
   return result;
 }
 
-var domains = getDomainsList('./domains');
+var domains = getDomainsList('../domains');
 var commits = [];
 
 for (var idx in domains) {

@@ -24,19 +24,16 @@ jobs:
               with:
                   node-version: '18'
 
-            - name: Generate database
-              run: node scripts/dbgen.js > stats/database.json
-
-            - name: Count domains
-              run: ls domains | wc -l > stats/count.txt
+            - name: Generate statistics
+              run: |
+                  node scripts/dict.js > stats/dict.json 2>&1 &
+                  ls domains | wc -l > stats/count.txt 2>&1 &
+                  wait
 
             - name: Commit changes
               run: |
                   git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"
-                  git add stats/database.json stats/count.txt
-                  ls -l
-                  ls -l stats
-                  pwd
+                  git add stats/dict.json stats/count.txt 
                   git commit -m "[automated] update stats"
                   git push
