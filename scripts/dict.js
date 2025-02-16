@@ -9,4 +9,4 @@ const dict = fs.readdirSync('./domains').map(f => [
     return v;
 }, {});
 
-console.log(dict);
+console.log(JSON.stringify(dict));
