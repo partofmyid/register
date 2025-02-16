@@ -1,4 +1,4 @@
-name: Database Sync
+name: Stats Sync
 
 on:
     workflow_dispatch:
@@ -25,7 +25,10 @@ jobs:
                   node-version: '18'
 
             - name: Generate database
-              run: node dbgen.js > database.json
+              run: node scripts/dbgen.js > stats/database.json
+
+            - name: Count domains
+              run: ls domains | wc -l > stats/count.txt
 
             - name: Commit changes
               run: |
