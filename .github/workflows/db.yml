@@ -35,5 +35,8 @@ jobs:
                   git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git config --global user.name "github-actions[bot]"
                   git add stats/database.json stats/count.txt
+                  ls -l
+                  ls -l stats
+                  pwd
                   git commit -m "[automated] update stats"
                   git push
