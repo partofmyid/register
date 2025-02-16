@@ -6,7 +6,7 @@ on:
         branches: [main]
         paths:
             - "domains/**"
-            - "dbgen.js"
+            - "scripts/dict.js"
             - ".github/workflows/db.yml"
 
 permissions:
