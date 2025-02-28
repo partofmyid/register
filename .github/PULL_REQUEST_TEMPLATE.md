@@ -12,6 +12,7 @@
 - [ ] There is sufficient information at the `owner` field. (including your github `username`)
 - [ ] I have read the [README](https://github.com/partofmyid/register) for announcements in case of any updates.
 - [ ] I know what im doing and everything is ready.
+- [ ] You have stared the repository and followed the organization. <!-- optional but highly recommended ;) -->
 
 ## Description
 <!-- Please provide a description below of what you will be using the domain for. -->
