@@ -1,4 +1,5 @@
 <!--
+    ⚠️⚠️ ****READ FIRST**** ⚠️⚠️
     To make our job easier, please spend time to review your application before submitting.
     To check an item, add an 'X' between the brackets: '[ ]' => '[X]'
 -->
@@ -11,11 +12,17 @@
 - [ ] The CNAME record is a valid hostname and doesn't contain `https://` or `/`. <!-- ignore if your not using CNAME -->
 - [ ] There is sufficient information at the `owner` field. (including your github `username`)
 - [ ] I have read the [README](https://github.com/partofmyid/register) for announcements in case of any updates.
-- [ ] I know what im doing and everything is ready.
+- [ ] I know what im doing and everything is ready. <!-- ⚠️⚠️ ****REQUIRED**** ⚠️⚠️ -->
 - [ ] You have stared the repository and followed the organization. <!-- optional but highly recommended ;) -->
 
 ## Description
-<!-- Please provide a description below of what you will be using the domain for. -->
+<!--
+    ⚠️⚠️ ****REQUIRED IF NOT USED FOR A WEBSITE**** ⚠️⚠️
+    Please provide a description below of what you will be using the domain for.
+-->
 
 ## Website / App preview
-<!-- Please provide a link to your website below. -->
+<!--
+    ⚠️⚠️ ****REQUIRED IF ITS A WEBSITE**** ⚠️⚠️
+    Please provide a link to your website below.
+-->
