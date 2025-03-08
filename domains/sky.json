@@ -1,0 +1,12 @@
+{
+  "description": "sky.my.id",
+  "owner": {
+    "username": "lverx",
+    "email": "admin@lverx.xyz"
+  },
+  {
+  "record": {
+    "CNAME": "https://sky-is.onrender.com"
+  },
+  "proxied": true
+}
