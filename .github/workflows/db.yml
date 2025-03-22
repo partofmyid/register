@@ -26,14 +26,19 @@ jobs:
 
             - name: Generate statistics
               run: |
-                  node scripts/dict.js > stats/dict.json 2>&1 &
-                  ls domains | wc -l > stats/count.txt 2>&1 &
-                  wait
+                rm stats/*_error.log
 
+                node scripts/dict.js > stats/dict.json 2>stats/dict_error.log &
+                ls domains | wc -l > stats/count.txt 2>stats/count_error.log &
+                wait
+            
             - name: Commit changes
               run: |
-                  git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                  git config --global user.name "github-actions[bot]"
-                  git add stats/dict.json stats/count.txt 
-                  git commit -m "[automated] update stats"
-                  git push
+                git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                git config --global user.name "github-actions[bot]"
+                git add stats
+
+                if [ -n "$(git status --porcelain)" ]; then
+                    git commit -m "[automated] update stats"
+                    git push
+                fi
