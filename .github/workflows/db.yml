@@ -26,7 +26,7 @@ jobs:
 
             - name: Generate statistics
               run: |
-                rm stats/*_error.log
+                rm -f stats/*_error.log
 
                 node scripts/dict.js > stats/dict.json 2>stats/dict_error.log &
                 ls domains | wc -l > stats/count.txt 2>stats/count_error.log &
