@@ -3,13 +3,15 @@ name: Validation
 on:
     workflow_dispatch:
     pull_request:
-    merge_group:
-    push:
+        types: [opened]
         branches: [main]
         paths:
             - "domains/*"
             - ".github/workflows/validation.yml"
             - "scripts/*"
+    merge_group:
+        types: [checks_requested]
+    push:
 
 concurrency:
     group: ${{ github.ref }}-validation
