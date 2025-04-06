@@ -7,8 +7,7 @@
     "record": {
         "A": ["128.204.223.98"],
         "MX": ["mail5.serv00.com"],
-        "TXT": ["v=spf1 mx a include:mail5.serv00.com -all"],
-        "NS": ["dns1.serv00.com", "dns2.serv00.com"],
+        "TXT": ["v=spf1 mx a include:mail5.serv00.com -all"]
     },
 
     "proxied": false
