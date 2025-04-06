@@ -3,6 +3,9 @@ name: Validation
 on:
     workflow_dispatch:
     pull_request:
+        types:
+            - opened
+            - labeled
     push:
         paths:
             - "domains/*"
