@@ -1,7 +1,4 @@
 > [!CAUTION]
-> **Pull requests are ON HOLD** for the time being to fix some CI issues.
-
-> [!CAUTION]
 > We currently **DO NOT** support Vercel, Netlify, and other services that requires us to be on the [PSL](https://github.com/publicsuffix/list). _We will apply to be on the list [only if theres high demand](https://publicsuffix.org/submit/#:~:text=We%20will%20generally%20decline%20small%20projects)_, so be patient and invite some of your friends!
 
 > [!NOTE]
