@@ -4,12 +4,10 @@ on:
     workflow_dispatch:
     pull_request:
     push:
-        branches: [main]
         paths:
-            - "domains/**"
+            - "domains/*"
             - ".github/workflows/validation.yml"
-            - "scripts/dnsconfig.js"
-            - "scripts/schema.json"
+            - "scripts/*"
 
 concurrency:
     group: ${{ github.ref }}-validation
