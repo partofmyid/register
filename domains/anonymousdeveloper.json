@@ -1,0 +1,16 @@
+{
+  "owner": {
+    "username": "noah-dev-codes"
+  },
+  "record": {
+    "MX": [
+      "mx1.improvmx.com",
+      "mx2.improvmx.com"
+    ],
+    "TXT": [
+      "dh=25d0bd4f72321500755bcad26216d6ce4181a155",
+      "v=spf1 include:spf.improvmx.com ~all"
+    ]
+  },
+  "proxy": true
+}
