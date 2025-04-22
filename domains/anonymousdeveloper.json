@@ -2,15 +2,10 @@
   "owner": {
     "username": "noah-dev-codes"
   },
-  "record": {
-    "MX": [
-      "mx1.improvmx.com",
-      "mx2.improvmx.com"
-    ],
-"CNAME": "noah-dev-codes.github.io",
+  "record": { 
+    "CNAME": "noah-dev-codes.github.io",
     "TXT": [
       "dh=25d0bd4f72321500755bcad26216d6ce4181a155",
-      "v=spf1 include:spf.improvmx.com ~all"
     ]
   },
   "proxied": true
