@@ -3,7 +3,7 @@
     "username": "ColinLeDev"
   },
   "description": "My personal portfolio hosted on my server",
-  "records": {
+  "record": {
     "CNAME": "proxy.col1n.fr"
   },
   "proxied": false
