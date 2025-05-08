@@ -1,0 +1,10 @@
+{
+  "owner": {
+    "username": "ColinLeDev"
+  },
+  "description": "My personal portfolio hosted on my server",
+  "record": {
+    "CNAME": "proxy.col1n.fr"
+  },
+  "proxied": false
+}
