@@ -1,9 +1,9 @@
 {
   "owner": {
-    "username": "jacobrdale.github.io"
+    "username": "jacobrdale"
   },
   "record": {
-    "CNAME": "jacobrdale.github.io"
+    "CNAME": "hexon404.onrender.com"
   },
   "proxy": false
 }
