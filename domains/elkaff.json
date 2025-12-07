@@ -5,5 +5,5 @@
   "record": {
     "CNAME": "portofolio-pixel.pages.dev"
   },
-  "proxy": true
+  "proxied": true
 }
