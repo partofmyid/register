@@ -8,6 +8,7 @@
         - Github Pull Requests
         - How DNS Works
     4.  When in doubt, read the docs before asking in PR
+    5. **PREVIEWS ARE REQUIRED FOR WEBSITES.** Can be a screenshot/link. If it's not a website then please state the use of the subdomain.
 -->
 
 ## Requirements
