@@ -17,6 +17,7 @@
 
 - [ ] The CNAME record is a valid FQDN and doesn't contain `https://` or `/`. <!-- ignore if your not using CNAME -->
 - [ ] There is sufficient information at the `owner` field. (including your github `username`)
+- [ ] I own the root subdomain for this nested subdomain. (checklist if you aren't registering a nested subdomain) 
 - [ ] I have read the [README](https://github.com/partofmyid/register) for announcements in case of any updates.
 - [ ] I know what im doing and everything is ready. <!-- ⚠️⚠️ ****REQUIRED**** ⚠️⚠️ -->
 - [ ] You have stared the repository and followed the organization. <!-- optional but highly recommended ;) -->
