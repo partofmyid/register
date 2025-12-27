@@ -1,0 +1,9 @@
+{
+  "owner": {
+    "username": "centralmacatuba"
+  },
+  "record": {
+    "CNAME": "centralmacatuba.eu.org"
+  },
+  "proxy": true
+}
