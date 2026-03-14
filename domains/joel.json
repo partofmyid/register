@@ -12,6 +12,9 @@
     ],
     "MX": [
       "achlys.infra.joestr.at"
+    ],
+    "TLSA": [
+      "3 1 1 cbea68f873a8e97c0e991cd6c993910b7bd83e37363c4e5c37469cf5675ca8aa"
     ]
   },
   "proxy": false
