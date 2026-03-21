@@ -14,11 +14,13 @@
         ];
       };
 
-      domains = builtins.readDir ./domains;
-      domainFiles = builtins.filterAttrs (
+      inherit (import <nixpkgs> { }) lib;
+
+      domainsFolder = builtins.readDir ./domains;
+      domainFiles = lib.filterAttrs (
         name: type: type == "regular" && builtins.match ".*\\.nix" name != null
-      ) domains;
-      subdomains = builtins.mapAttrs' (
+      ) domainsFolder;
+      subdomains = lib.mapAttrs' (
         name: _:
         let
           key = builtins.replaceStrings [ ".nix" ] [ "" ] name;
