@@ -11,20 +11,6 @@
         "fattouche.ns.cloudflare.com"
       ];
     };
-    
-    domainFiles = let
-      dir = ./domains;
-      entries = builtins.readDir ./domains;
-      nixFiles = builtins.filter (name: builtins.match ".*\\.nix$" name != null) (builtins.attrNames entries);
-    in map (name: {
-      subdomain = builtins.replaceStrings [ ".nix" ] [ "" ] name;
-      config = import (dir + "/${name}") { inherit dns; };
-    }) nixFiles;
-
-    subdomainsFromFiles = builtins.listToAttrs (map (entry: {
-      name = entry.subdomain;
-      value = entry.config;
-    }) domainFiles);
   in {
     packages.x86_64-linux = builtins.mapAttrs (_: domain:
       dns.util.x86_64-linux.writeZone domain.domain (
@@ -38,7 +24,8 @@
 
           # note: Cloudflare ignores SOA and NS records uploaded via Zone File, they are included just so that dns.nix builds a valid zone file.
 
-          subdomains = subdomainsFromFiles;
+          #subdomains = ;
+          # ^^ todo: implement file imports from ./domains
         }
       )
     ) domains;
