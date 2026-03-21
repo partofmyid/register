@@ -1,5 +1,5 @@
 {
-  description = "Zone File Generator For part-of.my.id";
+  description = "Zone File Generator";
   inputs.dns.url = "github:nix-community/dns.nix";
 
   outputs = { dns, ... }: let
@@ -11,6 +11,20 @@
         "fattouche.ns.cloudflare.com"
       ];
     };
+    
+    domainFiles = let
+      dir = ./domains;
+      entries = builtins.readDir ./domains;
+      nixFiles = builtins.filter (name: builtins.match ".*\\.nix$" name != null) (builtins.attrNames entries);
+    in map (name: {
+      subdomain = builtins.replaceStrings [ ".nix" ] [ "" ] name;
+      config = import (dir + "/${name}") { inherit dns; };
+    }) nixFiles;
+
+    subdomainsFromFiles = builtins.listToAttrs (map (entry: {
+      name = entry.subdomain;
+      value = entry.config;
+    }) domainFiles);
   in {
     packages.x86_64-linux = builtins.mapAttrs (_: domain:
       dns.util.x86_64-linux.writeZone domain.domain (
@@ -21,10 +35,10 @@
             serial = builtins.currentTime;
           };
           NS = domain.nameservers;
-          
-          # note: Cloudflare ignores SOA and NS records uploaded via Zone File, they are just so that dns.nix builds a valid zone file.
-          
-          A = [ "1.1.1.1" ];
+
+          # note: Cloudflare ignores SOA and NS records uploaded via Zone File, they are included just so that dns.nix builds a valid zone file.
+
+          subdomains = subdomainsFromFiles;
         }
       )
     ) domains;
