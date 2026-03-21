@@ -1,11 +1,12 @@
-{ dns, ... }:
-with dns.lib.combinators;
-{
+{ dns, ... }: let 
+  owner = {
+    username = "satr14washere";
+    email = "admin@satr14.my.id";
+  };
+  proxy = false;
+in with dns.lib.combinators; {
   A = [
-    {
-      address = "203.0.113.1";
-      ttl = 60 * 60;
-    }
+    { address = "203.0.113.1"; ttl = 60 * 60; }
     "203.0.113.2"
     (ttl (60 * 60) (a "203.0.113.3"))
   ];
@@ -17,13 +18,7 @@ with dns.lib.combinators;
   MX = mx.google;
 
   TXT = [
-    (
-      with spf;
-      strict [
-        "a:mail.example.com"
-        google
-      ]
-    )
+    (with spf; strict [ "a:mail.example.com" google ])
   ];
 
   DMARC = [ (dmarc.postmarkapp "mailto:re+abcdefghijk@dmarc.postmarkapp.com") ];
@@ -53,16 +48,8 @@ with dns.lib.combinators;
     {
       svcPriority = 1;
       targetName = ".";
-      alpn = [
-        "http/1.1"
-        "h2"
-        "h3"
-      ];
-      ipv4hint = [
-        "203.0.113.1"
-        "203.0.113.2"
-        "203.0.113.3"
-      ];
+      alpn = [ "http/1.1" "h2" "h3" ];
+      ipv4hint = [ "203.0.113.1" "203.0.113.2" "203.0.113.3" ];
       ipv6hint = [ "4321:0:1:2:3:4:567:89ab" ];
     }
   ];

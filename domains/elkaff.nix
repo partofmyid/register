@@ -1,5 +1,7 @@
-{ dns, ... }:
-with dns.lib.combinators;
-{
+{ dns, ... }: let
+  owner = {
+    username = "elkhaff";
+  };
+in with dns.lib.combinators; {
   CNAME = [ "portofolio-pixel.pages.dev." ];
 }
