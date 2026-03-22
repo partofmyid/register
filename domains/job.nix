@@ -1,11 +1,9 @@
-{ dns, ... }:
-let
+{ dns, ... }: with dns.lib.combinators; {
   owner = {
     username = "FWEEaaaa1";
   };
   proxy = false;
-in
-with dns.lib.combinators;
-{
-  A = [ "128.204.223.115" ];
+  records = {
+    A = [ "128.204.223.115" ];
+  };
 }

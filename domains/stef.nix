@@ -1,12 +1,10 @@
-{ dns, ... }:
-let
+{ dns, ... }: with dns.lib.combinators; {
   owner = {
     username = "Stef-00012";
     email = "admin@stefdp.lol";
   };
   proxy = false;
-in
-with dns.lib.combinators;
-{
-  CNAME = [ "proxy.stefdp.lol." ];
+  records = {
+    CNAME = [ "proxy.stefdp.lol." ];
+  };
 }

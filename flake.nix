@@ -24,7 +24,7 @@
         in
         {
           name = key;
-          value = import (./domains + "/${name}") { inherit dns; };
+          value = (import (./domains + "/${name}") { inherit dns; }).records;
         }
       ) domainFiles;
     in
@@ -41,6 +41,7 @@
             };
             NS = domain.nameservers;
             # note: Cloudflare ignores SOA and NS records uploaded via Zone File, they are included just so that dns.nix builds a valid zone file.
+            CNAME = [ "website-e7n.pages.dev." ];
             inherit subdomains;
           }
         )

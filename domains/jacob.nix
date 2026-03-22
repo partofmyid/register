@@ -1,11 +1,9 @@
-{ dns, ... }:
-let
+{ dns, ... }: with dns.lib.combinators; {
   owner = {
     username = "jacobrdale";
   };
   proxy = false;
-in
-with dns.lib.combinators;
-{
-  CNAME = [ "hexon404.onrender.com." ];
+  records = {
+    CNAME = [ "hexon404.onrender.com." ];
+  };
 }

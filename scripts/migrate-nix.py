@@ -6,7 +6,7 @@ Reads each JSON domain config and generates a corresponding .nix file
 following the format from docs/example.nix.
 
 Usage:
-    python3 scripts/migrate-json-to-nix.py [--dry-run] [--delete-json]
+    python3 scripts/migrate-nix.py [--dry-run] [--delete-json]
 
 Options:
     --dry-run      Print generated .nix content to stdout without writing files
@@ -15,7 +15,6 @@ Options:
 
 import json
 import sys
-import os
 from pathlib import Path
 
 DOMAINS_DIR = Path(__file__).resolve().parent.parent / "domains"
@@ -31,37 +30,36 @@ def json_to_nix(data: dict) -> str:
 
     lines = []
 
-    # Header
-    lines.append("{ dns, ... }: let")
+    # Header — no let block, just the function head with `with`
+    lines.append("{ dns, ... }: with dns.lib.combinators; {")
 
-    # Owner block
-    owner_lines = []
-    if owner.get("username"):
-        owner_lines.append(f'    username = "{owner["username"]}";')
-    if owner.get("email"):
-        owner_lines.append(f'    email = "{owner["email"]}";')
-    if owner.get("discord"):
-        owner_lines.append(f'    discord = "{owner["discord"]}";')
-    if owner.get("repo"):
-        owner_lines.append(f'    repo = "{owner["repo"]}";')
-
+    # Owner block as a top-level attribute
     lines.append("  owner = {")
-    for ol in owner_lines:
-        lines.append(ol)
+    if owner.get("username"):
+        lines.append(f'    username = "{escape_nix_string(owner["username"])}";')
+    if owner.get("email"):
+        lines.append(f'    email = "{escape_nix_string(owner["email"])}";')
+    if owner.get("discord"):
+        lines.append(f'    discord = "{escape_nix_string(owner["discord"])}";')
+    if owner.get("repo"):
+        lines.append(f'    repo = "{escape_nix_string(owner["repo"])}";')
     lines.append("  };")
 
+    # Description as a top-level attribute
     if description is not None:
         lines.append(f'  description = "{escape_nix_string(description)}";')
 
+    # Proxy as a top-level attribute
     if proxy is not None:
         lines.append(f"  proxy = {'true' if proxy else 'false'};")
 
-    lines.append("in with dns.lib.combinators; {")
-
-    # Records
+    # Records nested under `records`
     record_lines = build_record_lines(record)
-    for rl in record_lines:
-        lines.append(rl)
+    if record_lines:
+        lines.append("  records = {")
+        for rl in record_lines:
+            lines.append(rl)
+        lines.append("  };")
 
     lines.append("}")
     lines.append("")
@@ -78,129 +76,131 @@ def escape_nix_string(s: str) -> str:
 
 
 def build_record_lines(record: dict) -> list[str]:
-    """Build the Nix record lines from the JSON record dict."""
+    """Build the Nix record lines from the JSON record dict.
+
+    These are indented with 4 spaces since they sit inside `records = { ... };`.
+    """
     lines = []
 
     if "A" in record:
         values = record["A"]
         if isinstance(values, list):
             if len(values) == 1:
-                lines.append(f'  A = [ "{values[0]}" ];')
+                lines.append(f'    A = [ "{values[0]}" ];')
             else:
-                lines.append("  A = [")
+                lines.append("    A = [")
                 for v in values:
-                    lines.append(f'    "{v}"')
-                lines.append("  ];")
+                    lines.append(f'      "{v}"')
+                lines.append("    ];")
         else:
-            lines.append(f'  A = [ "{values}" ];')
+            lines.append(f'    A = [ "{values}" ];')
 
     if "AAAA" in record:
         values = record["AAAA"]
         if isinstance(values, list):
             if len(values) == 1:
-                lines.append(f'  AAAA = [ "{values[0]}" ];')
+                lines.append(f'    AAAA = [ "{values[0]}" ];')
             else:
-                lines.append("  AAAA = [")
+                lines.append("    AAAA = [")
                 for v in values:
-                    lines.append(f'    "{v}"')
-                lines.append("  ];")
+                    lines.append(f'      "{v}"')
+                lines.append("    ];")
         else:
-            lines.append(f'  AAAA = [ "{values}" ];')
+            lines.append(f'    AAAA = [ "{values}" ];')
 
     if "CNAME" in record:
         value = record["CNAME"]
         if isinstance(value, list):
             value = value[0]
-        lines.append(f'  CNAME = [ "{value}." ];')
+        lines.append(f'    CNAME = [ "{ensure_fqdn(value)}" ];')
 
     if "ALIAS" in record:
         value = record["ALIAS"]
         if isinstance(value, list):
             value = value[0]
         # ALIAS is typically handled as CNAME in dns.nix
-        lines.append(f'  CNAME = [ "{value}." ];')
+        lines.append(f'    CNAME = [ "{ensure_fqdn(value)}" ];')
 
     if "MX" in record:
         values = record["MX"]
         if isinstance(values, list):
-            lines.append("  MX = [")
+            lines.append("    MX = [")
             for i, v in enumerate(values):
-                # MX records need priority; default to (i+1)*10
                 priority = (i + 1) * 10
-                lines.append("    {")
-                lines.append(f'      exchange = "{ensure_fqdn(v)}";')
-                lines.append(f"      preference = {priority};")
-                lines.append("    }")
-            lines.append("  ];")
+                lines.append("      {")
+                lines.append(f'        exchange = "{ensure_fqdn(v)}";')
+                lines.append(f"        preference = {priority};")
+                lines.append("      }")
+            lines.append("    ];")
         else:
-            lines.append("  MX = [")
-            lines.append("    {")
-            lines.append(f'      exchange = "{ensure_fqdn(values)}";')
-            lines.append("      preference = 10;")
-            lines.append("    }")
-            lines.append("  ];")
+            lines.append("    MX = [")
+            lines.append("      {")
+            lines.append(f'        exchange = "{ensure_fqdn(values)}";')
+            lines.append("        preference = 10;")
+            lines.append("      }")
+            lines.append("    ];")
 
     if "TXT" in record:
         values = record["TXT"]
         if isinstance(values, list):
             if len(values) == 1:
-                lines.append(f'  TXT = [ "{escape_nix_string(values[0])}" ];')
+                lines.append(f'    TXT = [ "{escape_nix_string(values[0])}" ];')
             else:
-                lines.append("  TXT = [")
+                lines.append("    TXT = [")
                 for v in values:
-                    lines.append(f'    "{escape_nix_string(v)}"')
-                lines.append("  ];")
+                    lines.append(f'      "{escape_nix_string(v)}"')
+                lines.append("    ];")
         else:
-            lines.append(f'  TXT = [ "{escape_nix_string(values)}" ];')
+            lines.append(f'    TXT = [ "{escape_nix_string(values)}" ];')
 
     if "NS" in record:
         values = record["NS"]
         if isinstance(values, list):
             if len(values) == 1:
-                lines.append(f'  NS = [ "{ensure_fqdn(values[0])}" ];')
+                lines.append(f'    NS = [ "{ensure_fqdn(values[0])}" ];')
             else:
-                lines.append("  NS = [")
+                lines.append("    NS = [")
                 for v in values:
-                    lines.append(f'    "{ensure_fqdn(v)}"')
-                lines.append("  ];")
+                    lines.append(f'      "{ensure_fqdn(v)}"')
+                lines.append("    ];")
         else:
-            lines.append(f'  NS = [ "{ensure_fqdn(values)}" ];')
+            lines.append(f'    NS = [ "{ensure_fqdn(values)}" ];')
 
     if "SRV" in record:
         values = record["SRV"]
         if isinstance(values, list):
-            lines.append("  SRV = [")
+            lines.append("    SRV = [")
             for srv in values:
-                lines.append("    {")
+                lines.append("      {")
                 if "service" in srv:
-                    lines.append(f'      service = "{srv["service"]}";')
+                    lines.append(f'        service = "{srv["service"]}";')
                 if "proto" in srv:
-                    lines.append(f'      proto = "{srv["proto"]}";')
+                    lines.append(f'        proto = "{srv["proto"]}";')
                 if "port" in srv:
-                    lines.append(f"      port = {srv['port']};")
+                    lines.append(f"        port = {srv['port']};")
                 if "priority" in srv:
-                    lines.append(f"      priority = {srv['priority']};")
+                    lines.append(f"        priority = {srv['priority']};")
                 if "weight" in srv:
-                    lines.append(f"      weight = {srv['weight']};")
+                    lines.append(f"        weight = {srv['weight']};")
                 if "target" in srv:
-                    lines.append(f'      target = "{ensure_fqdn(srv["target"])}";')
-                lines.append("    }")
-            lines.append("  ];")
+                    lines.append(f'        target = "{ensure_fqdn(srv["target"])}";')
+                lines.append("      }")
+            lines.append("    ];")
 
     if "CAA" in record:
         values = record["CAA"]
         if isinstance(values, list):
-            lines.append("  CAA = [")
+            lines.append("    CAA = [")
             for caa in values:
-                lines.append("    {")
+                lines.append("      {")
                 if "flags" in caa:
-                    lines.append(f"      flags = {caa['flags']};")
+                    lines.append(f"        flags = {caa['flags']};")
                 if "tag" in caa:
-                    lines.append(f'      tag = "{caa["tag"]}";')
+                    lines.append(f'        tag = "{caa["tag"]}";')
                 if "value" in caa:
-                    lines.append(f'      value = "{escape_nix_string(caa["value"])}";')
-                lines.append("    }")
-            lines.append("  ];")
+                    lines.append(f'        value = "{escape_nix_string(caa["value"])}";')
+                lines.append("      }")
+            lines.append("    ];")
 
     return lines
 

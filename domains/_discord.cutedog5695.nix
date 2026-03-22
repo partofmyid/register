@@ -1,13 +1,11 @@
-{ dns, ... }:
-let
+{ dns, ... }: with dns.lib.combinators; {
   owner = {
     username = "CuteDog5695";
     email = "cutedog5695@gmail.com";
     repo = "https://github.com/CuteDog5695/cutedog5695.github.io";
   };
   proxy = false;
-in
-with dns.lib.combinators;
-{
-  TXT = [ "dh=a7c19efb0f6bc38b97a33760f6c1ee84df4151b1" ];
+  records = {
+    TXT = [ "dh=a7c19efb0f6bc38b97a33760f6c1ee84df4151b1" ];
+  };
 }

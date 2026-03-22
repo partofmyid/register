@@ -1,10 +1,8 @@
-{ dns, ... }:
-let
+{ dns, ... }: with dns.lib.combinators; {
   owner = {
     username = "elkhaff";
   };
-in
-with dns.lib.combinators;
-{
-  CNAME = [ "portofolio-pixel.pages.dev." ];
+  records = {
+    CNAME = [ "portofolio-pixel.pages.dev." ];
+  };
 }

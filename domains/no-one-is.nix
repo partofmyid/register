@@ -1,12 +1,10 @@
-{ dns, ... }:
-let
+{ dns, ... }: with dns.lib.combinators; {
   owner = {
     username = "EducatedSuddenBucket";
     email = "me@esb.is-a.dev";
   };
   proxy = false;
-in
-with dns.lib.combinators;
-{
-  CNAME = [ "educatedsuddenbucket-github-io.onrender.com." ];
+  records = {
+    CNAME = [ "educatedsuddenbucket-github-io.onrender.com." ];
+  };
 }

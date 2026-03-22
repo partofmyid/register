@@ -1,11 +1,9 @@
-{ dns, ... }:
-let
+{ dns, ... }: with dns.lib.combinators; {
   owner = {
     username = "vortexprime24";
   };
   proxy = false;
-in
-with dns.lib.combinators;
-{
-  CNAME = [ "fire.hackclub.app." ];
+  records = {
+    CNAME = [ "fire.hackclub.app." ];
+  };
 }
