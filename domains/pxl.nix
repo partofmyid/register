@@ -1,9 +1,11 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "heypxl";
+{ dns, ... }: {
+  metadata = {
+    proxy = false;
+    owner = {
+      username = "heypxl";
+    };
   };
-  proxy = false;
-  records = {
+  records = with dns.lib.combinators; {
     CNAME = [ "heypxl.github.io." ];
   };
 }

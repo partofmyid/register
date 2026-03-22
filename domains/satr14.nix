@@ -1,8 +1,10 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "satr14washere";
+{ dns, ... }: {
+  metadata = {
+    owner = {
+      username = "satr14washere";
+    };
   };
-  records = {
+  records = with dns.lib.combinators; {
     CNAME = [ "5th-site.pages.dev." ];
   };
 }

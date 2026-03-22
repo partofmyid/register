@@ -1,10 +1,13 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "ukriu";
-    email = "partofmyid@ukriu.com";
+{ dns, ... }: {
+  metadata = {
+    description = "my website";
+    proxy = false;
+    owner = {
+      username = "ukriu";
+      email = "partofmyid@ukriu.com";
+    };
   };
-  proxy = false;
-  records = {
+  records = with dns.lib.combinators; {
     CNAME = [ "ukriu.pages.dev." ];
   };
 }

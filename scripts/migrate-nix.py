@@ -1,16 +1,29 @@
 #!/usr/bin/env python3
 """
-Migration script to convert domains/*.json to domains/*.nix
+Migrate domains/*.json to domains/*.nix
 
-Reads each JSON domain config and generates a corresponding .nix file
-following the format from docs/example.nix.
+Converts each JSON domain config into a .nix file matching the format
+from docs/example.nix:
+
+    { dns, ... }: {
+      metadata = {
+        description = "...";
+        proxy = false;
+        owner = {
+          username = "...";
+        };
+      };
+      records = with dns.lib.combinators; {
+        CNAME = [ "example.com." ];
+      };
+    }
 
 Usage:
     python3 scripts/migrate-nix.py [--dry-run] [--delete-json]
 
 Options:
-    --dry-run      Print generated .nix content to stdout without writing files
-    --delete-json  Delete the original .json files after successful conversion
+    --dry-run      Print generated .nix to stdout without writing files
+    --delete-json  Delete the .json files after successful conversion
 """
 
 import json
@@ -20,224 +33,198 @@ from pathlib import Path
 DOMAINS_DIR = Path(__file__).resolve().parent.parent / "domains"
 
 
-def json_to_nix(data: dict) -> str:
-    """Convert a single domain JSON config to a .nix file string."""
+# --- Nix string helpers ---
+
+def escape(s: str) -> str:
+    """Escape a string for use inside Nix double quotes."""
+    return s.replace("\\", "\\\\").replace('"', '\\"').replace("${", "\\${")
+
+
+def fqdn(s: str) -> str:
+    """Ensure a domain string ends with a trailing dot."""
+    return s if s.endswith(".") else s + "."
+
+
+# --- Block builders ---
+
+def build_metadata(data: dict) -> list[str]:
+    """Build the metadata = { ... }; block."""
     owner = data.get("owner", {})
     description = data.get("description")
-    record = data.get("record", {})
-    # Some files use "proxy", others use "proxied"
     proxy = data.get("proxied", data.get("proxy"))
 
-    lines = []
+    lines = ["  metadata = {"]
 
-    # Header — no let block, just the function head with `with`
-    lines.append("{ dns, ... }: with dns.lib.combinators; {")
-
-    # Owner block as a top-level attribute
-    lines.append("  owner = {")
-    if owner.get("username"):
-        lines.append(f'    username = "{escape_nix_string(owner["username"])}";')
-    if owner.get("email"):
-        lines.append(f'    email = "{escape_nix_string(owner["email"])}";')
-    if owner.get("discord"):
-        lines.append(f'    discord = "{escape_nix_string(owner["discord"])}";')
-    if owner.get("repo"):
-        lines.append(f'    repo = "{escape_nix_string(owner["repo"])}";')
-    lines.append("  };")
-
-    # Description as a top-level attribute
     if description is not None:
-        lines.append(f'  description = "{escape_nix_string(description)}";')
+        lines.append(f'    description = "{escape(description)}";')
 
-    # Proxy as a top-level attribute
     if proxy is not None:
-        lines.append(f"  proxy = {'true' if proxy else 'false'};")
+        lines.append(f"    proxy = {'true' if proxy else 'false'};")
 
-    # Records nested under `records`
-    record_lines = build_record_lines(record)
-    if record_lines:
-        lines.append("  records = {")
-        for rl in record_lines:
-            lines.append(rl)
-        lines.append("  };")
+    owner_keys = ["username", "email", "discord", "repo"]
+    owner_fields = [(k, owner[k]) for k in owner_keys if owner.get(k)]
 
-    lines.append("}")
-    lines.append("")
+    if owner_fields:
+        lines.append("    owner = {")
+        for key, val in owner_fields:
+            lines.append(f'      {key} = "{escape(val)}";')
+        lines.append("    };")
 
-    return "\n".join(lines)
-
-
-def escape_nix_string(s: str) -> str:
-    """Escape special characters for a Nix double-quoted string."""
-    s = s.replace("\\", "\\\\")
-    s = s.replace('"', '\\"')
-    s = s.replace("${", "\\${")
-    return s
-
-
-def build_record_lines(record: dict) -> list[str]:
-    """Build the Nix record lines from the JSON record dict.
-
-    These are indented with 4 spaces since they sit inside `records = { ... };`.
-    """
-    lines = []
-
-    if "A" in record:
-        values = record["A"]
-        if isinstance(values, list):
-            if len(values) == 1:
-                lines.append(f'    A = [ "{values[0]}" ];')
-            else:
-                lines.append("    A = [")
-                for v in values:
-                    lines.append(f'      "{v}"')
-                lines.append("    ];")
-        else:
-            lines.append(f'    A = [ "{values}" ];')
-
-    if "AAAA" in record:
-        values = record["AAAA"]
-        if isinstance(values, list):
-            if len(values) == 1:
-                lines.append(f'    AAAA = [ "{values[0]}" ];')
-            else:
-                lines.append("    AAAA = [")
-                for v in values:
-                    lines.append(f'      "{v}"')
-                lines.append("    ];")
-        else:
-            lines.append(f'    AAAA = [ "{values}" ];')
-
-    if "CNAME" in record:
-        value = record["CNAME"]
-        if isinstance(value, list):
-            value = value[0]
-        lines.append(f'    CNAME = [ "{ensure_fqdn(value)}" ];')
-
-    if "ALIAS" in record:
-        value = record["ALIAS"]
-        if isinstance(value, list):
-            value = value[0]
-        # ALIAS is typically handled as CNAME in dns.nix
-        lines.append(f'    CNAME = [ "{ensure_fqdn(value)}" ];')
-
-    if "MX" in record:
-        values = record["MX"]
-        if isinstance(values, list):
-            lines.append("    MX = [")
-            for i, v in enumerate(values):
-                priority = (i + 1) * 10
-                lines.append("      {")
-                lines.append(f'        exchange = "{ensure_fqdn(v)}";')
-                lines.append(f"        preference = {priority};")
-                lines.append("      }")
-            lines.append("    ];")
-        else:
-            lines.append("    MX = [")
-            lines.append("      {")
-            lines.append(f'        exchange = "{ensure_fqdn(values)}";')
-            lines.append("        preference = 10;")
-            lines.append("      }")
-            lines.append("    ];")
-
-    if "TXT" in record:
-        values = record["TXT"]
-        if isinstance(values, list):
-            if len(values) == 1:
-                lines.append(f'    TXT = [ "{escape_nix_string(values[0])}" ];')
-            else:
-                lines.append("    TXT = [")
-                for v in values:
-                    lines.append(f'      "{escape_nix_string(v)}"')
-                lines.append("    ];")
-        else:
-            lines.append(f'    TXT = [ "{escape_nix_string(values)}" ];')
-
-    if "NS" in record:
-        values = record["NS"]
-        if isinstance(values, list):
-            if len(values) == 1:
-                lines.append(f'    NS = [ "{ensure_fqdn(values[0])}" ];')
-            else:
-                lines.append("    NS = [")
-                for v in values:
-                    lines.append(f'      "{ensure_fqdn(v)}"')
-                lines.append("    ];")
-        else:
-            lines.append(f'    NS = [ "{ensure_fqdn(values)}" ];')
-
-    if "SRV" in record:
-        values = record["SRV"]
-        if isinstance(values, list):
-            lines.append("    SRV = [")
-            for srv in values:
-                lines.append("      {")
-                if "service" in srv:
-                    lines.append(f'        service = "{srv["service"]}";')
-                if "proto" in srv:
-                    lines.append(f'        proto = "{srv["proto"]}";')
-                if "port" in srv:
-                    lines.append(f"        port = {srv['port']};")
-                if "priority" in srv:
-                    lines.append(f"        priority = {srv['priority']};")
-                if "weight" in srv:
-                    lines.append(f"        weight = {srv['weight']};")
-                if "target" in srv:
-                    lines.append(f'        target = "{ensure_fqdn(srv["target"])}";')
-                lines.append("      }")
-            lines.append("    ];")
-
-    if "CAA" in record:
-        values = record["CAA"]
-        if isinstance(values, list):
-            lines.append("    CAA = [")
-            for caa in values:
-                lines.append("      {")
-                if "flags" in caa:
-                    lines.append(f"        flags = {caa['flags']};")
-                if "tag" in caa:
-                    lines.append(f'        tag = "{caa["tag"]}";')
-                if "value" in caa:
-                    lines.append(f'        value = "{escape_nix_string(caa["value"])}";')
-                lines.append("      }")
-            lines.append("    ];")
-
+    lines.append("  };")
     return lines
 
 
-def ensure_fqdn(domain: str) -> str:
-    """Ensure a domain name ends with a dot (FQDN)."""
-    if not domain.endswith("."):
-        return domain + "."
-    return domain
+def build_records(record: dict) -> list[str]:
+    """Build the records = with dns.lib.combinators; { ... }; block."""
+    entries = []
+
+    # A records
+    if "A" in record:
+        entries.extend(string_list_record("A", as_list(record["A"])))
+
+    # AAAA records
+    if "AAAA" in record:
+        entries.extend(string_list_record("AAAA", as_list(record["AAAA"])))
+
+    # CNAME (also handles ALIAS → CNAME)
+    cname = record.get("CNAME") or record.get("ALIAS")
+    if cname is not None:
+        val = cname[0] if isinstance(cname, list) else cname
+        entries.append(f'    CNAME = [ "{fqdn(val)}" ];')
+
+    # MX records
+    if "MX" in record:
+        entries.extend(build_mx(as_list(record["MX"])))
+
+    # TXT records
+    if "TXT" in record:
+        escaped = [escape(v) for v in as_list(record["TXT"])]
+        entries.extend(string_list_record("TXT", escaped))
+
+    # NS records
+    if "NS" in record:
+        fqdns = [fqdn(v) for v in as_list(record["NS"])]
+        entries.extend(string_list_record("NS", fqdns))
+
+    # SRV records
+    if "SRV" in record:
+        entries.extend(build_srv(as_list(record["SRV"])))
+
+    # CAA records
+    if "CAA" in record:
+        entries.extend(build_caa(as_list(record["CAA"])))
+
+    if not entries:
+        return ["  records = with dns.lib.combinators; {};"]
+
+    lines = ["  records = with dns.lib.combinators; {"]
+    lines.extend(entries)
+    lines.append("  };")
+    return lines
 
 
-def migrate_file(json_path: Path, dry_run: bool = False, delete_json: bool = False) -> bool:
-    """Migrate a single JSON file to .nix. Returns True on success."""
+# --- Record type formatters ---
+
+def as_list(value) -> list:
+    """Wrap a scalar in a list if it isn't one already."""
+    return value if isinstance(value, list) else [value]
+
+
+def string_list_record(rtype: str, values: list[str]) -> list[str]:
+    """Format a record type whose values are plain strings."""
+    if len(values) == 1:
+        return [f'    {rtype} = [ "{values[0]}" ];']
+
+    lines = [f"    {rtype} = ["]
+    for v in values:
+        lines.append(f'      "{v}"')
+    lines.append("    ];")
+    return lines
+
+
+def build_mx(values: list) -> list[str]:
+    """Format MX records as attrsets with preference + exchange."""
+    lines = ["    MX = ["]
+    for i, v in enumerate(values):
+        pref = (i + 1) * 10
+        lines.append("      {")
+        lines.append(f"        preference = {pref};")
+        lines.append(f'        exchange = "{fqdn(v)}";')
+        lines.append("      }")
+    lines.append("    ];")
+    return lines
+
+
+def build_srv(values: list[dict]) -> list[str]:
+    """Format SRV records."""
+    lines = ["    SRV = ["]
+    for srv in values:
+        lines.append("      {")
+        for key in ("service", "proto"):
+            if key in srv:
+                lines.append(f'        {key} = "{srv[key]}";')
+        for key in ("priority", "weight", "port"):
+            if key in srv:
+                lines.append(f"        {key} = {srv[key]};")
+        if "target" in srv:
+            lines.append(f'        target = "{fqdn(srv["target"])}";')
+        lines.append("      }")
+    lines.append("    ];")
+    return lines
+
+
+def build_caa(values: list[dict]) -> list[str]:
+    """Format CAA records."""
+    lines = ["    CAA = ["]
+    for caa in values:
+        lines.append("      {")
+        if "flags" in caa:
+            lines.append(f"        flags = {caa['flags']};")
+        if "tag" in caa:
+            lines.append(f'        tag = "{caa["tag"]}";')
+        if "value" in caa:
+            lines.append(f'        value = "{escape(caa["value"])}";')
+        lines.append("      }")
+    lines.append("    ];")
+    return lines
+
+
+# --- Top-level conversion ---
+
+def json_to_nix(data: dict) -> str:
+    """Convert a parsed JSON domain config to a complete .nix file string."""
+    lines = ["{ dns, ... }: {"]
+    lines.extend(build_metadata(data))
+    lines.extend(build_records(data.get("record", {})))
+    lines.append("}")
+    lines.append("")
+    return "\n".join(lines)
+
+
+# --- File operations ---
+
+def migrate_file(path: Path, *, dry_run: bool, delete_json: bool) -> bool:
+    """Migrate a single .json file. Returns True on success."""
     try:
-        with open(json_path, "r") as f:
-            data = json.load(f)
+        data = json.loads(path.read_text())
     except json.JSONDecodeError as e:
-        print(f"  ERROR: Failed to parse {json_path.name}: {e}", file=sys.stderr)
+        print(f"  ERROR: {path.name}: {e}", file=sys.stderr)
         return False
 
-    nix_content = json_to_nix(data)
-    nix_filename = json_path.stem + ".nix"
-    nix_path = json_path.parent / nix_filename
+    nix = json_to_nix(data)
+    nix_path = path.with_suffix(".nix")
 
     if dry_run:
-        print(f"--- {nix_filename} ---")
-        print(nix_content)
+        print(f"--- {nix_path.name} ---")
+        print(nix)
         return True
 
-    with open(nix_path, "w") as f:
-        f.write(nix_content)
-
+    nix_path.write_text(nix)
     print(f"  Created {nix_path.name}")
 
     if delete_json:
-        json_path.unlink()
-        print(f"  Deleted {json_path.name}")
+        path.unlink()
+        print(f"  Deleted {path.name}")
 
     return True
 
@@ -247,31 +234,30 @@ def main():
     delete_json = "--delete-json" in sys.argv
 
     if not DOMAINS_DIR.exists():
-        print(f"Error: domains directory not found at {DOMAINS_DIR}", file=sys.stderr)
+        print(f"Error: {DOMAINS_DIR} not found", file=sys.stderr)
         sys.exit(1)
 
-    json_files = sorted(DOMAINS_DIR.glob("*.json"))
-
-    if not json_files:
-        print("No JSON files found in domains/")
+    files = sorted(DOMAINS_DIR.glob("*.json"))
+    if not files:
+        print("No .json files found in domains/")
         sys.exit(0)
 
-    print(f"Found {len(json_files)} JSON file(s) to migrate")
+    print(f"Found {len(files)} JSON file(s) to migrate")
     if dry_run:
         print("(dry run — no files will be written)\n")
 
     success = 0
     failed = 0
 
-    for json_path in json_files:
-        print(f"Migrating {json_path.name}...")
-        if migrate_file(json_path, dry_run=dry_run, delete_json=delete_json):
+    for f in files:
+        print(f"Migrating {f.name}...")
+        if migrate_file(f, dry_run=dry_run, delete_json=delete_json):
             success += 1
         else:
             failed += 1
 
     print(f"\nDone: {success} succeeded, {failed} failed")
-    if failed > 0:
+    if failed:
         sys.exit(1)
 
 

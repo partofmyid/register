@@ -1,9 +1,11 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "vortexprime24";
+{ dns, ... }: {
+  metadata = {
+    proxy = false;
+    owner = {
+      username = "vortexprime24";
+    };
   };
-  proxy = false;
-  records = {
+  records = with dns.lib.combinators; {
     CNAME = [ "fire.hackclub.app." ];
   };
 }

@@ -1,9 +1,12 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "ColinLeDev";
+{ dns, ... }: {
+  metadata = {
+    description = "Discord verification";
+    proxy = false;
+    owner = {
+      username = "ColinLeDev";
+    };
   };
-  proxy = false;
-  records = {
+  records = with dns.lib.combinators; {
     TXT = [ "dh=279643a6f8677dedb1c5c63d007fc4516149679c" ];
   };
 }

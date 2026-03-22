@@ -1,11 +1,13 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "JustDeveloper1";
-    email = "support@juststudio.is-a.dev";
-    repo = "https://github.com/JustStudio7/Website";
+{ dns, ... }: {
+  metadata = {
+    proxy = false;
+    owner = {
+      username = "JustDeveloper1";
+      email = "support@juststudio.is-a.dev";
+      repo = "https://github.com/JustStudio7/Website";
+    };
   };
-  proxy = false;
-  records = {
+  records = with dns.lib.combinators; {
     CNAME = [ "edge.redirect.pizza." ];
   };
 }

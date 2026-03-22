@@ -1,10 +1,12 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "Roki100";
-    discord = "289479495444987904";
+{ dns, ... }: {
+  metadata = {
+    proxy = false;
+    owner = {
+      username = "Roki100";
+      discord = "289479495444987904";
+    };
   };
-  proxy = false;
-  records = {
+  records = with dns.lib.combinators; {
     CNAME = [ "edge.redirect.pizza." ];
   };
 }

@@ -1,10 +1,12 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "orangci";
-    email = "c@orangc.xyz";
+{ dns, ... }: {
+  metadata = {
+    proxy = false;
+    owner = {
+      username = "orangci";
+      email = "c@orangc.xyz";
+    };
   };
-  proxy = false;
-  records = {
+  records = with dns.lib.combinators; {
     CNAME = [ "edge.redirect.pizza." ];
   };
 }

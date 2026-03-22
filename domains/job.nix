@@ -1,9 +1,11 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "FWEEaaaa1";
+{ dns, ... }: {
+  metadata = {
+    proxy = false;
+    owner = {
+      username = "FWEEaaaa1";
+    };
   };
-  proxy = false;
-  records = {
+  records = with dns.lib.combinators; {
     A = [ "128.204.223.115" ];
   };
 }

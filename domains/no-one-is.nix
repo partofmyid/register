@@ -1,10 +1,12 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "EducatedSuddenBucket";
-    email = "me@esb.is-a.dev";
+{ dns, ... }: {
+  metadata = {
+    proxy = false;
+    owner = {
+      username = "EducatedSuddenBucket";
+      email = "me@esb.is-a.dev";
+    };
   };
-  proxy = false;
-  records = {
+  records = with dns.lib.combinators; {
     CNAME = [ "educatedsuddenbucket-github-io.onrender.com." ];
   };
 }

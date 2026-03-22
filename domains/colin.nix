@@ -1,9 +1,12 @@
-{ dns, ... }: with dns.lib.combinators; {
-  owner = {
-    username = "ColinLeDev";
+{ dns, ... }: {
+  metadata = {
+    description = "My personal portfolio hosted on my server";
+    proxy = false;
+    owner = {
+      username = "ColinLeDev";
+    };
   };
-  proxy = false;
-  records = {
+  records = with dns.lib.combinators; {
     CNAME = [ "proxy.col1n.fr." ];
   };
 }
