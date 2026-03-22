@@ -3,5 +3,5 @@ creds.json
 types-dnscontrol.d.ts
 
 # Zone files
-result
+result*
 part-of.my.id.txt
