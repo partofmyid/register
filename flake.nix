@@ -5,13 +5,22 @@
     { dns, ... }:
     let
       email = "admin@satr14.my.id";
-      domains."0" = {
-        domain = "part-of.my.id";
-        nameservers = [
-          "adele.ns.cloudflare.com"
-          "fattouche.ns.cloudflare.com"
-        ];
-      };
+      domains = [
+        "0" = {
+          domain = "part-of.my.id";
+          nameservers = [
+            "adele.ns.cloudflare.com"
+            "fattouche.ns.cloudflare.com"
+          ];
+        };
+        "1" = {
+          domain = "is-my.id";
+          nameservers = [
+            "adele.ns.cloudflare.com"
+            "fattouche.ns.cloudflare.com"
+          ];
+        };
+      ];
       inherit (import <nixpkgs> { }) lib;
       domainsFolder = builtins.readDir ./domains;
       domainFiles = lib.filterAttrs (

@@ -1,0 +1,72 @@
+;;
+;; Domain:     is-my.id.
+;; Exported:   2026-03-21 23:44:57
+;;
+;; This file is intended for use for informational and archival
+;; purposes ONLY and MUST be edited before use on a production
+;; DNS server.  In particular, you must:
+;;   -- update the SOA record with the correct authoritative name server
+;;   -- update the SOA record with the contact e-mail address information
+;;   -- update the NS record(s) with the authoritative name servers for this domain.
+;;
+;; For further information, please consult the BIND documentation
+;; located on the following website:
+;;
+;; http://www.isc.org/
+;;
+;; And RFC 1035:
+;;
+;; http://www.ietf.org/rfc/rfc1035.txt
+;;
+;; Please note that we do NOT offer technical support for any use
+;; of this zone data, the BIND name server, or any other third-party
+;; DNS software.
+;;
+;; Use at your own risk.
+;; SOA Record
+is-my.id	3600	IN	SOA	adele.ns.cloudflare.com. dns.cloudflare.com. 2052580329 10000 2400 604800 3600
+
+;; NS Records
+is-my.id.	86400	IN	NS	adele.ns.cloudflare.com.
+is-my.id.	86400	IN	NS	fattouche.ns.cloudflare.com.
+
+;; A Records
+job.is-my.id.	1	IN	A	128.204.223.115 ; cf_tags=cf-proxied:false
+joel.is-my.id.	1	IN	A	142.132.173.34 ; cf_tags=cf-proxied:false
+katz.is-my.id.	1	IN	A	69.197.135.205 ; cf_tags=cf-proxied:false
+
+;; AAAA Records
+joel.is-my.id.	1	IN	AAAA	2a01:4f8:1c0c:6cc0::1 ; cf_tags=cf-proxied:false
+
+;; CNAME Records
+batman.is-my.id.	1	IN	CNAME	shadowe1ite.github.io. ; cf_tags=cf-proxied:true
+colin.is-my.id.	1	IN	CNAME	proxy.col1n.fr. ; cf_tags=cf-proxied:false
+c.is-my.id.	1	IN	CNAME	edge.redirect.pizza. ; cf_tags=cf-proxied:false
+cutedog5695.is-my.id.	1	IN	CNAME	edge.redirect.pizza. ; cf_tags=cf-proxied:false
+elkaff.is-my.id.	1	IN	CNAME	portofolio-pixel.pages.dev. ; cf_tags=cf-proxied:false
+jacob.is-my.id.	1	IN	CNAME	hexon404.onrender.com. ; cf_tags=cf-proxied:false
+jd.is-my.id.	1	IN	CNAME	edge.redirect.pizza. ; cf_tags=cf-proxied:false
+j.is-my.id.	1	IN	CNAME	edge.redirect.pizza. ; cf_tags=cf-proxied:false
+js.is-my.id.	1	IN	CNAME	edge.redirect.pizza. ; cf_tags=cf-proxied:false
+justdeveloper.is-my.id.	1	IN	CNAME	edge.redirect.pizza. ; cf_tags=cf-proxied:false
+justdev.is-my.id.	1	IN	CNAME	edge.redirect.pizza. ; cf_tags=cf-proxied:false
+just.is-my.id.	1	IN	CNAME	edge.redirect.pizza. ; cf_tags=cf-proxied:false
+juststudio.is-my.id.	1	IN	CNAME	edge.redirect.pizza. ; cf_tags=cf-proxied:false
+no-one-is.is-my.id.	1	IN	CNAME	educatedsuddenbucket-github-io.onrender.com. ; cf_tags=cf-proxied:false
+is-my.id.	1	IN	CNAME	website-e7n.pages.dev. ; cf_tags=cf-proxied:false
+pxl.is-my.id.	1	IN	CNAME	heypxl.github.io. ; cf_tags=cf-proxied:false
+rchessauth.is-my.id.	1	IN	CNAME	fire.hackclub.app. ; cf_tags=cf-proxied:false
+roki.is-my.id.	1	IN	CNAME	edge.redirect.pizza. ; cf_tags=cf-proxied:false
+stef.is-my.id.	1	IN	CNAME	proxy.stefdp.lol. ; cf_tags=cf-proxied:false
+ukriu.is-my.id.	1	IN	CNAME	ukriu.pages.dev. ; cf_tags=cf-proxied:false
+you-are.is-my.id.	1	IN	CNAME	proxy.stefdp.com. ; cf_tags=cf-proxied:false
+
+;; MX Records
+joel.is-my.id.	1	IN	MX	10 achlys.infra.joestr.at.
+
+;; TXT Records
+_discord.colin.is-my.id.	1	IN	TXT	"dh=279643a6f8677dedb1c5c63d007fc4516149679c"
+_discord.cutedog5695.is-my.id.	1	IN	TXT	"dh=a7c19efb0f6bc38b97a33760f6c1ee84df4151b1"
+_discord.justdeveloper.is-my.id.	1	IN	TXT	"dh=6024027bc233825451e290ac37a4b4a1f838ee70"
+_discord.is-my.id.	1	IN	TXT	"dh=d509fc9014e196311ed887c2e410cdefa833436e"
+_discord.roki.is-my.id.	1	IN	TXT	"dh=5633078cd5bfd347a896ddb0f0de017c5423aa06"
