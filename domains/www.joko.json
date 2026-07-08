@@ -1,0 +1,11 @@
+{
+    "owner": {
+        "repo": "https://github.com/jokoarynt/part-of-my-id",
+        "email": "jokoariyanto2013@gmail.com",
+        "username": "jokoarynt"
+    },
+    "record": {
+    "A": ["185.199.108.153", "185.199.109.153", "185.199.110.153", "185.199.111.153"]
+    },
+    "proxied": false
+}
