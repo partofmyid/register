@@ -1,0 +1,11 @@
+{
+    "owner": {
+        "repo": "https://github.com/jokoarynt/part-of-my-id",
+        "email": "jokoariyanto2013@gmail.com",
+        "username": "jokoarynt"
+    },
+    "record": {
+        "CNAME": "edge.redirect.pizza"
+    },
+    "proxied": false
+}
