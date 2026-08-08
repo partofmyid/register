@@ -24,4 +24,4 @@ jobs:
               with:
                   version: 4.44.1
             - name: Push DNS Records
-              run: dnscontrol push --config scripts/dnscontrol.js
+              run: dnscontrol push --config scripts/dnsconfig.js
