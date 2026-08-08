@@ -20,10 +20,8 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - run: echo '{"cloudflare":{"TYPE":"CLOUDFLAREAPI","apitoken":"$CLOUDFLARE_API_TOKEN"}}' > ./creds.json
-            - name: Publish
-              uses: is-cool-me/dnscontrol-action@v4.11.0
-              env:
-                  CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+            - uses: gacts/install-dnscontrol@v1
               with:
-                  args: push
-                  config_file: "scripts/dnsconfig.js"
+                  version: 4.44.1
+            - name: Push DNS Records
+              run: dnscontrol push --config scripts/dnscontrol.js
