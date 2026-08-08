@@ -41,79 +41,59 @@ for (var idx in domains) {
 
   if ('A' in domainData.record) {
     for (var a in domainData.record.A) {
-      commits.push(
-        A(subdomain, IP(domainData.record.A[a]), proxyState)
-      );
+      commits.push(A(subdomain, IP(domainData.record.A[a]), proxyState));
     }
   }
 
   if ('AAAA' in domainData.record) {
     for (var aaaa in domainData.record.AAAA) {
-      commits.push(
-        AAAA(subdomain, domainData.record.AAAA[aaaa], proxyState)
-      );
+      commits.push(AAAA(subdomain, domainData.record.AAAA[aaaa], proxyState));
     }
   }
 
   if ('ALIAS' in domainData.record) {
-    commits.push(
-      ALIAS(subdomain, domainData.record.ALIAS + ".", proxyState)
-    );
+    commits.push(ALIAS(subdomain, domainData.record.ALIAS + ".", proxyState));
   }
 
   if ('CNAME' in domainData.record) {
-    commits.push(
-      CNAME(subdomain, domainData.record.CNAME + ".", proxyState)
-    );
+    commits.push(CNAME(subdomain, domainData.record.CNAME + ".", proxyState));
   }
 
   if ('MX' in domainData.record) {
     for (var mx in domainData.record.MX) {
-      commits.push(
-        MX(subdomain, 10, domainData.record.MX[mx] + ".")
-      );
+      commits.push(MX(subdomain, 10, domainData.record.MX[mx] + "."));
     }
   }
 
   if ('TXT' in domainData.record) {
     for (var txt in domainData.record.TXT) {
-      commits.push(
-        TXT(subdomain, domainData.record.TXT[txt])
-      );
+      commits.push(TXT(subdomain, domainData.record.TXT[txt]));
     }
   }
 
   // if ('NS' in domainData.record) {
   //   for (var ns in domainData.record.NS) {
-  //     commits.push(
-  //       NS(subdomain, domainData.record.NS[ns] + ".")
-  //     );
+  //     commits.push(NS(subdomain, domainData.record.NS[ns] + "."));
   //   }
   // }
 
   // if ('CAA' in domainData.record) {
   //   for (var caa in domainData.record.CAA) {
   //     var caaRecord = domainData.record.CAA[caa];
-  //     commits.push(
-  //       CAA(subdomain, caaRecord.flags, caaRecord.tag, caaRecord.value)
-  //     );
+  //     commits.push(CAA(subdomain, caaRecord.flags, caaRecord.tag, caaRecord.value));
   //   }
   // }
 
   // if ('SRV' in domainData.record) {
   //   for (var srv in domainData.record.SRV) {
   //     var srvRecord = domainData.record.SRV[srv];
-  //     commits.push(
-  //       SRV(subdomain, srvRecord.priority, srvRecord.weight, srvRecord.port, srvRecord.target + ".")
-  //     );
+  //     commits.push(SRV(subdomain, srvRecord.priority, srvRecord.weight, srvRecord.port, srvRecord.target + "."));
   //   }
   // }
 
   // if ('PTR' in domainData.record) {
   //   for (var ptr in domainData.record.PTR) {
-  //     commits.push(
-  //       PTR(subdomain, domainData.record.PTR[ptr] + ".")
-  //     );
+  //     commits.push(PTR(subdomain, domainData.record.PTR[ptr] + "."));
   //   }
   // }
 }
