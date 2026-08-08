@@ -55,6 +55,12 @@ for (var idx in domains) {
     }
   }
 
+  if ('ALIAS' in domainData.record) {
+    commits.push(
+      ALIAS(subdomain, domainData.record.ALIAS + ".", proxyState)
+    );
+  }
+
   if ('CNAME' in domainData.record) {
     commits.push(
       CNAME(subdomain, domainData.record.CNAME + ".", proxyState)
@@ -69,14 +75,6 @@ for (var idx in domains) {
     }
   }
 
-  // if ('NS' in domainData.record) {
-  //   for (var ns in domainData.record.NS) {
-  //     commits.push(
-  //       NS(subdomain, domainData.record.NS[ns] + ".")
-  //     );
-  //   }
-  // }
-
   if ('TXT' in domainData.record) {
     for (var txt in domainData.record.TXT) {
       commits.push(
@@ -84,6 +82,14 @@ for (var idx in domains) {
       );
     }
   }
+
+  // if ('NS' in domainData.record) {
+  //   for (var ns in domainData.record.NS) {
+  //     commits.push(
+  //       NS(subdomain, domainData.record.NS[ns] + ".")
+  //     );
+  //   }
+  // }
 
   // if ('CAA' in domainData.record) {
   //   for (var caa in domainData.record.CAA) {
@@ -110,12 +116,6 @@ for (var idx in domains) {
   //     );
   //   }
   // }
-
-  if ('ALIAS' in domainData.record) {
-    commits.push(
-      ALIAS(subdomain, domainData.record.ALIAS + ".", proxyState)
-    );
-  }
 }
 
 // commits.push();
