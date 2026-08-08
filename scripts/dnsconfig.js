@@ -4,13 +4,19 @@
 
 var regNone = NewRegistrar("none");
 var providerCf = DnsProvider(NewDnsProvider("cloudflare", {
-  // manage_redirects: true,
+  manage_single_redirects: true,
 }));
 
 var apexDomains = [
   'part-of.my.id',
   'is-my.id',
 ];
+
+/** @type {Object<string, DomainModifier[]>} */
+var extraCommits = {
+  'is-my.id': [ CF_REDIRECT('is-my.id/*', 'https://part-of.my.id/$1') ],
+  'part-of.my.id': [ CF_REDIRECT('www.part-of.my.id/*', 'https://part-of.my.id/$1') ],
+}
 
 /**
  * @param {string} directory
@@ -32,8 +38,11 @@ function getDomainsList(directory) {
  * @param {string} domain
  */
 function commitsFor(domain) {
-  var domains = getDomainsList('../domains/' + domain);
+  /** @type {DomainModifier[]} */
   var commits = [];
+  var domains = getDomainsList('../domains/' + domain);
+
+  if (domain in extraCommits) commits = commits.concat(extraCommits[domain]);
   
   for (var idx in domains) {
     var data = domains[idx].data;
