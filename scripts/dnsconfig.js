@@ -34,32 +34,33 @@ var domains = getDomainsList('../domains');
 var commits = [];
 
 for (var idx in domains) {
-  var domainData = domains[idx].data;
+  var data = domains[idx].data;
   var subdomain = domains[idx].name;
-  var proxyState = proxy.off;
-  if (domainData.proxied === true) proxyState = proxy.on;
+  var modifier = {
+    "cloudflare_proxy": data.proxied ? "on" : "off",
+  };
 
-  if ('NS' in domainData.record) for (var ns in domainData.record.NS) commits.push(NS(subdomain, domainData.record.NS[ns] + "."));
+  // if ('NS' in data.record) for (var ns in data.record.NS) commits.push(NS(subdomain, data.record.NS[ns] + "."));
   
-  if ('ALIAS' in domainData.record) commits.push(ALIAS(subdomain, domainData.record.ALIAS + ".", proxyState));
-  if ('CNAME' in domainData.record) commits.push(CNAME(subdomain, domainData.record.CNAME + ".", proxyState));
+  if ('ALIAS' in data.record) commits.push(ALIAS(subdomain, data.record.ALIAS + ".", modifier));
+  if ('CNAME' in data.record) commits.push(CNAME(subdomain, data.record.CNAME + ".", modifier));
   
-  if ('A' in domainData.record) for (var a in domainData.record.A) commits.push(A(subdomain, IP(domainData.record.A[a]), proxyState));
-  if ('AAAA' in domainData.record) for (var aaaa in domainData.record.AAAA) commits.push(AAAA(subdomain, domainData.record.AAAA[aaaa], proxyState));
+  if ('A' in data.record) for (var a in data.record.A) commits.push(A(subdomain, IP(data.record.A[a]), modifier));
+  if ('AAAA' in data.record) for (var aaaa in data.record.AAAA) commits.push(AAAA(subdomain, data.record.AAAA[aaaa], modifier));
 
-  if ('MX' in domainData.record) for (var mx in domainData.record.MX) commits.push(MX(subdomain, 10, domainData.record.MX[mx] + "."));
-  if ('TXT' in domainData.record) for (var txt in domainData.record.TXT) commits.push(TXT(subdomain, domainData.record.TXT[txt]));
-  if ('PTR' in domainData.record) for (var ptr in domainData.record.PTR) commits.push(PTR(subdomain, domainData.record.PTR[ptr] + "."));
+  if ('MX' in data.record) for (var mx in data.record.MX) commits.push(MX(subdomain, 10, data.record.MX[mx] + "."));
+  if ('TXT' in data.record) for (var txt in data.record.TXT) commits.push(TXT(subdomain, data.record.TXT[txt]));
+  // if ('PTR' in data.record) for (var ptr in data.record.PTR) commits.push(PTR(subdomain, data.record.PTR[ptr] + "."));
 
-  if ('CAA' in domainData.record) for (var caa in domainData.record.CAA) {
-    var caaRecord = domainData.record.CAA[caa];
-    commits.push(CAA(subdomain, caaRecord.flags, caaRecord.tag, caaRecord.value));
-  }
+  // if ('CAA' in data.record) for (var caa in data.record.CAA) {
+  //   var caaRecord = data.record.CAA[caa];
+  //   commits.push(CAA(subdomain, caaRecord.flags, caaRecord.tag, caaRecord.value));
+  // }
 
-  if ('SRV' in domainData.record) for (var srv in domainData.record.SRV) {
-    var srvRecord = domainData.record.SRV[srv];
-    commits.push(SRV(subdomain, srvRecord.priority, srvRecord.weight, srvRecord.port, srvRecord.target + "."));
-  }
+  // if ('SRV' in data.record) for (var srv in data.record.SRV) {
+  //   var srvRecord = data.record.SRV[srv];
+  //   commits.push(SRV(subdomain, srvRecord.priority, srvRecord.weight, srvRecord.port, srvRecord.target + "."));
+  // }
 }
 
 // commits.push();
