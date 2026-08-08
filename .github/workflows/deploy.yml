@@ -17,17 +17,20 @@ jobs:
     dns:
         name: DNS
         runs-on: ubuntu-latest
+        env:
+            CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         steps:
             - uses: actions/checkout@v7
             - name: Write DNSControl creds
+              if: ${{ env.CLOUDFLARE_API_TOKEN != '' }}
               run: |
                 cat > ./creds.json <<EOF
                 {"cloudflare":{"TYPE":"CLOUDFLAREAPI","apitoken":"${CLOUDFLARE_API_TOKEN}"}}
                 EOF
-              env:
-                CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
             - uses: gacts/install-dnscontrol@v1
+              if: ${{ env.CLOUDFLARE_API_TOKEN != '' }}
               with:
                   version: 4.44.1
             - name: Push DNS Records
+              if: ${{ env.CLOUDFLARE_API_TOKEN != '' }}
               run: dnscontrol push --config ./scripts/dnsconfig.js
