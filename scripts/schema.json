@@ -17,7 +17,7 @@
         "type": "string"
       }
     },
-    "record": {
+    "records": {
       "type": "object",
       "properties": {
         "ALIAS": {
@@ -68,5 +68,5 @@
       "type": "boolean"
     }
   },
-  "required": ["owner", "record"]
+  "required": ["owner", "records"]
 }

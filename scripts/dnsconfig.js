@@ -7,7 +7,10 @@ var providerCf = DnsProvider(NewDnsProvider("cloudflare", {
   // manage_redirects: true,
 }));
 
-var rootDomain = 'part-of.my.id';
+var apexDomains = [
+  'part-of.my.id',
+  'is-my.id',
+];
 
 /**
  * @param {string} directory
@@ -25,39 +28,47 @@ function getDomainsList(directory) {
   return result;
 }
 
-var domains = getDomainsList('../domains');
-var commits = [];
-
-for (var idx in domains) {
-  var data = domains[idx].data;
-  var subdomain = domains[idx].name;
-  var modifier = {
-    "cloudflare_proxy": data.proxied ? "on" : "off",
-  };
-
-  // if ('NS' in data.record) for (var ns in data.record.NS) commits.push(NS(subdomain, data.record.NS[ns] + "."));
+/**
+ * @param {string} domain
+ */
+function commitsFor(domain) {
+  var domains = getDomainsList('../domains/' + domain);
+  var commits = [];
   
-  if ('ALIAS' in data.record) commits.push(ALIAS(subdomain, data.record.ALIAS + ".", modifier));
-  if ('CNAME' in data.record) commits.push(CNAME(subdomain, data.record.CNAME + ".", modifier));
+  for (var idx in domains) {
+    var data = domains[idx].data;
+    var subdomain = domains[idx].name;
+    var modifier = {
+      "cloudflare_proxy": data.proxied ? "on" : "off",
+    };
   
-  if ('A' in data.record) for (var a in data.record.A) commits.push(A(subdomain, IP(data.record.A[a]), modifier));
-  if ('AAAA' in data.record) for (var aaaa in data.record.AAAA) commits.push(AAAA(subdomain, data.record.AAAA[aaaa], modifier));
+    // if ('NS' in data.records) for (var ns in data.records.NS) commits.push(NS(subdomain, data.records.NS[ns] + "."));
+    
+    if ('ALIAS' in data.records) commits.push(ALIAS(subdomain, data.records.ALIAS + ".", modifier));
+    if ('CNAME' in data.records) commits.push(CNAME(subdomain, data.records.CNAME + ".", modifier));
+    
+    if ('A' in data.records) for (var a in data.records.A) commits.push(A(subdomain, IP(data.records.A[a]), modifier));
+    if ('AAAA' in data.records) for (var aaaa in data.records.AAAA) commits.push(AAAA(subdomain, data.records.AAAA[aaaa], modifier));
+  
+    if ('MX' in data.records) for (var mx in data.records.MX) commits.push(MX(subdomain, 10, data.records.MX[mx] + "."));
+    if ('TXT' in data.records) for (var txt in data.records.TXT) commits.push(TXT(subdomain, data.records.TXT[txt]));
+    // if ('PTR' in data.records) for (var ptr in data.records.PTR) commits.push(PTR(subdomain, data.records.PTR[ptr] + "."));
+  
+    // if ('CAA' in data.records) for (var caa in data.records.CAA) {
+    //   var caaRecord = data.records.CAA[caa];
+    //   commits.push(CAA(subdomain, caaRecord.flags, caaRecord.tag, caaRecord.value));
+    // }
+  
+    // if ('SRV' in data.records) for (var srv in data.records.SRV) {
+    //   var srvRecord = data.records.SRV[srv];
+    //   commits.push(SRV(subdomain, srvRecord.priority, srvRecord.weight, srvRecord.port, srvRecord.target + "."));
+    // }
+  }
 
-  if ('MX' in data.record) for (var mx in data.record.MX) commits.push(MX(subdomain, 10, data.record.MX[mx] + "."));
-  if ('TXT' in data.record) for (var txt in data.record.TXT) commits.push(TXT(subdomain, data.record.TXT[txt]));
-  // if ('PTR' in data.record) for (var ptr in data.record.PTR) commits.push(PTR(subdomain, data.record.PTR[ptr] + "."));
-
-  // if ('CAA' in data.record) for (var caa in data.record.CAA) {
-  //   var caaRecord = data.record.CAA[caa];
-  //   commits.push(CAA(subdomain, caaRecord.flags, caaRecord.tag, caaRecord.value));
-  // }
-
-  // if ('SRV' in data.record) for (var srv in data.record.SRV) {
-  //   var srvRecord = data.record.SRV[srv];
-  //   commits.push(SRV(subdomain, srvRecord.priority, srvRecord.weight, srvRecord.port, srvRecord.target + "."));
-  // }
+  return commits;
 }
 
-// commits.push();
-
-D(rootDomain, regNone, providerCf, commits);
+for (var i in apexDomains) {
+  var domain = apexDomains[i];
+  D(domain, regNone, providerCf, commitsFor(domain));
+}
