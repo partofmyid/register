@@ -16,7 +16,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
               with:
                   token: ${{ secrets.PR_BYPASS_TOKEN }}
                   fetch-depth: 0

@@ -18,12 +18,16 @@ jobs:
         name: DNS
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - name: Check
-              uses: koenrh/dnscontrol-action@v3
+            - uses: actions/checkout@v7
+            - run: echo '{"cloudflare":{"TYPE":"CLOUDFLAREAPI","apitoken":"$CLOUDFLARE_API_TOKEN"}}' > ./creds.json
+            - uses: gacts/install-dnscontrol@v1
               with:
-                  args: check
-                  config_file: "scripts/dnsconfig.js"
+                  version: 4.44.1
+            - name: Push DNS Records
+              run: dnscontrol check --config scripts/dnsconfig.js
+              env:
+                  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
     json:
         name: JSON
         runs-on: ubuntu-latest
