@@ -3,8 +3,7 @@
 // ^^^^^^ https://docs.dnscontrol.org/getting-started/typescript
 
 var regNone = NewRegistrar("none");
-// @ts-ignore
-var providerCf = DnsProvider(NewDnsProvider("cloudflare", "CLOUDFLAREAPI", {
+var providerCf = DnsProvider(NewDnsProvider("cloudflare", {
   // manage_redirects: true,
 }));
 
