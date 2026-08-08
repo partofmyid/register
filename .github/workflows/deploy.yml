@@ -6,7 +6,7 @@ on:
         branches: [main]
         paths:
             - "domains/**"
-            - ".github/workflows/publish.yml"
+            - ".github/workflows/deploy.yml"
             - "scripts/dnsconfig.js"
 
 concurrency:
