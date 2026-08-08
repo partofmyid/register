@@ -1,0 +1,11 @@
+{
+  "owner": {
+    "repo": "https://github.com/JustStudio7/Website",
+    "email": "support@juststudio.is-a.dev",
+    "username": "JustDeveloper1"
+  },
+  "proxied": false,
+  "records": {
+    "CNAME": "edge.redirect.pizza"
+  }
+}

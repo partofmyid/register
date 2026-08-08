@@ -1,0 +1,11 @@
+{
+  "owner": {
+    "repo": "https://github.com/jokoarynt/part-of-my-id",
+    "email": "remix-drone-kindly@duck.com",
+    "username": "jokoarynt"
+  },
+  "proxied": false,
+  "records": {
+    "CNAME": "edge.redirect.pizza"
+  }
+}

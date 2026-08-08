@@ -1,0 +1,10 @@
+{
+  "owner": {
+    "email": "c@orangc.xyz",
+    "username": "orangci"
+  },
+  "proxied": false,
+  "records": {
+    "CNAME": "edge.redirect.pizza"
+  }
+}

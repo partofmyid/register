@@ -1,0 +1,9 @@
+{
+    "description": "(worker managed so no records) redirect to part-of.my.id",
+    "owner": {
+        "username": "partofmyid"
+    },
+    "records": {
+      "TXT": [ "reserved" ]
+    }
+}
