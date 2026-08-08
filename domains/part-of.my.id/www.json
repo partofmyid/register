@@ -1,0 +1,10 @@
+{
+  "description": "dashboard and main website",
+  "owner": {
+    "username": "partofmyid"
+  },
+  "records": {
+    "AAAA": [ "100::" ]
+  },
+  "proxied": true
+}
