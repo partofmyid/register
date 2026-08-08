@@ -3,6 +3,7 @@
 // ^^^^^^ https://docs.dnscontrol.org/getting-started/typescript
 
 var regNone = NewRegistrar("none");
+// @ts-ignore
 var providerCf = DnsProvider(NewDnsProvider("cloudflare", "CLOUDFLAREAPI", {
   // manage_redirects: true,
 }));
@@ -13,9 +14,12 @@ var proxy = {
   off: { "cloudflare_proxy": "off" }
 }
 
-function getDomainsList(filesPath) {
+/**
+ * @param {string} directory
+ */
+function getDomainsList(directory) {
   // @ts-expect-error
-  var files = glob.apply(null, [filesPath, true, '.json']);
+  var files = glob.apply(null, [directory, true, '.json']);
   var result = [];
 
   for (var i = 0; i < files.length; i++) {
