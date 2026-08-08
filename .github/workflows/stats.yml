@@ -31,7 +31,8 @@ jobs:
               run: |
                 rm -f stats/*_error.log
 
-                ls domains | wc -l > stats/count.txt 2>stats/count_error.log &
+                find domains -type f | wc -l > stats/count.txt 2>stats/count_error.log &
+
                 wait
             
             - name: Commit changes

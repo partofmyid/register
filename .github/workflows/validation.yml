@@ -5,7 +5,7 @@ on:
     pull_request:
     push:
         paths:
-            - "domains/*"
+            - "domains/**"
             - ".github/workflows/validation.yml"
             - "scripts/*"
 
