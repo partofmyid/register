@@ -55,7 +55,7 @@ Fields:
 
 ### `proxied` (optional)
 
-A boolean to indicate weather to enable Cloudflare proxying (also known as orange clouding). Defaults to `false`.
+A boolean to indicate whether to enable Cloudflare proxying (also known as orange clouding). Defaults to `false`.
 
 ### `description` (optional)
 
@@ -63,7 +63,7 @@ A string containing a short description about the use of the subdomain. This is 
 
 ## Full File Example
 
-Path: `/domain/is-my.id/steve.json`
+Path: `/domains/is-my.id/steve.json`
 ```json
 {
   "description": "test domain",
