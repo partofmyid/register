@@ -60,8 +60,7 @@
         { "required": ["AAAA"] },
         { "required": ["CNAME"] },
         { "required": ["MX"] },
-        { "required": ["TXT"] },
-        { "required": ["SRV"] }
+        { "required": ["TXT"] }
       ]
     },
     "proxied": {
