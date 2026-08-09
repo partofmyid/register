@@ -62,3 +62,20 @@ A boolean to indicate weather to enable Cloudflare proxying (also known as orang
 A string containing a short description about the use of the subdomain. This is purely used for reference and is completely optional.
 
 ## Full File Example
+
+Path: `/domain/is-my.id/steve.json`
+```json
+{
+  "description": "test domain",
+  "owner": {
+    "username": "steve",
+    "email": "steve@example.com"
+  },
+  "records": {
+    "CNAME": "your-site.example.com",
+    "MX": [ "mx1.example.com", "mx2.example.com" ],
+    "TXT": [ "part1", "part2" ]
+  },
+  "proxied": true
+}
+```
