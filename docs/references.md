@@ -11,7 +11,7 @@ To make a new subdomain, fork and create a new `<subdomain>.json` file (under a 
 
 ### Filename Guide
 
-Nested subdomains like `blog.steve.is-my.id` are supported, by using additional `.` in the filename: `/domains/is-my.id/blog.steve.json`
+Nested subdomains like `blog.steve.is-my.id` are supported, by using additional `.` in the filename: `/domains/is-my.id/blog.steve.json`. **However**, you need to own the root subdomain in order to register a nested subdomain (e.g., you must own `steve.is-my.id` in order to register `blog.steve.is-my.id`).
 
 Each subdomain level (i.e., `blog` and `steve` in the example above) must follow these rules:
 - Only use **alphanumeric and lowercase** characters
