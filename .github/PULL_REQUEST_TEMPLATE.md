@@ -1,7 +1,6 @@
 <!--
     ⚠️⚠️ ****READ FIRST**** ⚠️⚠️
-    0. Please note that we are currently undergoing a rewrite, using the old schema will be fixed by maintainers until the rewrite is done. After that its back on to you to use the new schema
-    1.  You **MUST** read the documentation (https://part-of.my.id/docs) if you have any issue first **BEFORE** opening a pull request
+    1.  You **MUST** read the documentation if you have any issue first **BEFORE** opening a pull request
     2.  Note that checkboxes in this template **ARE REQUIRED** so not checking them will result in a possible PR close
         So to get your PR merged, please spend time to review your application before submitting.
         To check an item, add an 'X' between the brackets: '[ ]' => '[X]'
