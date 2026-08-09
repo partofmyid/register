@@ -7,7 +7,7 @@
 
 > [!NOTE]
 > 1. We have a new subdomain available: **is-my.id**
-> 2. Deploy script has been rewritten to support multiple domains. Please check the [reference documentation]() for usage guides. All existing subdomains has been migrated.
+> 2. Deploy script has been rewritten to support multiple domains. Please check the [reference documentation](https://github.com/partofmyid/register/blob/main/docs/references.md) for usage guides. All existing subdomains has been migrated.
 > 3. Current documentation on the main website **is outdated**. Use the reference documentation for the time being.
 
 > [!CAUTION]
