@@ -17,6 +17,7 @@ Each subdomain level (i.e., `blog` and `steve` in the example above) must follow
 - Only use **alphanumeric and lowercase** characters
 - Dashes are allowed but **cant** be repeated twice in a row (e.g., `--` is invalid) and cant be at the start/end of a subdomain level.
 - Each subdomain level is limited to 1-63 characters (except `.json` file extensions)
+- Underscores are only allowed for specific records (e.g., `TXT` records for verification)
 
 File name in `/domains/<apex>/<subdomain>.json` must follow these rules:
 - Must end in `.json`
