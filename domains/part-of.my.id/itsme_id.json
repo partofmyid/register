@@ -1,0 +1,10 @@
+{
+  "owner": {
+    "username": "zizou14115"
+  },
+  "description": "My website",
+  "proxied": false,
+  "records": {
+    "CNAME": "itsme_id.on-forge.com"
+  }
+}
