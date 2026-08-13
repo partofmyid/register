@@ -2,16 +2,6 @@
 /// <reference path="./types-dnscontrol.d.ts"/>
 // ^^^^^^ https://docs.dnscontrol.org/getting-started/typescript
 
-var regNone = NewRegistrar("none");
-var providerCf = DnsProvider(NewDnsProvider("cloudflare", {
-  manage_single_redirects: true,
-}));
-
-var apexDomains = [
-  'part-of.my.id',
-  'is-my.id',
-];
-
 /** @type {Object<string, DomainModifier[]>} */
 var extraCommits = {
   'is-my.id': [ CF_REDIRECT('is-my.id/*', 'https://part-of.my.id/$1') ],
@@ -77,7 +67,10 @@ function commitsFor(domain) {
   return commits;
 }
 
+var apexDomains = require("./apexdomains.json");
 for (var i in apexDomains) {
   var domain = apexDomains[i];
-  D(domain, regNone, providerCf, commitsFor(domain));
+  D(domain, NewRegistrar("none"), DnsProvider(NewDnsProvider("cloudflare", {
+    manage_single_redirects: true,
+  })), commitsFor(domain));
 }
