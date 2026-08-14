@@ -11,7 +11,7 @@
 > 3. Current documentation on the main website **is outdated**. Use the reference documentation for the time being.
 
 > [!CAUTION]
-> We currently **DO NOT** support Vercel, Netlify, and other services that requires us to be on the [PSL](https://github.com/publicsuffix/list). _We will apply to be on the list [only if theres high demand](https://publicsuffix.org/submit/#:~:text=We%20will%20generally%20decline%20small%20projects)_, so be patient and invite some of your friends!
+> We currently **DO NOT** support Vercel, Netlify, and other services that requires us to be on the [PSL](https://github.com/publicsuffix/list). _We will apply to be on the list [only if theres high demand](https://publicsuffix.org/submit/#:~:text=We%20will%20generally%20decline%20small%20projects)_.
 
 > [!WARNING]
 > *Domains used for illegal purposes will be removed and permanently banned. Please provide a clear description of your resource in the pull request.*
