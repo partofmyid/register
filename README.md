@@ -5,6 +5,8 @@
 <p align="center">part-of.my.id is a <b>free subdomain service</b> that allows you to have a nice looking subdomain for your website for free.</p>
 <p></p>
 
+<!-- ANNOUNCEMENTS_START -->
+
 > [!NOTE]
 > 1. We have a new subdomain available: **is-my.id**
 > 2. Deploy script has been rewritten to support multiple domains. Please check the [reference documentation](https://github.com/partofmyid/register/blob/main/docs/references.md) for usage guides. All existing subdomains has been migrated.
