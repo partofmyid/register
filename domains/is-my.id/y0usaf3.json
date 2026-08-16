@@ -1,0 +1,10 @@
+{
+  "description": "testtt domain",
+  "owner": {
+    "username": "Y0usaf3",
+    "email": "youssef.pro.coding@gmail.com"
+  },
+  "records": {
+    "CNAME": "y0usaf3.github.io"
+  }
+}
