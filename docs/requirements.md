@@ -34,3 +34,6 @@ Your website **MUST NOT** contain the following:
 - AI chatbot websites
 - Game cheats/hacks/exploits
 - Violations of Indonesian laws and regulations
+
+> [!NOTE]
+> This list is not exhaustive and may be updated in the future.
