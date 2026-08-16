@@ -1,0 +1,11 @@
+{
+  "owner": {
+    "username": "satr14washere"
+  },
+  "proxy": false,
+  "records": {
+    "TXT": [
+      "dh=644529a29e74f0d4e5ed657ab5745dd7707a0301"
+    ]
+  }
+}
