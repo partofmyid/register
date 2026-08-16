@@ -5,6 +5,11 @@
 <p align="center">part-of.my.id is a <b>free subdomain service</b> that allows you to have a nice looking subdomain for your website for free.</p>
 <p></p>
 
+## Important Links
+- [Quickstart Guide](https://part-of.my.id/d/quickstart)
+- [Main Website](https://part-of.my.id/)
+
+## Announcements
 <!-- ANNOUNCEMENTS_START -->
 
 > [!NOTE]
