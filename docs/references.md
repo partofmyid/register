@@ -15,13 +15,13 @@ Nested subdomains like `blog.steve.is-my.id` are supported, by using additional 
 
 Each subdomain level (i.e., `blog` and `steve` in the example above) must follow these rules:
 - Only use **alphanumeric and lowercase** characters
-- Dashes are allowed but **cant** be repeated twice in a row (e.g., `--` is invalid) and cant be at the start/end of a subdomain level.
-- Each subdomain level is limited to 1-63 characters (except `.json` file extensions)
+- Dashes are allowed but **can't** be repeated twice in a row (e.g., `--` is invalid) and can't be at the start/end of a subdomain level.
+- Each subdomain level is limited to 1-63 characters
 - Underscores are only allowed for specific records (e.g., `TXT` records for verification)
 
 File name in `/domains/<apex>/<subdomain>.json` must follow these rules:
 - Must end in `.json`
-- Cannot contain the any of the available apex/root domains (e.g., `steve.is-my.id.json` is invalid)
+- Cannot contain any of the available apex/root domains (e.g., `steve.is-my.id.json` is invalid)
 - Cannot begin with a dot, contain spaces, or any invalid FQDN characters
 - Cannot repeat dots (e.g., `..` is invalid)
 - Cannot exceed 244 characters (excluding `.json`)
@@ -29,11 +29,11 @@ File name in `/domains/<apex>/<subdomain>.json` must follow these rules:
 ## JSON Schema
 
 > [!NOTE]
-> These are the only supported keys for the JSON schema. Including any other key not listed here may trigger a PR check fail. 
+> These are the only supported keys for the JSON schema. Including any other key not listed here may trigger a PR check fail.
 
 ### `owner` (required)
 
-Contact information in case action is required for your subdomain. GitHub username is the absolute bare minimum and **must match** the account you are making the PR with. Its recommended that you also include other contact methods such as `email` and `discord`.
+Contact information in case action is required for your subdomain. GitHub username is the absolute bare minimum and **must match** the account you are making the PR with. It's recommended that you also include other contact methods such as `email` and `discord`.
 
 Required fields:
 - `username`: A string containing your GitHub username.
@@ -47,7 +47,7 @@ Fields:
 - `AAAA`: An array of strings containing IPv6 addresses.
 - `CNAME`: A string containing the hostname to point to.
 - `MX`: An array of strings containing the mail servers to point to.
-- `TXT`: An array of stings containing plain text records.
+- `TXT`: An array of strings containing plain text records.
 
 **Important** notes:
 - Mixing `CNAME` with any other record is unsupported **without** enabling `proxied` status.
