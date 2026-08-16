@@ -4,6 +4,6 @@
     "username": "partofmyid"
   },
   "records": {
-    "TXT": "reserved"
+    "TXT": [ "reserved" ]
   }
 }
