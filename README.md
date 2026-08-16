@@ -9,8 +9,7 @@
 
 > [!NOTE]
 > 1. We have a new subdomain available: **is-my.id**
-> 2. Deploy script has been rewritten to support multiple domains. Please check the [reference documentation](https://github.com/partofmyid/register/blob/main/docs/references.md) for usage guides. All existing subdomains have been migrated.
-> 3. Current documentation on the main website **is outdated**. Use the reference documentation for the time being.
+> 2. Deploy script has been rewritten to support multiple apex domains. Please check the [reference documentation](https://part-of.my.id/d/references) for usage guides. All existing subdomains have been migrated.
 
 > [!CAUTION]
 > We currently **DO NOT** support Vercel, Netlify, and other services that require us to be on the [PSL](https://github.com/publicsuffix/list). _We will apply to be on the list [only if there's high demand](https://publicsuffix.org/submit/#:~:text=We%20will%20generally%20decline%20small%20projects)_.
