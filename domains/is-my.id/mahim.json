@@ -1,0 +1,13 @@
+{
+  "description": "test domain",
+  "owner": {
+    "username": "mahim",
+    "email": "mahimcraft.mail@gmail.com"
+  },
+  "records": {
+    "CNAME": "dns1.alwaysdata.com",
+    "MX": [ "mx1.alwaysdata.com", "mx2.example.com" ],
+    "TXT": [ "part1", "part2" ]
+  },
+  "proxied": true
+}
