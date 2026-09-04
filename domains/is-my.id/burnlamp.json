@@ -1,0 +1,10 @@
+{
+  "description": "Personal website and personal digital space hosted on GitHub Pages",
+  "owner": {
+    "username": "burnicelamp"
+  },
+  "records": {
+    "CNAME": "burnicelamp.github.io"
+  },
+  "proxied": false
+}
