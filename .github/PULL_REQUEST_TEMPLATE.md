@@ -37,6 +37,6 @@ _None provided..._
 _None provided..._
 <!--
     ^^^^^^ Remove the line above to provide a link/screenshot
-    ⚠️⚠️ ****REQUIRED IF ITS A WEBSITE**** ⚠️⚠️
+    ⚠️⚠️ ****REQUIRED IF ITS A WEBSITE, DO NOT PUT IN THE SUBDOMAIN YOU ARE REGISTERING. MUST BE REACHABLE**** ⚠️⚠️
     Please provide a link (required) and/or screenshot to your website below.
 -->
