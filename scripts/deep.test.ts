@@ -10,8 +10,8 @@ import type {
 
 const DOMAINS_DIR = `${import.meta.dir}/../domains`;
 
-describe('domains filesystem', () => {
-  test('only known apex directories exist', async () => {
+describe('directory structure', () => {
+  test('only known files and directories exist', async () => {
     const domainsDir = await readdir(DOMAINS_DIR);
     for (const content of domainsDir) expect(APEX_LIST).toContain(content);
   });
