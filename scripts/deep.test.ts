@@ -8,9 +8,9 @@ import type {
   DomainFile, ArrayRecordType
 } from './schema';
 
-describe('filesystem', () => {
-  test('lingering', async () => {
-    const domainsDir = await readdir('./domains');
-    for (const content of domainsDir) expect(APEX.includes(content)).toBe(true);
+describe('domains filesystem', () => {
+  test('only known apex directories exist', async () => {
+    const domainsDir = await readdir(`${import.meta.dir}/../domains`);
+    for (const content of domainsDir) expect(APEX).toContain(content);
   })
 })
