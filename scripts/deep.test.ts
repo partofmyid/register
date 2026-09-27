@@ -12,5 +12,5 @@ describe('domains filesystem', () => {
   test('only known apex directories exist', async () => {
     const domainsDir = await readdir(`${import.meta.dir}/../domains`);
     for (const content of domainsDir) expect(APEX).toContain(content);
-  })
-})
+  });
+});
