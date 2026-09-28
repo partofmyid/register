@@ -11,12 +11,14 @@ import type {
 const DOMAINS_DIR = `${import.meta.dir}/../domains`;
 
 async function forEachDomainFile(cb:
-  (apex: string, fileName: string) => any | Promise<any>
+  (_: { apex: string, fileName: string, fullPath: string, fullSubdomain: string }) => any | Promise<any>
 ) {
   for (const apex of APEX_LIST) {
     const files = await readdir(`${DOMAINS_DIR}/${apex}`);
     for (const fileName of files) {
-      await cb(apex, fileName);
+      const fullPath = `${DOMAINS_DIR}/${apex}/${fileName}`;
+      const fullSubdomain = `${fileName.replace(/\.json$/, '')}.${apex}`;
+      await cb({ apex, fileName, fullPath, fullSubdomain });
     }
   }
 }
@@ -27,8 +29,7 @@ describe('directory structure', () => {
     for (const content of domainsDir) expect(APEX_LIST).toContain(content);
   });
   test('filenames are valid fqdns', async () => {
-    forEachDomainFile((apex, fileName) => {
-      const fullSubdomain = `${fileName.replace(/\.json$/, '')}.${apex}`;
+    forEachDomainFile(({ apex, fileName, fullSubdomain }) => {
       expect(fileName.endsWith('.json'), `Invalid File: ${apex}/${fileName}`).toBe(true);
       expect(fileName === '@.json' || SUBDOMAIN_REGEX.test(fullSubdomain), `Invalid Subdomain: ${fullSubdomain}`).toBe(true);
     });
@@ -37,8 +38,7 @@ describe('directory structure', () => {
 
 describe('schema and records', () => {
   test('json is valid and parses', async () => {
-    forEachDomainFile((apex, fileName) => {
-      const fullPath = `${DOMAINS_DIR}/${apex}/${fileName}`;
+    forEachDomainFile(({ fullPath }) => {
       const file = Bun.file(fullPath);
       expect(file.type.includes('application/json'), `File Not JSON: ${fullPath}`).toBe(true);
       expect(file.json(), `JSON Invalid: ${fullPath}`).resolves.toBeObject();
