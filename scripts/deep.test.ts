@@ -10,6 +10,11 @@ import type {
 
 const DOMAINS_DIR = `${import.meta.dir}/../domains`;
 
+async function getDomainRecords(getFilePath: string): Promise<DomainFile> {
+  const file = Bun.file(getFilePath);
+  return await file.json();
+}
+
 async function forEachDomainFile(cb:
   (_: { apex: string, fileName: string, fullPath: string, fullSubdomain: string }) => any | Promise<any>
 ) {
