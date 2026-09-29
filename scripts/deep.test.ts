@@ -50,4 +50,29 @@ describe('schema and records', () => {
       await expect(file.json(), `JSON Invalid: ${fullPath}`).resolves.toBeObject();
     });
   });
+  test('schema and records are valid', async () => {
+    await forEachDomainFile(async ({ fullPath }) => {
+      const domainFile = await getDomainRecords(fullPath);
+      expect(domainFile.owner?.username).toBeString();
+      expect(domainFile.records).toBeObject();
+      
+      for (const type of ARRAY_RECORDS) {
+        if (!(type in domainFile.records)) continue; 
+        expect(domainFile.records[type], `${type} Record Must Be An Array: ${fullPath}`).toBeArray();
+        domainFile.records[type]?.forEach(value => {
+          expect(value, `${type} Record Must Contain Strings: ${fullPath}`).toBeString();
+          expect(value, `${type} Record Of ${value} Is Not Valid: ${fullPath}`).toMatch(RECORDS_REGEX[type]);
+        });
+      }
+      for (const type of STRING_RECORDS) {
+        if (!(type in domainFile.records)) continue; 
+        const value = domainFile.records[type];
+        expect(value, `${type} Record Must Be A String: ${fullPath}`).toBeString();
+        expect(value, `${type} Record Of ${value} Is Not Valid: ${fullPath}`).toMatch(RECORDS_REGEX[type]);
+      }
+      
+      if (domainFile?.proxied !== undefined) expect(domainFile.proxied).toBeBoolean();
+      if (domainFile?.description !== undefined) expect(domainFile.description).toBeString();
+    });
+  })
 });
