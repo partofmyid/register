@@ -35,8 +35,8 @@ describe('directory structure', () => {
     for (const content of domainsDir) expect(APEX_LIST).toContain(content);
   });
   test('filenames are valid fqdns', async () => {
-    await forEachDomainFile(({ apex, fileName, fullSubdomain }) => {
-      expect(fileName.endsWith('.json'), `Invalid File: ${apex}/${fileName}`).toBe(true);
+    await forEachDomainFile(({ fileName, fullSubdomain, fullPath }) => {
+      expect(fileName.endsWith('.json'), `Invalid File: ${fullPath}`).toBe(true);
       expect(fileName === '@.json' || SUBDOMAIN_REGEX.test(fullSubdomain), `Invalid Subdomain: ${fullSubdomain}`).toBe(true);
     });
   });
