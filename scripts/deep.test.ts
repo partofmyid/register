@@ -2,10 +2,11 @@ import { expect, test, describe } from 'bun:test';
 import { readdir } from "node:fs/promises";
 import APEX_LIST from './apexdomains.json';
 import {
-  ARRAY_RECORDS, FQDN_REGEX, RECORDS_REGEX, SUBDOMAIN_REGEX
+  ARRAY_RECORDS, STRING_RECORDS,
+  RECORDS_REGEX, SUBDOMAIN_REGEX,
 } from './schema';
 import type {
-  DomainFile, ArrayRecordType
+  DomainFile
 } from './schema';
 
 const DOMAINS_DIR = `${import.meta.dir}/../domains`;
