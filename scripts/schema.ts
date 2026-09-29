@@ -26,4 +26,4 @@ export const RECORDS_REGEX = {
 } as const;
 
 export const ARRAY_RECORDS = ['A', 'AAAA', 'MX', 'TXT'] as const;
-export type ArrayRecordType = typeof ARRAY_RECORDS[number];
+export const STRING_RECORDS = ['CNAME'] as const;
