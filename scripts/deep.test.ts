@@ -63,14 +63,14 @@ describe('schema and records', () => {
         expect(domainFile.records[type], `${type} Record Must Contain At Least 1 Value: ${fullPath}`).not.toBeEmpty();
         domainFile.records[type]?.forEach(value => {
           expect(value, `${type} Record Must Contain Strings: ${fullPath}`).toBeString();
-          expect(value, `${type} Record Of ${value} Is Not Valid: ${fullPath}`).toMatch(RECORDS_REGEX[type]);
+          expect(value, `${type} Record Of ${value || '(empty)'} Is Not Valid: ${fullPath}`).toMatch(RECORDS_REGEX[type]);
         });
       }
       for (const type of STRING_RECORDS) {
         if (!(type in domainFile.records)) continue; 
         const value = domainFile.records[type];
         expect(value, `${type} Record Must Be A String: ${fullPath}`).toBeString();
-        expect(value, `${type} Record Of ${value} Is Not Valid: ${fullPath}`).toMatch(RECORDS_REGEX[type]);
+        expect(value, `${type} Record Of ${value || '(empty)'} Is Not Valid: ${fullPath}`).toMatch(RECORDS_REGEX[type]);
       }
       
       if (domainFile?.proxied !== undefined) expect(domainFile.proxied).toBeBoolean();
