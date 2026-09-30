@@ -35,9 +35,10 @@ describe('directory structure', () => {
     for (const content of domainsDir) expect(APEX_LIST, `Unknown File/Directory: ${content}`).toContain(content);
   });
   test('filenames are valid fqdns', async () => {
-    await forEachDomainFile(({ fileName, fullSubdomain, fullPath }) => {
+    await forEachDomainFile(({ apex, fileName, fullSubdomain, fullPath }) => {
       expect(fileName, `Invalid File Extension: ${fullPath}`).toEndWith('.json');
       expect(fileName.length, `File Name Too Long: ${fullPath}`).toBeLessThan(254);
+      expect(fileName, `Subdomain Cannot Include Apex: ${fullPath}`).not.toContain(apex);
       if (fileName !== '@.json') expect(fileName, `Invalid Subdomain: ${fullSubdomain}`).toMatch(SUBDOMAIN_REGEX);
     });
   });
