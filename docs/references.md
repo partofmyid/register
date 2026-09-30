@@ -52,7 +52,6 @@ Fields:
 **Important** notes:
 - Mixing `CNAME` with any other record is unsupported **without** enabling `proxied` status.
 - Mixing `CNAME` with `A`/`AAAA` record is not supported regardless of `proxied` status.
-- `ALIAS` records are **only used internally**.
 
 ### `proxied` (optional)
 

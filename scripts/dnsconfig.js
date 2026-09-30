@@ -43,7 +43,7 @@ function commitsFor(domain) {
   
     // if ('NS' in data.records) for (var ns in data.records.NS) commits.push(NS(subdomain, data.records.NS[ns] + "."));
     
-    if ('ALIAS' in data.records) commits.push(ALIAS(subdomain, data.records.ALIAS + ".", modifier));
+    // if ('ALIAS' in data.records) commits.push(ALIAS(subdomain, data.records.ALIAS + ".", modifier));
     if ('CNAME' in data.records) commits.push(CNAME(subdomain, data.records.CNAME + ".", modifier));
     
     if ('A' in data.records) for (var a in data.records.A) commits.push(A(subdomain, IP(data.records.A[a]), modifier));

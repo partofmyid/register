@@ -20,9 +20,6 @@
     "records": {
       "type": "object",
       "properties": {
-        "ALIAS": {
-          "type": "string"
-        },
         "A": {
           "type": "array",
           "items": {
@@ -55,7 +52,6 @@
       },
       "required": [],
       "anyOf": [
-        { "required": ["ALIAS"] },
         { "required": ["A"] },
         { "required": ["AAAA"] },
         { "required": ["CNAME"] },
