@@ -39,6 +39,7 @@ describe('directory structure', () => {
       expect(fileName.length, `File Name Too Long: ${fullPath}`).toBeLessThan(254);
       expect(fileName, `Invalid File Extension: ${fullPath}`).toEndWith('.json');
       expect(fileName, `Subdomain Cannot Include Apex: ${fullPath}`).not.toContain(apex);
+      expect(fileName, `Subdomain Must Be Lowercase: ${fullPath}`).toEqual(fileName.toLowerCase());
       if (fileName !== '@.json') expect(fileName, `Invalid Subdomain: ${fullSubdomain}`).toMatch(SUBDOMAIN_REGEX);
     });
   });
