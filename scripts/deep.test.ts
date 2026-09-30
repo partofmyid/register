@@ -36,8 +36,8 @@ describe('directory structure', () => {
   });
   test('filenames are valid fqdns', async () => {
     await forEachDomainFile(({ apex, fileName, fullSubdomain, fullPath }) => {
-      expect(fileName, `Invalid File Extension: ${fullPath}`).toEndWith('.json');
       expect(fileName.length, `File Name Too Long: ${fullPath}`).toBeLessThan(254);
+      expect(fileName, `Invalid File Extension: ${fullPath}`).toEndWith('.json');
       expect(fileName, `Subdomain Cannot Include Apex: ${fullPath}`).not.toContain(apex);
       if (fileName !== '@.json') expect(fileName, `Invalid Subdomain: ${fullSubdomain}`).toMatch(SUBDOMAIN_REGEX);
     });
