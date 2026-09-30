@@ -55,10 +55,12 @@ describe('schema and records', () => {
       const domainFile = await getDomainRecords(fullPath);
       expect(domainFile.owner?.username, `A GitHub Username Must Be Provided: ${fullPath}`).toBeString();
       expect(domainFile.records, `Records Must Be An Object: ${fullPath}`).toBeObject();
+      expect(domainFile.records, `At Least 1 Record Type Must Be Set: ${fullPath}`).toContainAnyKeys([...ARRAY_RECORDS, ...STRING_RECORDS]);
       
       for (const type of ARRAY_RECORDS) {
         if (!(type in domainFile.records)) continue; 
         expect(domainFile.records[type], `${type} Record Must Be An Array: ${fullPath}`).toBeArray();
+        expect(domainFile.records[type], `${type} Record Must Contain At Least 1 Value: ${fullPath}`).not.toBeEmpty();
         domainFile.records[type]?.forEach(value => {
           expect(value, `${type} Record Must Contain Strings: ${fullPath}`).toBeString();
           expect(value, `${type} Record Of ${value} Is Not Valid: ${fullPath}`).toMatch(RECORDS_REGEX[type]);
