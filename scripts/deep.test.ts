@@ -37,7 +37,7 @@ describe('directory structure', () => {
   test('filenames are valid fqdns', async () => {
     await forEachDomainFile(({ fileName, fullSubdomain, fullPath }) => {
       expect(fileName, `Invalid File Extension: ${fullPath}`).toEndWith('.json');
-      expect(fileName === '@.json' || SUBDOMAIN_REGEX.test(fullSubdomain), `Invalid Subdomain: ${fullSubdomain}`).toBe(true);
+      if (fileName !== '@.json') expect(fileName, `Invalid Subdomain: ${fullSubdomain}`).toMatch(SUBDOMAIN_REGEX);
     });
   });
 });
@@ -73,8 +73,8 @@ describe('schema and records', () => {
         expect(value, `${type} Record Of ${value || '(empty)'} Is Not Valid: ${fullPath}`).toMatch(RECORDS_REGEX[type]);
       }
       
-      if (domainFile?.proxied !== undefined, `Proxied Must Be A Boolean: ${fullPath}`) expect(domainFile.proxied).toBeBoolean();
-      if (domainFile?.description !== undefined, `Description Must Be A String: ${fullPath}`) expect(domainFile.description).toBeString();
+      if (domainFile?.proxied !== undefined) expect(domainFile.proxied, `Proxied Must Be A Boolean: ${fullPath}`).toBeBoolean();
+      if (domainFile?.description !== undefined) expect(domainFile.description, `Description Must Be A String: ${fullPath}`).toBeString();
     });
   })
 });
