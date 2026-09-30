@@ -1,0 +1,12 @@
+{
+  "description": "GitLab Pages ownership verification for leejoonhun.is-my.id.",
+  "owner": {
+    "username": "leejoonhun"
+  },
+  "records": {
+    "TXT": [
+      "gitlab-pages-verification-code=8de1168625b1b83f2548948413650656"
+    ]
+  },
+  "proxied": false
+}
