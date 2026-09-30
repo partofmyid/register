@@ -73,8 +73,8 @@ describe('schema and records', () => {
         expect(value, `${type} Record Of ${value || '(empty)'} Is Not Valid: ${fullPath}`).toMatch(RECORDS_REGEX[type]);
       }
       
-      if (domainFile?.proxied !== undefined) expect(domainFile.proxied).toBeBoolean();
-      if (domainFile?.description !== undefined) expect(domainFile.description).toBeString();
+      if (domainFile?.proxied !== undefined, `Proxied Must Be A Boolean: ${fullPath}`) expect(domainFile.proxied).toBeBoolean();
+      if (domainFile?.description !== undefined, `Description Must Be A String: ${fullPath}`) expect(domainFile.description).toBeString();
     });
   })
 });
