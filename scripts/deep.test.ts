@@ -32,11 +32,11 @@ async function forEachDomainFile(cb:
 describe('directory structure', () => {
   test('only known files and directories exist', async () => {
     const domainsDir = await readdir(DOMAINS_DIR);
-    for (const content of domainsDir) expect(APEX_LIST).toContain(content);
+    for (const content of domainsDir) expect(APEX_LIST, `Unknown File/Directory: ${content}`).toContain(content);
   });
   test('filenames are valid fqdns', async () => {
     await forEachDomainFile(({ fileName, fullSubdomain, fullPath }) => {
-      expect(fileName.endsWith('.json'), `Invalid File: ${fullPath}`).toBe(true);
+      expect(fileName, `Invalid File Extension: ${fullPath}`).toEndWith('.json');
       expect(fileName === '@.json' || SUBDOMAIN_REGEX.test(fullSubdomain), `Invalid Subdomain: ${fullSubdomain}`).toBe(true);
     });
   });
@@ -46,15 +46,15 @@ describe('schema and records', () => {
   test('json is valid and parses', async () => {
     await forEachDomainFile(async ({ fullPath }) => {
       const file = Bun.file(fullPath);
-      expect(file.type.includes('application/json'), `File Not JSON: ${fullPath}`).toBe(true);
+      expect(file.type, `File Not JSON: ${fullPath}`).toContain('application/json');
       await expect(file.json(), `JSON Invalid: ${fullPath}`).resolves.toBeObject();
     });
   });
   test('schema and records are valid', async () => {
     await forEachDomainFile(async ({ fullPath }) => {
       const domainFile = await getDomainRecords(fullPath);
-      expect(domainFile.owner?.username).toBeString();
-      expect(domainFile.records).toBeObject();
+      expect(domainFile.owner?.username, `A GitHub Username Must Be Provided: ${fullPath}`).toBeString();
+      expect(domainFile.records, `Records Must Be An Object: ${fullPath}`).toBeObject();
       
       for (const type of ARRAY_RECORDS) {
         if (!(type in domainFile.records)) continue; 
