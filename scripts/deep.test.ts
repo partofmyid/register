@@ -82,3 +82,20 @@ describe('schema and records', () => {
     });
   })
 });
+
+describe('dns and cloudflare', () => {
+  test('underscores for special records only', () => {
+  });
+  
+  test('require proxied for mixing cname records', () => {
+  });
+});
+
+describe('ownership rules', () => {
+  test('root subdomain exists for nested subdomains', () => {
+  });
+  
+  test('github commit author matches record file owner', () => {
+    // might move to a different file due to github and git history checking
+  });
+});
