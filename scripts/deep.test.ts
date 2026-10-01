@@ -93,8 +93,11 @@ describe('schema and records', () => {
 describe('dns and cloudflare', () => {
   test('underscores for special records only', () => {
   });
-  
-  test('require proxied for mixing cname records', () => {
+  test('cloudflare proxied rules', async () => {
+    await forEachDomainFile(async ({ fullPath }) => {
+      const { contents: domainFile } = await getDomainRecords(fullPath);
+      if (domainFile.records.CNAME && !domainFile.proxied) expect(domainFile.records, `CNAME Records Must Be Proxied For Mixing With Other Records: ${fullPath}`).not.toContainAnyKeys(['MX', 'TXT']);
+    });
   });
 });
 
