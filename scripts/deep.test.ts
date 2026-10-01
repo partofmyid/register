@@ -63,8 +63,8 @@ describe('schema and records', () => {
   });
   test('schema and records are valid', async () => {
     await forEachDomainFile(async ({ fullPath }) => {
-      const domainFile = await getDomainRecords(fullPath);
-      expect(domainFile.owner?.username, `A GitHub Username Must Be Provided: ${fullPath}`).toBeString();
+      const { contents: domainFile } = await getDomainRecords(fullPath);
+      expect(domainFile.owner.username, `A GitHub Username Must Be Provided: ${fullPath}`).toBeString();
       expect(domainFile.records, `Records Must Be An Object: ${fullPath}`).toBeObject();
       expect(domainFile.records, `At Least 1 Record Type Must Be Set: ${fullPath}`).toContainAnyKeys([...ARRAY_RECORDS, ...STRING_RECORDS]);
       
