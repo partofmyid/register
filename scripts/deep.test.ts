@@ -11,9 +11,16 @@ import type {
 
 const DOMAINS_DIR = `${import.meta.dir}/../domains`;
 
-async function getDomainRecords(getFilePath: string): Promise<DomainFile> {
+function getPath(apex: string, subdomain: string) {
+  return `${DOMAINS_DIR}/${apex}/${subdomain}.json`;  
+}
+
+async function getDomainRecords(getFilePath: string) {
   const file = Bun.file(getFilePath);
-  return await file.json();
+  const exists = await file.exists();
+  return {
+    exists, contents: await file.json().catch(() => null) as DomainFile,
+  };
 }
 
 async function forEachDomainFile(cb:
