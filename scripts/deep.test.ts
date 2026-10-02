@@ -83,6 +83,13 @@ describe('schema and records', () => {
         expect(value, `${type} Record Must Be A String: ${fullPath}`).toBeString();
         expect(value, `${type} Record Of ${value || '(empty)'} Is Not Valid: ${fullPath}`).toMatch(RECORDS_REGEX[type]);
       }
+
+      for (const type of Object.keys(domainFile.records)) {
+        expect([...ARRAY_RECORDS, ...STRING_RECORDS] as string[], `Unknown Record Type: ${type} in ${fullPath}`).toContain(type);
+      } 
+      for (const keys of Object.keys(domainFile)) {
+        expect(['owner', 'records', 'proxied', 'description'], `Unknown Key In Domain File: ${fullPath}`).toContain(keys);
+      }
       
       if (domainFile?.proxied !== undefined) expect(domainFile.proxied, `Proxied Must Be A Boolean: ${fullPath}`).toBeBoolean();
       if (domainFile?.description !== undefined) expect(domainFile.description, `Description Must Be A String: ${fullPath}`).toBeString();
