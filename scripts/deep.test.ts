@@ -115,7 +115,7 @@ describe('ownership rules', () => {
       const subdomain = fileName.replace(/\.json$/, '');
       if (!subdomain.includes('.')) return;
 
-      const rootSubdomain = subdomain.split('.').at(-1);
+      const rootSubdomain = subdomain.split('.').slice(1).join('.');
       const { contents: domainFile } = await getDomainRecords(fullPath);
       const { exists, contents: rootDomainFile } = await getDomainRecords(getPath(apex, rootSubdomain!));
 
