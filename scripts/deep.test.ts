@@ -45,9 +45,9 @@ describe('directory structure', () => {
     await forEachDomainFile(({ apex, fileName, fullSubdomain, fullPath }) => {
       expect(fileName.replace(/\.json$/, '').length, `File Name Too Long: ${fullPath}`).toBeLessThan(254);
       expect(fileName, `Invalid File Extension: ${fullPath}`).toEndWith('.json');
-      expect(fileName, `Subdomain Cannot Include Apex: ${fullPath}`).not.toContain(apex);
       expect(fileName, `Subdomain Cannot Include Repeated Dashes (-): ${fullPath}`).not.toContain('--');
       expect(fileName, `Subdomain Must Be Lowercase: ${fullPath}`).toEqual(fileName.toLowerCase());
+      for (const apexes of APEX_LIST) expect(fileName, `Subdomain Cannot Include Any Apex: ${fullPath}`).not.toContain(apexes);
       if (fileName !== '@.json') expect(fileName, `Invalid Subdomain: ${fullSubdomain}`).toMatch(SUBDOMAIN_REGEX);
     });
   });
