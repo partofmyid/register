@@ -2,7 +2,6 @@
   "owner": {
     "username": "jacobrdale"
   },
-  "proxy": false,
   "records": {
     "CNAME": "hexon404.onrender.com"
   }

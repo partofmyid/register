@@ -3,7 +3,6 @@
     "username": "joestr",
     "email": "strasser999@gmail.com"
   },
-  "proxy": false,
   "records": {
     "A": [
       "142.132.173.34"
