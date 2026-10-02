@@ -129,6 +129,7 @@ describe('ownership rules', () => {
   });
   
   test('github commit author matches record file owner', () => {
+    expect(true, `GitHub Commit Author Matching Not Implemented Yet`).toBe(false);
     // might move to a different file due to github and git history checking
   });
 });
