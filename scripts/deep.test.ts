@@ -120,7 +120,7 @@ describe('ownership rules', () => {
       const { exists, contents: rootDomainFile } = await getDomainRecords(getPath(apex, rootSubdomain!));
 
       expect(exists, `Root Subdomain Does Not Exist: ${fullPath}`).toBe(true);
-      expect(rootDomainFile.owner.username, `Root Subdomain Owner Does Not Match: ${fullPath}`).toBe(domainFile.owner.username);
+      if (exists) expect(rootDomainFile.owner.username, `Root Subdomain Owner Does Not Match: ${fullPath}`).toBe(domainFile.owner.username);
     });
   });
   
