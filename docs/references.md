@@ -48,10 +48,12 @@ Fields:
 - `CNAME`: A string containing the hostname to point to.
 - `MX`: An array of strings containing the mail servers to point to.
 - `TXT`: An array of strings containing plain text records.
+- `REDIRECT`: A string containing the the URL to redirect to.
 
 **Important** notes:
 - Mixing `CNAME` with any other record is unsupported **without** enabling `proxied` status.
 - Mixing `CNAME` with `A`/`AAAA` record is not supported regardless of `proxied` status.
+- `REDIRECT` is not a real DNS record, under the hood it 
 
 ### `proxied` (optional)
 
