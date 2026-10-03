@@ -15,6 +15,6 @@ test('root subdomain exists for nested subdomains', async () => {
   });
 });
 
-test('github commit author matches record file owner', () => {
-  // TOOD: implement
+test.todo('github commit author matches record file owner', () => {
+  // TODO: implement
 });
