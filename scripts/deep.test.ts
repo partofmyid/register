@@ -125,7 +125,7 @@ describe('ownership rules', () => {
       if (!domainFile) return expect(domainFile, `JSON Parsing Failed: ${fullPath}`).toBeObject();
       const { exists, contents: rootDomainFile } = await getDomainRecords(getPath(apex, rootSubdomain!));
 
-      expect(exists, `Root Subdomain Does Not Exist: ${fullPath}`).toBe(true);
+      expect(exists, `Root Subdomain (${rootSubdomain}.${apex}) Does Not Exist: ${fullPath}`).toBe(true);
       if (exists) expect(rootDomainFile.owner.username, `Root Subdomain Owner Does Not Match: ${fullPath}`).toBe(domainFile.owner.username);
     });
   });
