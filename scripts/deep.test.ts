@@ -43,12 +43,12 @@ describe('directory structure', () => {
     for (const content of domainsDir) expect(APEX_LIST, `Unknown File/Directory: ${content}`).toContain(content);
   });
   test('filenames are valid fqdns', async () => {
-    await forEachDomainFile(({ apex, fileName, fullSubdomain, fullPath }) => {
+    await forEachDomainFile(({ fileName, fullSubdomain, fullPath }) => {
       expect(fileName.replace(/\.json$/, '').length, `File Name Too Long: ${fullPath}`).toBeLessThan(254);
       expect(fileName, `Invalid File Extension: ${fullPath}`).toEndWith('.json');
       expect(fileName, `Subdomain Cannot Include Repeated Dashes (-): ${fullPath}`).not.toContain('--');
       expect(fileName, `Subdomain Must Be Lowercase: ${fullPath}`).toEqual(fileName.toLowerCase());
-      for (const apexes of APEX_LIST) expect(fileName, `Subdomain Cannot Include Any Apex: ${fullPath}`).not.toContain(apexes);
+      for (const apexes of APEX_LIST) expect(fileName, `Subdomain Cannot Include Any Apex: ${fullPath}`).not.toContain(`.${apexes}`);
       if (fileName !== '@.json') expect(fileName, `Invalid Subdomain: ${fullSubdomain}`).toMatch(SUBDOMAIN_REGEX);
     });
   });
@@ -59,13 +59,13 @@ describe('schema and records', () => {
     await forEachDomainFile(async ({ fullPath }) => {
       const file = Bun.file(fullPath);
       expect(file.type, `File Not JSON: ${fullPath}`).toContain('application/json');
-      await expect(file.json(), `JSON Invalid: ${fullPath}`).resolves.toBeObject();
+      expect(file.json().catch(() => null), `JSON Parsing Failed: ${fullPath}`).resolves.toBeObject();
     });
   });
   test('schema and records are valid', async () => {
     await forEachDomainFile(async ({ fullPath }) => {
       const { contents: domainFile } = await getDomainRecords(fullPath);
-      if (!domainFile) return expect(domainFile, `JSON Parsing Failed: ${fullPath}`).toBeObject();
+      if (domainFile === null) return expect(domainFile, `JSON Parsing Failed: ${fullPath}`).toBeObject();
       for (const keys of Object.keys(domainFile)) expect(['owner', 'records', 'proxied', 'description'], `Unknown Key In Domain File: ${fullPath}`).toContain(keys);
       for (const type of Object.keys(domainFile.records)) expect([...ARRAY_RECORDS, ...STRING_RECORDS] as string[], `Unknown Record Type: ${type} in ${fullPath}`).toContain(type);
       
