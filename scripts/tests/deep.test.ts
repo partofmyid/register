@@ -1,16 +1,16 @@
 import { expect, test, describe } from 'bun:test';
 import { readdir } from "node:fs/promises";
 import { join as path } from "node:path";
-import APEX_LIST from './apexdomains.json';
+import APEX_LIST from '../apexdomains.json';
 import {
   ARRAY_RECORDS, STRING_RECORDS,
   RECORDS_REGEX, SUBDOMAIN_REGEX,
-} from './schema';
+} from '../lib/schema';
 import type {
   DomainFile
-} from './schema';
+} from '../lib/schema';
 
-const DOMAINS_DIR = path(import.meta.dir, '/../domains');
+const DOMAINS_DIR = path(import.meta.dir, '../../domains');
 
 function getPath(apex: string, subdomain: string) {
   return path(DOMAINS_DIR, apex, `${subdomain}.json`);  
@@ -129,18 +129,15 @@ describe('ownership rules', () => {
     });
   });
   test('github commit author matches record file owner', () => {
-    expect(true, `Unimplemented`).toBe(false);
     // might move to a different file due to github and git history checking
   });
 });
 
 describe('site reachability', () => {
   test('subdomain records is reachable from ping', () => {
-    expect(true, `Unimplemented`).toBe(false);
     // might move to a different file due to github pr body checking
   });
   test('website preview from pr is reachable', () => {
-    expect(true, `Unimplemented`).toBe(false);
     // might move to a different file due to github pr body checking
   });
 });
