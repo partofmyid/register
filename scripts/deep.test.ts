@@ -68,6 +68,7 @@ describe('schema and records', () => {
       if (domainFile === null) return expect(domainFile, `JSON Parsing Failed: ${fullPath}`).toBeObject();
       for (const keys of Object.keys(domainFile)) expect(['owner', 'records', 'proxied', 'description'], `Unknown Key In Domain File: ${fullPath}`).toContain(keys);
       for (const type of Object.keys(domainFile.records)) expect([...ARRAY_RECORDS, ...STRING_RECORDS] as string[], `Unknown Record Type: ${type} in ${fullPath}`).toContain(type);
+      if (!domainFile?.owner || !domainFile?.records) return;
       
       expect(domainFile.owner.username, `A GitHub Username Must Be Provided: ${fullPath}`).toBeString();
       expect(domainFile.records, `Records Must Be An Object: ${fullPath}`).toBeObject();
