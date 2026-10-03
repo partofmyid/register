@@ -1,5 +1,6 @@
 import { expect, test } from 'bun:test';
-import { forEachDomainFile, getDomainRecords, getPath } from '../lib/files';
+import { forEachDomainFile, getSubdomainFromFile, getPath } from '../lib/files';
+const { PR_AUTHOR, PR_NUMBER } = process.env;
 
 test('root subdomain exists for nested', async () => {
   await forEachDomainFile(async ({ apex, fullPath, fileName }) => {
@@ -7,14 +8,14 @@ test('root subdomain exists for nested', async () => {
     if (!subdomain.includes('.')) return;
 
     const rootSubdomain = subdomain.split('.').slice(1).join('.');
-    const { contents: domainFile } = await getDomainRecords(fullPath);
-    const { exists, contents: rootDomainFile } = await getDomainRecords(getPath(apex, rootSubdomain!));
+    const { contents: domainFile } = await getSubdomainFromFile(fullPath);
+    const { exists, contents: rootDomainFile } = await getSubdomainFromFile(getPath(apex, rootSubdomain!));
 
     expect(exists, `Root Subdomain (${rootSubdomain}.${apex}) Does Not Exist: ${fullPath}`).toBe(true);
     if (exists) expect(rootDomainFile.owner.username, `Root Subdomain Owner Does Not Match: ${fullPath}`).toBe(domainFile.owner.username);
   });
 });
 
-test.todo('github commit author matches record file owner', () => {
-  // TODO: implement
+test.skipIf(!PR_NUMBER || !PR_AUTHOR)('github pull request authorized', () => {
+  
 });

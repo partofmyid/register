@@ -11,7 +11,7 @@ export function getPath(apex: string, subdomain: string) {
   return path(DOMAINS_DIR, apex, `${subdomain}.json`);  
 }
 
-export async function getDomainRecords(getFilePath: string) {
+export async function getSubdomainFromFile(getFilePath: string) {
   const file = Bun.file(getFilePath);
   const exists = await file.exists();
   const contents = await file.json().catch(() => null) as DomainFile

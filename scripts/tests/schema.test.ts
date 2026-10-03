@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import { forEachDomainFile, getDomainRecords } from '../lib/files';
+import { forEachDomainFile, getSubdomainFromFile } from '../lib/files';
 import { ARRAY_RECORDS, STRING_RECORDS, RECORDS_REGEX } from '../lib/schema';
 
 test('json is valid and parses', async () => {
@@ -12,7 +12,7 @@ test('json is valid and parses', async () => {
 
 test('schema and records are valid', async () => {
   await forEachDomainFile(async ({ fullPath }) => {
-    const { contents: domainFile } = await getDomainRecords(fullPath);
+    const { contents: domainFile } = await getSubdomainFromFile(fullPath);
     for (const keys of Object.keys(domainFile)) expect(['owner', 'records', 'proxied', 'description'], `Unknown Key In Domain File: ${fullPath}`).toContain(keys);
     for (const type of Object.keys(domainFile.records)) expect([...ARRAY_RECORDS, ...STRING_RECORDS] as string[], `Unknown Record Type: ${type} in ${fullPath}`).toContain(type);
           
