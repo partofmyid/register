@@ -128,9 +128,19 @@ describe('ownership rules', () => {
       if (exists) expect(rootDomainFile.owner.username, `Root Subdomain Owner Does Not Match: ${fullPath}`).toBe(domainFile.owner.username);
     });
   });
-  
   test('github commit author matches record file owner', () => {
-    expect(true, `GitHub Commit Author Matching Not Implemented Yet`).toBe(false);
+    expect(true, `Unimplemented`).toBe(false);
     // might move to a different file due to github and git history checking
+  });
+});
+
+describe('site reachability', () => {
+  test('subdomain records is reachable from ping', () => {
+    expect(true, `Unimplemented`).toBe(false);
+    // might move to a different file due to github pr body checking
+  });
+  test('website preview from pr is reachable', () => {
+    expect(true, `Unimplemented`).toBe(false);
+    // might move to a different file due to github pr body checking
   });
 });
