@@ -1,7 +1,7 @@
 import { expect, test } from 'bun:test';
 import { forEachDomainFile, getDomainRecords, getPath } from '../lib/files';
 
-test('root subdomain exists for nested subdomains', async () => {
+test('root subdomain exists for nested', async () => {
   await forEachDomainFile(async ({ apex, fullPath, fileName }) => {
     const subdomain = fileName.replace(/\.json$/, '');
     if (!subdomain.includes('.')) return;

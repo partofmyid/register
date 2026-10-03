@@ -5,7 +5,7 @@ import { DOMAINS_DIR } from '../lib/files';
 import { SUBDOMAIN_REGEX } from '../lib/schema';
 import APEX_LIST from '../apexdomains.json';
 
-test('only known files and directories exist', async () => {
+test('only known files exist', async () => {
   const domainsDir = await readdir(DOMAINS_DIR);
   for (const content of domainsDir) expect(APEX_LIST, `Unknown File/Directory: ${content}`).toContain(content);
 });
