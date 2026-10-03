@@ -1,45 +1,12 @@
 import { expect, test, describe } from 'bun:test';
 import { readdir } from "node:fs/promises";
-import { join as path } from "node:path";
+import { forEachDomainFile, getDomainRecords, getPath } from '../lib/files';
 import APEX_LIST from '../apexdomains.json';
+import { DOMAINS_DIR } from '../lib/files';
 import {
   ARRAY_RECORDS, STRING_RECORDS,
   RECORDS_REGEX, SUBDOMAIN_REGEX,
 } from '../lib/schema';
-import type {
-  DomainFile
-} from '../lib/schema';
-
-const DOMAINS_DIR = path(import.meta.dir, '../../domains');
-
-function getPath(apex: string, subdomain: string) {
-  return path(DOMAINS_DIR, apex, `${subdomain}.json`);  
-}
-
-async function getDomainRecords(getFilePath: string) {
-  const file = Bun.file(getFilePath);
-  const exists = await file.exists();
-  const contents = await file.json().catch(() => null) as DomainFile
-  if (exists) {
-    expect(contents, `JSON Parsing Failed: ${getFilePath}`).toBeObject();
-    expect(contents?.owner, `Owner Must Be An Object: ${getFilePath}`).toBeObject();
-    expect(contents?.records, `Records Must Be An Object: ${getFilePath}`).toBeObject();
-  }
-  return { exists, contents };
-}
-
-async function forEachDomainFile(cb:
-  (_: { apex: string, fileName: string, fullPath: string, fullSubdomain: string }) => any | Promise<any>
-) {
-  for (const apex of APEX_LIST) {
-    const files = await readdir(`${DOMAINS_DIR}/${apex}`);
-    for (const fileName of files) {
-      const fullPath = path(DOMAINS_DIR, apex, fileName);
-      const fullSubdomain = `${fileName.replace(/\.json$/, '')}.${apex}`;
-      await cb({ apex, fileName, fullPath, fullSubdomain });
-    }
-  }
-}
 
 describe('directory structure', () => {
   test('only known files and directories exist', async () => {
