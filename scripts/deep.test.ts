@@ -1,5 +1,6 @@
 import { expect, test, describe } from 'bun:test';
 import { readdir } from "node:fs/promises";
+import { join as path } from "node:path";
 import APEX_LIST from './apexdomains.json';
 import {
   ARRAY_RECORDS, STRING_RECORDS,
@@ -9,10 +10,10 @@ import type {
   DomainFile
 } from './schema';
 
-const DOMAINS_DIR = `${import.meta.dir}/../domains`;
+const DOMAINS_DIR = path(import.meta.dir, '/../domains');
 
 function getPath(apex: string, subdomain: string) {
-  return `${DOMAINS_DIR}/${apex}/${subdomain}.json`;  
+  return path(DOMAINS_DIR, apex, `${subdomain}.json`);  
 }
 
 async function getDomainRecords(getFilePath: string) {
@@ -29,7 +30,7 @@ async function forEachDomainFile(cb:
   for (const apex of APEX_LIST) {
     const files = await readdir(`${DOMAINS_DIR}/${apex}`);
     for (const fileName of files) {
-      const fullPath = `${DOMAINS_DIR}/${apex}/${fileName}`;
+      const fullPath = path(DOMAINS_DIR, apex, fileName);
       const fullSubdomain = `${fileName.replace(/\.json$/, '')}.${apex}`;
       await cb({ apex, fileName, fullPath, fullSubdomain });
     }
@@ -64,6 +65,7 @@ describe('schema and records', () => {
   test('schema and records are valid', async () => {
     await forEachDomainFile(async ({ fullPath }) => {
       const { contents: domainFile } = await getDomainRecords(fullPath);
+      if (!domainFile) return expect(domainFile, `JSON Parsing Failed: ${fullPath}`).toBeObject();
       for (const keys of Object.keys(domainFile)) expect(['owner', 'records', 'proxied', 'description'], `Unknown Key In Domain File: ${fullPath}`).toContain(keys);
       for (const type of Object.keys(domainFile.records)) expect([...ARRAY_RECORDS, ...STRING_RECORDS] as string[], `Unknown Record Type: ${type} in ${fullPath}`).toContain(type);
       
@@ -97,6 +99,7 @@ describe('dns and cloudflare', () => {
   test('dns hostname and record rules', async () => {
     await forEachDomainFile(async ({ fullPath, fileName }) => {
       const { contents: domainFile } = await getDomainRecords(fullPath);
+      if (!domainFile) return expect(domainFile, `JSON Parsing Failed: ${fullPath}`).toBeObject();
       if (fileName.includes('_')) expect(domainFile.records, `Underscores Are Only Allowed For Special Records: ${fullPath}`).not.toContainAnyKeys(['A', 'AAAA', 'CNAME', 'MX']);
       if ("CNAME" in domainFile.records) expect(domainFile.records, `CNAME Records Cannot Mix With A and AAAA: ${fullPath}`).not.toContainAnyKeys([ 'A', 'AAAA' ]);
     });
@@ -104,6 +107,7 @@ describe('dns and cloudflare', () => {
   test('cloudflare proxied rules', async () => {
     await forEachDomainFile(async ({ fullPath }) => {
       const { contents: domainFile } = await getDomainRecords(fullPath);
+      if (!domainFile) return expect(domainFile, `JSON Parsing Failed: ${fullPath}`).toBeObject();
       if (domainFile.records.CNAME && !domainFile.proxied) expect(domainFile.records, `CNAME Records Must Be Proxied For Mixing With Other Records: ${fullPath}`).not.toContainAnyKeys(['MX', 'TXT']);
     });
   });
@@ -117,6 +121,7 @@ describe('ownership rules', () => {
 
       const rootSubdomain = subdomain.split('.').slice(1).join('.');
       const { contents: domainFile } = await getDomainRecords(fullPath);
+      if (!domainFile) return expect(domainFile, `JSON Parsing Failed: ${fullPath}`).toBeObject();
       const { exists, contents: rootDomainFile } = await getDomainRecords(getPath(apex, rootSubdomain!));
 
       expect(exists, `Root Subdomain Does Not Exist: ${fullPath}`).toBe(true);
