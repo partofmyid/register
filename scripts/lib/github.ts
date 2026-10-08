@@ -36,7 +36,7 @@ export async function fetchChangedFiles(pr: string): Promise<{
     exists: false, message: `GitHub API Error: ${prResponse.status} ${prResponse.statusText}`,
   }
 
-  const filesResponse = await fetch(`https://api.github.com/repos/${REPO}/pulls/${pr}/files`, { headers });
+  const filesResponse = await fetch(`https://api.github.com/repos/${REPO}/pulls/${pr}/files?per_page=100`, { headers });
   if (!filesResponse.ok) return {
     exists: false, message: `GitHub API Error: ${filesResponse.status} ${filesResponse.statusText}`,
   }
