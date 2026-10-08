@@ -25,8 +25,8 @@ export async function getSubdomainFromRaw(url: string) {
 export async function fetchChangedFiles(pr: number): Promise<{
   exists: boolean,
   message?: string,
-  files?: string[],
-  deleted?: string[],
+  changedPaths?: string[],
+  removedURLs?: string[],
 }> {
   const response = await fetch(`https://api.github.com/repos/partofmyid/register/pulls/${pr}/files`, { headers });
   const exists = response.ok;
@@ -38,8 +38,8 @@ export async function fetchChangedFiles(pr: number): Promise<{
   const json = await response.json().catch(() => null) as DiffEntryAPIResponse[];
   const domainFiles = json.filter(({ filename }) => filename.startsWith('domains/'))
 
-  const files: string[] = [];
-  const deleted: string[] = [];
+  const changedPaths: string[] = [];
+  const removedURLs: string[] = [];
 
   for (const { status, filename, previous_filename } of domainFiles) {
     switch (status) {
@@ -47,14 +47,14 @@ export async function fetchChangedFiles(pr: number): Promise<{
       case 'modified':
       case 'changed':
       case 'copied':
-        files.push(filename);
+        changedPaths.push(filename);
         break;
       case 'renamed':
-        files.push(filename);
-        if (previous_filename) deleted.push(previous_filename);
+        changedPaths.push(filename);
+        if (previous_filename) removedURLs.push(previous_filename);
         break;
       case 'removed':
-        deleted.push(filename);
+        removedURLs.push(filename);
         break;
       case 'unchanged':
         break;
@@ -63,7 +63,7 @@ export async function fetchChangedFiles(pr: number): Promise<{
 
   return {
     exists,
-    files,
-    deleted,
+    changedPaths,
+    removedURLs,
   }
 }
