@@ -3,7 +3,7 @@ import type { DomainFile } from "./schema";
 import { join as path } from 'node:path';
 import type { HeadersInit } from "bun";
 
-export const REPO = 'partofmyid/register';
+const REPO = 'partofmyid/register';
 const headers: HeadersInit = {
   "X-GitHub-Api-Version": "2026-03-10",
   "Accept": "application/vnd.github+json",
