@@ -1,3 +1,5 @@
+import type { DomainFile } from "./schema";
+
 export const REPO = 'partofmyid/register';
 export const BYPASSER = [ 'satr14washere' ];
 
@@ -13,7 +15,14 @@ export type DiffEntryAPIResponse = {
   previous_filename?: string,
 };
 
-export async function fetchChangedFiles(pr: number, token?: string): Promise<{
+export async function getSubdomainFromRaw(url: string) {
+  const response = await fetch(url, { headers });
+  const exists = response.ok;
+  const contents = await response.json().catch(() => null) as DomainFile;
+  return { exists, contents };
+}
+
+export async function fetchChangedFiles(pr: number): Promise<{
   exists: boolean,
   message?: string,
   files?: string[],
