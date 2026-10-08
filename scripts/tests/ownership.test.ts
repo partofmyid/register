@@ -31,7 +31,7 @@ test.skipIf(!PR_NUMBER)('github pull request authorized', async () => {
   for (const { url, removed } of files!) { 
     const { exists, contents } = await getSubdomainFromRaw(url);
     expect(exists, `${removed ? 'Removed' : 'Changed'} Subdomain Does Not Exist: ${url}`).toBe(true);
-    expect(contents?.owner.username.toLocaleLowerCase(), `${removed ? 'Removed' : 'Changed'} Subdomain Owner Does Not Match: ${url}`).toBe(owner!);
+    expect(contents?.owner?.username?.toLocaleLowerCase(), `${removed ? 'Removed' : 'Changed'} Subdomain Owner Does Not Match: ${url}`).toBe(owner!);
   }
   
   console.log(`* PR #${PR_NUMBER} by ${owner} with ${files!.length} changes: authorized`);
