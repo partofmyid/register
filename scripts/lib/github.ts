@@ -66,7 +66,7 @@ export async function fetchChangedFiles(pr: string): Promise<{
         files.push({ removed, url: `${changedRaw}/${filename}` });
         break;
       case 'renamed':
-        files.push({ removed, url: `${changedRaw}/${filename}` });
+        files.push({ removed: false, url: `${changedRaw}/${filename}` });
         if (previous_filename) files.push({ removed, url: `${deletedRaw}/${previous_filename}` });
         break;
       case 'removed':
