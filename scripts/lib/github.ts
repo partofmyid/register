@@ -1,10 +1,8 @@
 import type { DomainFile } from "./schema";
 
 export const REPO = 'partofmyid/register';
-export const BYPASSER = [ 'satr14washere' ];
-
 const headers = {
-  "Authorization": `Bearer ${process.env.GITHUB_TOKEN}`,
+  "Authorization": process.env.GITHUB_TOKEN ? `Bearer ${process.env.GITHUB_TOKEN}` : '',
   "X-GitHub-Api-Version": "2026-03-10",
   "Accept": "application/vnd.github+json",
 };
@@ -22,25 +20,31 @@ export async function getSubdomainFromRaw(url: string) {
   return { exists, contents };
 }
 
-export async function fetchChangedFiles(pr: number): Promise<{
+export async function fetchChangedFiles(pr: string): Promise<{
   exists: boolean,
   message?: string,
   changedPaths?: string[],
   removedURLs?: string[],
 }> {
-  const response = await fetch(`https://api.github.com/repos/partofmyid/register/pulls/${pr}/files`, { headers });
-  const exists = response.ok;
+  const prResponse = await fetch(`https://api.github.com/repos/${REPO}/pulls/${pr}`, { headers });
+  if (!prResponse.ok) return {
+    exists: false, message: `GitHub API Error: ${prResponse.status} ${prResponse.statusText}`,
+  }
 
-  if (!exists) return {
-    exists, message: `GitHub API Error: ${response.status} ${response.statusText}`,
+  const filesResponse = await fetch(`https://api.github.com/repos/${REPO}/pulls/${pr}/files`, { headers });
+  if (!filesResponse.ok) return {
+    exists: false, message: `GitHub API Error: ${filesResponse.status} ${filesResponse.statusText}`,
   }
   
-  const json = await response.json().catch(() => null) as DiffEntryAPIResponse[];
-  const domainFiles = json.filter(({ filename }) => filename.startsWith('domains/'))
+  const deletedRaw = `https://raw.githubusercontent.com/${REPO}/${(
+    await prResponse.json() as { base: { sha: string } }
+  ).base.sha}`;
 
   const changedPaths: string[] = [];
   const removedURLs: string[] = [];
-
+  const domainFiles = (await filesResponse.json() as DiffEntryAPIResponse[])
+    .filter(({ filename }) => filename.startsWith('domains/'));
+  
   for (const { status, filename, previous_filename } of domainFiles) {
     switch (status) {
       case 'added':
@@ -51,19 +55,15 @@ export async function fetchChangedFiles(pr: number): Promise<{
         break;
       case 'renamed':
         changedPaths.push(filename);
-        if (previous_filename) removedURLs.push(previous_filename);
+        if (previous_filename) removedURLs.push(`${deletedRaw}/${previous_filename}`);
         break;
       case 'removed':
-        removedURLs.push(filename);
+        removedURLs.push(`${deletedRaw}/${filename}`);
         break;
       case 'unchanged':
         break;
     }
   }
 
-  return {
-    exists,
-    changedPaths,
-    removedURLs,
-  }
+  return { exists: true, changedPaths, removedURLs }
 }
