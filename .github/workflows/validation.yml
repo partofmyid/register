@@ -56,5 +56,5 @@ jobs:
             - name: Run test suite
               run: bun test
               env:
-                PR_NUMBER: ${{ github.event.pull_request.number }}
+                PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
