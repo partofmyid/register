@@ -35,4 +35,4 @@ test.skipIf(!PR_NUMBER)('github pull request authorized', async () => {
   }
   
   console.log(`* PR #${PR_NUMBER} by ${owner} with ${files!.length} changes: authorized`);
-});
+}, { timeout: 30 * 1000, retry: 2 });
