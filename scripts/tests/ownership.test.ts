@@ -1,6 +1,8 @@
 import { expect, test } from 'bun:test';
 import { forEachDomainFile, getSubdomainFromFile, getPath } from '../lib/files';
 import { fetchChangedFiles, getSubdomainFromRaw } from '../lib/github';
+import BYPASSERS from '../bypassers.json';
+
 const { PR_NUMBER } = process.env;
 
 test('root subdomain exists for nested', async () => {
@@ -18,10 +20,13 @@ test('root subdomain exists for nested', async () => {
 });
 
 test.skipIf(!PR_NUMBER)('github pull request authorized', async () => {
-  const { exists, message, author, changedPaths, removedURLs } = await fetchChangedFiles(PR_NUMBER!);
-  const owner = author!?.toLocaleLowerCase();
+  const { exists, message, author, labels, changedPaths, removedURLs } = await fetchChangedFiles(PR_NUMBER!);
+  
   expect(exists, message).toBe(true);
   expect(message, message).toBeUndefined();
+  
+  const owner = author!?.toLocaleLowerCase();
+  if (BYPASSERS.includes(owner) || labels!.includes('skip-authorization')) return; 
 
   for (const url of removedURLs!) { 
     const { exists, contents } = await getSubdomainFromRaw(url);

@@ -27,6 +27,7 @@ export async function fetchChangedFiles(pr: string): Promise<{
   exists: boolean,
   message?: string,
   author?: string,
+  labels?: string[],
   changedPaths?: string[],
   removedURLs?: string[],
 }> {
@@ -41,8 +42,9 @@ export async function fetchChangedFiles(pr: string): Promise<{
   }
   
   const prJson = await prResponse.json() as {
-    base: { sha: string }
-    user: { login: string }
+    base: { sha: string },
+    user: { login: string },
+    labels: { name: string }[],
   };
   const deletedRaw = `https://raw.githubusercontent.com/${REPO}/${prJson.base.sha}`;
 
@@ -74,6 +76,7 @@ export async function fetchChangedFiles(pr: string): Promise<{
 
   return {
     exists: true, author: prJson.user.login,
+    labels: prJson.labels.map(l => l.name),
     changedPaths, removedURLs
   }
 }
