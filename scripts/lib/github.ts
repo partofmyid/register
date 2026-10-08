@@ -10,10 +10,8 @@ const headers: HeadersInit = {
 };
 if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 
-type BranchInfoAPIResponse = {
-  sha: string,
-  repo: { full_name: string },
-};  
+type FileEntry = { removed: boolean, url: string };
+type BranchInfoAPIResponse = { sha: string, repo?: { full_name: string } };  
 type DiffEntryAPIResponse = {
   status: "added" | "removed" | "modified" | "renamed" | "copied" | "changed" | "unchanged",
   filename: string,
