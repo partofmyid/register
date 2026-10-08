@@ -12,7 +12,11 @@ on:
 concurrency:
     group: ${{ github.ref }}-validation
     cancel-in-progress: true
-
+    
+permissions:
+  contents: read
+  pull-requests: read
+  
 jobs:
     dns:
         name: DNS
@@ -36,15 +40,11 @@ jobs:
         name: JSON
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - name: JSON Syntax Check
-              uses: limitusus/json-syntax-check@v2
+            - uses: actions/checkout@v7
+            - uses: oven-sh/setup-bun@v2
               with:
-                  pattern: "\\.json$"
+                bun-version: v1.3.13
+            - run: bun test
               env:
-                  BASE: "domains/"
-            - name: Validate JSON Schema
-              uses: cardinalby/schema-validator-action@v3
-              with:
-                file: 'domains/**/*.json'
-                schema: 'scripts/schema.json'
+                PR_NUMBER: ${{ github.event.pull_request.number }}
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
