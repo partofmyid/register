@@ -23,6 +23,7 @@ export async function getSubdomainFromRaw(url: string) {
 export async function fetchChangedFiles(pr: string): Promise<{
   exists: boolean,
   message?: string,
+  author?: string,
   changedPaths?: string[],
   removedURLs?: string[],
 }> {
@@ -36,9 +37,11 @@ export async function fetchChangedFiles(pr: string): Promise<{
     exists: false, message: `GitHub API Error: ${filesResponse.status} ${filesResponse.statusText}`,
   }
   
-  const deletedRaw = `https://raw.githubusercontent.com/${REPO}/${(
-    await prResponse.json() as { base: { sha: string } }
-  ).base.sha}`;
+  const prJson = await prResponse.json() as {
+    base: { sha: string }
+    user: { login: string }
+  };
+  const deletedRaw = `https://raw.githubusercontent.com/${REPO}/${prJson.base.sha}`;
 
   const changedPaths: string[] = [];
   const removedURLs: string[] = [];
@@ -65,5 +68,8 @@ export async function fetchChangedFiles(pr: string): Promise<{
     }
   }
 
-  return { exists: true, changedPaths, removedURLs }
+  return {
+    exists: true, author: prJson.user.login,
+    changedPaths, removedURLs
+  }
 }
