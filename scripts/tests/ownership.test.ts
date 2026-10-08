@@ -20,7 +20,7 @@ test('root subdomain exists for nested', async () => {
 });
 
 test.skipIf(!PR_NUMBER)('github pull request authorized', async () => {
-  const { exists, message, author, labels, changedPaths, removedURLs } = await fetchChangedFiles(PR_NUMBER!);
+  const { exists, message, author, labels, changedURLs, removedURLs } = await fetchChangedFiles(PR_NUMBER!);
   
   expect(exists, message).toBe(true);
   expect(message, message).toBeUndefined();
@@ -34,9 +34,9 @@ test.skipIf(!PR_NUMBER)('github pull request authorized', async () => {
     expect(contents?.owner.username, `Removed Subdomain Owner Does Not Match: ${url}`).toBe(owner!);
   }
   
-  for (const path of changedPaths!) { 
-    const { exists, contents } = await getSubdomainFromFile(path);
-    expect(exists, `Changed Subdomain Does Not Exist: ${path}`).toBe(true);
-    expect(contents?.owner.username, `Changed Subdomain Owner Does Not Match: ${path}`).toBe(owner!);
+  for (const url of changedURLs!) { 
+    const { exists, contents } = await getSubdomainFromRaw(url);
+    expect(exists, `Changed Subdomain Does Not Exist: ${url}`).toBe(true);
+    expect(contents?.owner.username, `Changed Subdomain Owner Does Not Match: ${url}`).toBe(owner!);
   }
 });
