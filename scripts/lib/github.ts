@@ -1,13 +1,14 @@
 import { DOMAINS_DIR } from "./files";
 import type { DomainFile } from "./schema";
 import { join as path } from 'node:path';
+import type { HeadersInit } from "bun";
 
 export const REPO = 'partofmyid/register';
-const headers = {
-  "Authorization": process.env.GITHUB_TOKEN ? `Bearer ${process.env.GITHUB_TOKEN}` : '',
+const headers: HeadersInit = {
   "X-GitHub-Api-Version": "2026-03-10",
   "Accept": "application/vnd.github+json",
 };
+if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 
 export type DiffEntryAPIResponse = {
   status: "added" | "removed" | "modified" | "renamed" | "copied" | "changed" | "unchanged",
