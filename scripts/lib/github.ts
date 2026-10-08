@@ -1,4 +1,6 @@
+import { DOMAINS_DIR } from "./files";
 import type { DomainFile } from "./schema";
+import { join as path } from 'node:path';
 
 export const REPO = 'partofmyid/register';
 const headers = {
@@ -49,19 +51,20 @@ export async function fetchChangedFiles(pr: string): Promise<{
     .filter(({ filename }) => filename.startsWith('domains/'));
   
   for (const { status, filename, previous_filename } of domainFiles) {
+    const localPath = path(DOMAINS_DIR, filename.replace(/^domains\//, ''));
     switch (status) {
       case 'added':
       case 'modified':
       case 'changed':
       case 'copied':
-        changedPaths.push(filename);
+        changedPaths.push(localPath);
         break;
       case 'renamed':
-        changedPaths.push(filename);
+        changedPaths.push(localPath);
         if (previous_filename) removedURLs.push(`${deletedRaw}/${previous_filename}`);
         break;
       case 'removed':
-        removedURLs.push(`${deletedRaw}/${filename}`);
+        removedURLs.push(`${deletedRaw}/${localPath}`);
         break;
       case 'unchanged':
         break;
