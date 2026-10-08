@@ -2,6 +2,11 @@ name: Validation
 
 on:
     workflow_dispatch:
+      inputs:
+        pr_number:
+          description: 'PR number to check (optional)'
+          type: string
+          required: false
     pull_request:
       types: [opened, synchronize, reopened, labeled, unlabeled]
     push:
