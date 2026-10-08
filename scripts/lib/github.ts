@@ -1,6 +1,12 @@
 export const REPO = 'partofmyid/register';
 export const BYPASSER = [ 'satr14washere' ];
 
+const headers = {
+  "Authorization": `Bearer ${process.env.GITHUB_TOKEN}`,
+  "X-GitHub-Api-Version": "2026-03-10",
+  "Accept": "application/vnd.github+json",
+};
+
 export type DiffEntryAPIResponse = {
   status: "added" | "removed" | "modified" | "renamed" | "copied" | "changed" | "unchanged",
   filename: string,
@@ -13,14 +19,7 @@ export async function fetchChangedFiles(pr: number, token?: string): Promise<{
   files?: string[],
   deleted?: string[],
 }> {
-  const response = await fetch(`https://api.github.com/repos/partofmyid/register/pulls/${pr}/files`, {
-    headers: {
-      "Authorization": `Bearer ${token}`,
-      "X-GitHub-Api-Version": "2026-03-10",
-      "Accept": "application/vnd.github+json",
-    },
-  });
-
+  const response = await fetch(`https://api.github.com/repos/partofmyid/register/pulls/${pr}/files`, { headers });
   const exists = response.ok;
 
   if (!exists) return {
