@@ -14,7 +14,7 @@ export function getPath(apex: string, subdomain: string) {
 export async function getSubdomainFromFile(getFilePath: string) {
   const file = Bun.file(getFilePath);
   const exists = await file.exists();
-  const contents = await file.json().catch(() => null) as DomainFile
+  const contents = await file.json().catch(() => null) as DomainFile;
   if (exists) {
     expect(contents, `JSON Parsing Failed: ${getFilePath}`).toBeObject();
     expect(contents?.owner, `Owner Must Be An Object: ${getFilePath}`).toBeObject();
