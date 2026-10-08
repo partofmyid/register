@@ -1,6 +1,5 @@
-import { DOMAINS_DIR } from "./files";
+import { expect } from "bun:test";
 import type { DomainFile } from "./schema";
-import { join as path } from 'node:path';
 import type { HeadersInit } from "bun";
 
 const REPO = 'partofmyid/register';
@@ -30,8 +29,7 @@ export async function fetchChangedFiles(pr: string): Promise<{
   message?: string,
   author?: string,
   labels?: string[],
-  changedURLs?: string[],
-  removedURLs?: string[],
+  files?: FileEntry[],
 }> {
   const prResponse = await fetch(`https://api.github.com/repos/${REPO}/pulls/${pr}`, { headers });
   if (!prResponse.ok) return {
@@ -49,28 +47,30 @@ export async function fetchChangedFiles(pr: string): Promise<{
     user: { login: string },
     labels: { name: string }[],
   };
-  const deletedRaw = `https://raw.githubusercontent.com/${prJson.base.repo.full_name}/${prJson.base.sha}`;
-  const changedRaw = `https://raw.githubusercontent.com/${prJson.head.repo.full_name}/${prJson.head.sha}`;
 
-  const changedURLs: string[] = [];
-  const removedURLs: string[] = [];
+  expect(prJson.head.repo, `PR #${pr} Head Repo Info Missing`).toBeObject();
+  const deletedRaw = `https://raw.githubusercontent.com/${prJson.base.repo!.full_name}/${prJson.base.sha}`;
+  const changedRaw = `https://raw.githubusercontent.com/${prJson.head.repo?.full_name}/${prJson.head.sha}`;
+
+  const files = [] as FileEntry[];
   const domainFiles = (await filesResponse.json() as DiffEntryAPIResponse[])
     .filter(({ filename }) => filename.startsWith('domains/'));
   
   for (const { status, filename, previous_filename } of domainFiles) {
+    const removed = ['removed', 'renamed'].includes(status);
     switch (status) {
       case 'added':
       case 'modified':
       case 'changed':
       case 'copied':
-        changedURLs.push(`${changedRaw}/${filename}`);
+        files.push({ removed, url: `${changedRaw}/${filename}` });
         break;
       case 'renamed':
-        changedURLs.push(`${changedRaw}/${filename}`);
-        if (previous_filename) removedURLs.push(`${deletedRaw}/${previous_filename}`);
+        files.push({ removed, url: `${changedRaw}/${filename}` });
+        if (previous_filename) files.push({ removed, url: `${deletedRaw}/${previous_filename}` });
         break;
       case 'removed':
-        removedURLs.push(`${deletedRaw}/${filename}`);
+        files.push({ removed, url: `${deletedRaw}/${filename}` });
         break;
       case 'unchanged':
         break;
@@ -80,6 +80,6 @@ export async function fetchChangedFiles(pr: string): Promise<{
   return {
     exists: true, author: prJson.user.login,
     labels: prJson.labels.map(l => l.name),
-    changedURLs, removedURLs
+    files,
   }
 }
