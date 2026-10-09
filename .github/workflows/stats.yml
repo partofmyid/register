@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   sync:
+    name: Count & Update
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
