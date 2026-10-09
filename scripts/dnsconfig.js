@@ -1,5 +1,5 @@
 // @ts-check
-/// <reference path="./types-dnscontrol.d.ts"/>
+/// <reference path="./lib/types-dnscontrol.d.ts"/>
 // ^^^^^^ https://docs.dnscontrol.org/getting-started/typescript
 
 /** @type {Object<string, DomainModifier[]>} */
