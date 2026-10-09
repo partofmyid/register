@@ -13,5 +13,9 @@ test('cloudflare proxied rules', async () => {
   await forEachDomainFile(async ({ fullPath }) => {
     const { contents: domainFile } = await getSubdomainFromFile(fullPath);
     if (domainFile.records.CNAME && !domainFile.proxied) expect(domainFile.records, `CNAME Records Must Be Proxied For Mixing With Other Records: ${fullPath}`).not.toContainAnyKeys(['MX', 'TXT']);
+    if ("REDIRECT" in domainFile.records) {
+      expect(domainFile.proxied, `REDIRECT Requires Proxied Enabled: ${fullPath}`).toBe(true);
+      expect(domainFile.records, `REDIRECT Cannot Mix With A, AAAA, or CNAME: ${fullPath}`).not.toContainAnyKeys(['A', 'AAAA', 'CNAME']);
+    }
   });
 });
