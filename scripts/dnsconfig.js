@@ -42,7 +42,17 @@ function commitsFor(domain) {
     };
   
     var fqdn = (subdomain !== '@' ? subdomain + "." : "") + domain
-    if ('REDIRECT' in data.records) commits.push(CF_SINGLE_REDIRECT("redirect " + fqdn, 301, 'http.host eq "' + fqdn + '"', 'concat("' + data.records.REDIRECT + '", http.request.uri.path)'));
+    if ('REDIRECT' in data.records) {
+      commits.push(CF_SINGLE_REDIRECT(
+        "redirect " + fqdn, 302,
+        'http.host eq "' + fqdn + '"',
+        '"' + data.records.REDIRECT + '"'));
+      if (
+        !('A' in data.records) && 
+        !('AAAA' in data.records) && 
+        !('CNAME' in data.records)
+      ) commits.push(AAAA(subdomain, "100::", modifier));
+    }
     // if ('NS' in data.records) for (var ns in data.records.NS) commits.push(NS(subdomain, data.records.NS[ns] + "."));
     
     // if ('ALIAS' in data.records) commits.push(ALIAS(subdomain, data.records.ALIAS + ".", modifier));
