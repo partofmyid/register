@@ -2,12 +2,6 @@
 /// <reference path="./lib/types-dnscontrol.d.ts"/>
 // ^^^^^^ https://docs.dnscontrol.org/getting-started/typescript
 
-/** @type {Object<string, DomainModifier[]>} */
-var extraCommits = {
-  'is-my.id': [ CF_REDIRECT('is-my.id/*', 'https://part-of.my.id/$1') ],
-  'part-of.my.id': [ CF_REDIRECT('www.part-of.my.id/*', 'https://part-of.my.id/$1') ],
-}
-
 /**
  * @param {string} directory
  */
@@ -32,8 +26,6 @@ function commitsFor(domain) {
   var commits = [];
   var domains = getDomainsList('../domains/' + domain);
 
-  if (domain in extraCommits) commits = commits.concat(extraCommits[domain] || []);
-
   domains.forEach(function (entry) {
     var data = entry.data;
     var subdomain = entry.name;
@@ -41,6 +33,8 @@ function commitsFor(domain) {
       "cloudflare_proxy": data.proxied ? "on" : "off",
     };
   
+    var fqdn = (subdomain !== '@' ? subdomain + "." : "") + domain
+    if ('REDIRECT' in data.records) commits.push(CF_SINGLE_REDIRECT("redirect " + fqdn, 301, 'http.host eq "' + fqdn + '"', 'concat("' + data.records.REDIRECT + '", http.request.uri.path)'));
     // if ('NS' in data.records) for (var ns in data.records.NS) commits.push(NS(subdomain, data.records.NS[ns] + "."));
     
     // if ('ALIAS' in data.records) commits.push(ALIAS(subdomain, data.records.ALIAS + ".", modifier));
