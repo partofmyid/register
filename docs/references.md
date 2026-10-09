@@ -56,6 +56,7 @@ Fields:
 - Mixing `REDIRECT` with `A`/`AAAA`/`CNAME` is not supported regardless of `proxied` status.
 - `REDIRECT` requires `proxied` status to route requests through Cloudflare.
 - `REDIRECT` is not a real DNS record, it's a Cloudflare Single Redirect rule using HTTP 302 Temporary status code.
+- An `AAAA` record containing `100::` is automatically added to `REDIRECT` records.
 
 ### `proxied` (optional)
 
