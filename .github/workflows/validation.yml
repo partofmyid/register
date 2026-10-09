@@ -25,7 +25,7 @@ permissions:
 
 jobs:
   dnscontrol:
-    name: DNSControl
+    name: Check DNS
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     env:
@@ -40,7 +40,7 @@ jobs:
       - uses: gacts/install-dnscontrol@v1
         with:
           version: 4.44.1
-      - name: Push DNS Records
+      - name: Check DNS Records
         run: dnscontrol check --config ./scripts/dnsconfig.js
 
   tests:
