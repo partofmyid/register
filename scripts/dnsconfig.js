@@ -4,8 +4,8 @@
 
 /** @type {Object<string, DomainModifier[]>} */
 var extraCommits = {
-  'is-my.id': [ CF_REDIRECT('is-my.id/*', 'https://part-of.my.id/$1') ],
-  'part-of.my.id': [ CF_REDIRECT('www.part-of.my.id/*', 'https://part-of.my.id/$1') ],
+  'is-my.id': [ ],
+  'part-of.my.id': [ ],
 }
 
 /**

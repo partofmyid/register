@@ -1,10 +1,10 @@
 {
-  "description": "dashboard and main website",
-  "owner": {
-    "username": "partofmyid"
-  },
-  "records": {
-    "AAAA": [ "100::" ]
-  },
-  "proxied": true
+    "description": "redirect to part-of.my.id",
+    "owner": {
+        "username": "partofmyid"
+    },
+    "records": {
+      "REDIRECT": "https://part-of.my.id"
+    },
+    "proxied": true
 }
