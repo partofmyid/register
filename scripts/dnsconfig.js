@@ -46,7 +46,7 @@ function commitsFor(domain) {
       commits.push(CF_SINGLE_REDIRECT(
         "redirect " + fqdn, 302,
         'http.host eq "' + fqdn + '"',
-        '"' + data.records.REDIRECT + '"'));
+        'concat("' + data.records.REDIRECT + '")'));
       commits.push(AAAA(subdomain, "100::", modifier));
     }
     // if ('NS' in data.records) for (var ns in data.records.NS) commits.push(NS(subdomain, data.records.NS[ns] + "."));
