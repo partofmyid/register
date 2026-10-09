@@ -1,46 +1,46 @@
 name: Stats Sync
 
 on:
-    workflow_dispatch:
-    push:
-        branches: [main]
-        paths:
-            - "domains/**"
-            - ".github/workflows/stats.yml"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "domains/**"
+      - ".github/workflows/stats.yml"
 
 permissions:
-    contents: write
+  contents: write
 
 jobs:
-    sync:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v7
-              with:
-                  token: ${{ secrets.PR_BYPASS_TOKEN }}
-                  fetch-depth: 0
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.PR_BYPASS_TOKEN }}
+          fetch-depth: 0
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: '18'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
 
-            - name: Generate statistics
-              run: |
-                rm -f stats/*_error.log
+      - name: Generate statistics
+        run: |
+          rm -f stats/*_error.log
 
-                find domains -type f | wc -l > stats/count.txt 2>stats/count_error.log &
+          find domains -type f | wc -l > stats/count.txt 2>stats/count_error.log &
 
-                wait
-            
-            - name: Commit changes
-              run: |
-                git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-                git config --global user.name "github-actions[bot]"
-                git add stats
+          wait
 
-                if [ -n "$(git status --porcelain)" ]; then
-                    git commit -m "[automated] update stats"
-                    git push
-                fi
+      - name: Commit changes
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add stats
+
+          if [ -n "$(git status --porcelain)" ]; then
+              git commit -m "[automated] update stats"
+              git push
+          fi
