@@ -47,11 +47,7 @@ function commitsFor(domain) {
         "redirect " + fqdn, 302,
         'http.host eq "' + fqdn + '"',
         '"' + data.records.REDIRECT + '"'));
-      if (
-        !('A' in data.records) && 
-        !('AAAA' in data.records) && 
-        !('CNAME' in data.records)
-      ) commits.push(AAAA(subdomain, "100::", modifier));
+      commits.push(AAAA(subdomain, "100::", modifier));
     }
     // if ('NS' in data.records) for (var ns in data.records.NS) commits.push(NS(subdomain, data.records.NS[ns] + "."));
     
