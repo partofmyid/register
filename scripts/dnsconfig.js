@@ -2,6 +2,12 @@
 /// <reference path="./lib/types-dnscontrol.d.ts"/>
 // ^^^^^^ https://docs.dnscontrol.org/getting-started/typescript
 
+/** @type {Object<string, DomainModifier[]>} */
+var extraCommits = {
+  'is-my.id': [ CF_REDIRECT('is-my.id/*', 'https://part-of.my.id/$1') ],
+  'part-of.my.id': [ CF_REDIRECT('www.part-of.my.id/*', 'https://part-of.my.id/$1') ],
+}
+
 /**
  * @param {string} directory
  */
@@ -25,6 +31,8 @@ function commitsFor(domain) {
   /** @type {DomainModifier[]} */
   var commits = [];
   var domains = getDomainsList('../domains/' + domain);
+  
+  if (domain in extraCommits) commits = commits.concat(extraCommits[domain] || []);
 
   domains.forEach(function (entry) {
     var data = entry.data;
