@@ -20,7 +20,7 @@ domains/is-my.id/satr14.json
 
 ## Setting your records
 
-Next, you'll need to **write your DNS record in our JSON schema**. You can find this in the [documentation](/docs/references) or alternatively check `scripts/schema.json`. Please make sure your JSON is valid and properly formatted.
+Next, you'll need to **write your DNS record in our JSON schema**. You can find this in the [documentation](/docs/references). Please make sure your JSON is valid and properly formatted.
 
 Here's what a valid file would look like for Cloudflare pages:
 ```json
