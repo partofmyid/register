@@ -5,6 +5,18 @@
 <p align="center">part-of.my.id is a <b>free subdomain service</b> that allows you to have a nice looking subdomain for your website for free.</p>
 <p></p>
 
+## Brief Guide
+
+1. [Fork](https://github.com/partofmyid/register/fork) the repository
+2. Make a JSON file in the `/domains/<apex_of_choice>` directory
+3. Fill in your records as per our [reference documentation](https://part-of.my.id/docs/references)
+4. Make a PR and wait for a maintainer to merge it
+5. After merge, wait ~24 hours for DNS to propagate
+6. ???
+7. Profit. Enjoy your new subdomain!
+
+_PS: If you want a more detailed guide, check out our quickstart guide below!_
+
 ## Important Links
 - [Quickstart Guide](https://part-of.my.id/docs/quickstart)
 - [Main Website](https://part-of.my.id/)
