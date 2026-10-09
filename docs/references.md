@@ -53,7 +53,9 @@ Fields:
 **Important** notes:
 - Mixing `CNAME` with any other record is unsupported **without** enabling `proxied` status.
 - Mixing `CNAME` with `A`/`AAAA` record is not supported regardless of `proxied` status.
-- `REDIRECT` is not a real DNS record, under the hood it 
+- Mixing `REDIRECT` with `A`/`AAAA`/`CNAME` is not supported regardless of `proxied` status.
+- `REDIRECT` requires `proxied` status to route requests through Cloudflare.
+- `REDIRECT` is not a real DNS record, it's a Cloudflare Single Redirect rule.
 
 ### `proxied` (optional)
 
