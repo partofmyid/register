@@ -32,11 +32,11 @@ function commitsFor(domain) {
   var commits = [];
   var domains = getDomainsList('../domains/' + domain);
 
-  if (domain in extraCommits) commits = commits.concat(extraCommits[domain]);
-  
-  for (var idx in domains) {
-    var data = domains[idx].data;
-    var subdomain = domains[idx].name;
+  if (domain in extraCommits) commits = commits.concat(extraCommits[domain] || []);
+
+  domains.forEach(function (entry) {
+    var data = entry.data;
+    var subdomain = entry.name;
     var modifier = {
       "cloudflare_proxy": data.proxied ? "on" : "off",
     };
@@ -62,15 +62,14 @@ function commitsFor(domain) {
     //   var srvRecord = data.records.SRV[srv];
     //   commits.push(SRV(subdomain, srvRecord.priority, srvRecord.weight, srvRecord.port, srvRecord.target + "."));
     // }
-  }
+  });
 
   return commits;
 }
 
 var apexDomains = require("./apexdomains.json");
-for (var i in apexDomains) {
-  var domain = apexDomains[i];
+apexDomains.forEach(function (domain) {
   D(domain, NewRegistrar("none"), DnsProvider(NewDnsProvider("cloudflare", {
     manage_single_redirects: true,
   })), commitsFor(domain));
-}
+});
