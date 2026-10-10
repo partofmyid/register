@@ -1,0 +1,10 @@
+{
+  "description": "A personal Website and developer Portfolio For L-RiXx",
+  "owner": {
+    "username": "L-RiXx",
+    "email": "L_RiXx@proton.me"
+  },
+  "records": {
+    "CNAME": "l-rixx.github.io"
+  }
+}
