@@ -4,5 +4,6 @@
   },
   "records": {
     "REDIRECT": "https://satr14.my.id"
-  }
+  },
+  "proxied": true
 }
