@@ -14,6 +14,9 @@ This document lists the **tested and known working** hosting and services with o
 | Vercel | **No** | Requires [PSL](https://publicsuffix.org/) |
 | Netlify | **No** | Requires [PSL](https://publicsuffix.org/) |
 
+> [!NOTE]
+> This list is not exhaustive, it only contains services tested and working hosting services. If you have a service that is not listed here, feel free to open an issue to request it to be added.
+
 ## PSL Restrictions
 
 Unfortunately, some services require our apex domains to be registered under the [Public Suffix List](https://publicsuffix.org/) (PSL). We will apply in the future when [the service gets more demand and subdomains](https://publicsuffix.org/submit/#:~:text=We%20will%20generally%20decline%20small%20projects).
