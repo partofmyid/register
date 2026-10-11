@@ -1,8 +1,7 @@
 {
   "description": "about L-RiXx",
   "owner": {
-    "username": "L-RiXx",
-    "email": "L_RiXx.proton.me"
+    "username": "L-RiXx"
   },
   "records": {
     "CNAME": "l-rixx.github.io"
