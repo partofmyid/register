@@ -3,6 +3,7 @@
     "username": "mysticalpengu"
   },
   "records": {
+      "proxied": true,
     "REDIRECT": "mysticalpengu.is-my.id/about.html"
   }
 }
