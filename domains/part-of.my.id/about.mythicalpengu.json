@@ -2,8 +2,8 @@
   "owner": {
     "username": "mysticalpengu"
   },
+  "proxied": true,
   "records": {
-      "proxied": true,
     "REDIRECT": "mysticalpengu.part-of.my.id/about.html"
   }
 }
