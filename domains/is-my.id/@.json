@@ -4,7 +4,8 @@
         "username": "partofmyid"
     },
     "records": {
-      "REDIRECT": "https://part-of.my.id"
+      "REDIRECT": "https://part-of.my.id",
+      "TXT": [ "google-site-verification=SaUNN1gIF3v0gRUmyWlbF6pT6VsWJWhGri8U_FHkOl4" ]
     },
     "proxied": true
 }
