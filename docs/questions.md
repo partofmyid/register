@@ -20,7 +20,7 @@ Within a day, but may take longer depending on how busy the maintainers are. Kee
 
 ## How long does DNS propagation take?
 
-After your PR is merged, you have to wait for Github Actions to push your records to Cloudflare using DNSControl. After that it can take from 24 to 48 hours for DNS to propagate. But in most cases, it will be available in a few hours.
+After your PR is merged, you have to wait for GitHub Actions to push your records to Cloudflare using DNSControl. After that it can take from 24 to 48 hours for DNS to propagate. But in most cases, it will be available in a few hours.
 
 ## Can I be a maintainer / PR reviewer?
 

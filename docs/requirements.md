@@ -40,6 +40,6 @@ Your website **MUST NOT** contain the following:
 
 ## Vibe Coded / AI Generated Websites
 
-While we generally allow this, all content written within your website **must be human written**. Using AI for coding the UI and scripts is allowed, but texts, posts, images, and other content must be made by a human. 
+While we generally allow this, all content written within your website **must be human written**. Using AI for coding the UI and scripts is allowed, but text, posts, images, and other content must be made by a human.
 
 Your website must also be working, fully functional, and complete. Meaning there's no broken links and unfinished pages. Please make sure there's no placeholder content left behind by your agent.

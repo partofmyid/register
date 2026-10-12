@@ -1,7 +1,7 @@
 **DRAFT**
 
 > [!WARNING]
-> While it is possible to create subdomains through the Web UI, we still recommend that you do research and learn about DNS, GitHub PRs, and Writing JSON. This way, it is less likely for your PR getting invalid. 
+> While it is possible to create subdomains through the Web UI, we still recommend that you do research and learn about DNS, GitHub PRs, and writing JSON. This way, it is less likely for your PR to be invalid.
 
 # Registering w/ The Web UI
 

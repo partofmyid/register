@@ -1,2 +1,2 @@
 > [!WARNING]
-> These markup files are meant to be viewed through the [Web UI](https://part-of.my.id/docs/quickstart). As there are many links and references only resolvable if rendered through the Web UI.
+> These markup files are meant to be viewed through the [Web UI](https://part-of.my.id/docs/quickstart), as there are many links and references that are only resolvable when rendered through the Web UI.

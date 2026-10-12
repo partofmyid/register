@@ -1,7 +1,7 @@
 <!--
     ⚠️⚠️ ****READ FIRST**** ⚠️⚠️
     1.  You **MUST** read the documentation if you have any issue first **BEFORE** opening a pull request
-    2.  Note that checkboxes in this template **ARE REQUIRED** so not checking them will result in a possible PR close
+    2.  Note that checkboxes in this template **ARE REQUIRED**, so not checking them may result in your PR being closed.
         So to get your PR merged, please spend time to review your application before submitting.
         To check an item, add an 'X' between the brackets: '[ ]' => '[X]'
     3.  Please **MAKE SURE YOU KNOW WHAT YOU'RE DOING**, this means you know:
@@ -18,7 +18,7 @@
 
 - [ ] The CNAME record is a valid FQDN and doesn't contain `https://` or `/`. <!-- ignore if you're not using CNAME -->
 - [ ] There is sufficient information at the `owner` field. (including your GitHub `username`)
-- [ ] I own the root subdomain for this nested subdomain. (checklist if you aren't registering a nested subdomain) 
+- [ ] I own the root subdomain for this nested subdomain. (check this if you aren't registering a nested subdomain)
 - [ ] I have read the [README](https://github.com/partofmyid/register) for announcements in case of any updates.
 - [ ] I know what I'm doing and everything is ready. <!-- ⚠️⚠️ ****REQUIRED**** ⚠️⚠️ -->
 - [ ] You have starred the repository and followed the organization. <!-- optional but highly recommended ;) -->

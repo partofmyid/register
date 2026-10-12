@@ -65,7 +65,7 @@ A boolean to indicate whether to enable Cloudflare proxying (also known as orang
 
 ### `description` (optional)
 
-A string containing a short description about the use of the subdomain. This is purely used for reference and is completely optional. However, it's highly recommended you include this if your subdomain is not a website (e.g., game server, API, etc.) so maintainers wont get confused when your site is unreachable.
+A string containing a short description about the use of the subdomain. This is purely used for reference and is completely optional. However, it's highly recommended you include this if your subdomain is not a website (e.g., game server, API, etc.) so maintainers won't get confused when your site is unreachable.
 
 ## Full File Example
 
