@@ -57,10 +57,14 @@ function commitsFor(domain) {
     if ('A' in data.records) for (var a in data.records.A) commits.push(A(subdomain, IP(data.records.A[a]), modifier));
     if ('AAAA' in data.records) for (var aaaa in data.records.AAAA) commits.push(AAAA(subdomain, data.records.AAAA[aaaa], modifier));
   
-    if ('MX' in data.records) for (var mx in data.records.MX) commits.push(MX(subdomain, 10, data.records.MX[mx] + "."));
     if ('TXT' in data.records) for (var txt in data.records.TXT) commits.push(TXT(subdomain, data.records.TXT[txt]));
     // if ('PTR' in data.records) for (var ptr in data.records.PTR) commits.push(PTR(subdomain, data.records.PTR[ptr] + "."));
   
+    var mxPriority = 10;
+    if ('MX' in data.records) for (var mx in data.records.MX) {
+      commits.push(MX(subdomain, mxPriority, data.records.MX[mx] + "."));
+      mxPriority += 10;
+    }
     // if ('CAA' in data.records) for (var caa in data.records.CAA) {
     //   var caaRecord = data.records.CAA[caa];
     //   commits.push(CAA(subdomain, caaRecord.flags, caaRecord.tag, caaRecord.value));

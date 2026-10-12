@@ -51,6 +51,7 @@ Fields:
 - `REDIRECT`: A string containing the URL to redirect to.
 
 **Important** notes:
+- `MX` record ordering determines priority, with the first entry having the highest priority order.
 - Mixing `CNAME` with any other record is unsupported **without** enabling `proxied` status.
 - Mixing `CNAME` with `A`/`AAAA` record is not supported regardless of `proxied` status.
 - Mixing `REDIRECT` with `A`/`AAAA`/`CNAME` is not supported regardless of `proxied` status.
