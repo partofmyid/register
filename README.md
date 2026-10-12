@@ -1,5 +1,5 @@
 <p align="center">
-   <img height="350" alt="part-of.my.id Banner" src="https://raw.githubusercontent.com/partofmyid/register/main/docs/banner.png">
+   <img height="350" alt="part-of.my.id Banner" src="https://raw.githubusercontent.com/partofmyid/register/main/docs/visuals/banner.png">
 </p>
 <h1 align="center">part-of.my.id</h1>
 <p align="center">part-of.my.id is a <b>free subdomain service</b> that allows you to have a nice looking subdomain for your website for free.</p>
