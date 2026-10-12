@@ -5,7 +5,12 @@
 /** @type {Object<string, DomainModifier[]>} */
 var extraCommits = {
   'is-my.id': [ ],
-  'part-of.my.id': [ ],
+  'part-of.my.id': [
+    // cf email routing
+    IGNORE("@", "MX"),
+    IGNORE("@", "TXT", "v=spf1*"),
+    IGNORE("cf2024-1._domainkey", "TXT"),
+  ],
 }
 
 /**
