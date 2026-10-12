@@ -1,6 +1,5 @@
 // @ts-check
 /// <reference path="./lib/types-dnscontrol.d.ts"/>
-// ^^^^^^ https://docs.dnscontrol.org/getting-started/typescript
 
 /** @type {Object<string, DomainModifier[]>} */
 var extraCommits = {
