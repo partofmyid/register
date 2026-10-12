@@ -48,7 +48,7 @@ Fields:
 - `CNAME`: A string containing the hostname to point to.
 - `MX`: An array of strings containing the mail servers to point to.
 - `TXT`: An array of strings containing plain text records.
-- `REDIRECT`: A string containing the the URL to redirect to.
+- `REDIRECT`: A string containing the URL to redirect to.
 
 **Important** notes:
 - Mixing `CNAME` with any other record is unsupported **without** enabling `proxied` status.
