@@ -69,6 +69,9 @@ A string containing a short description about the use of the subdomain. This is 
 
 ## Full File Example
 
+> [!NOTE]
+> This example uses all available record keys in an unsupported configuration. This is purely for demonstration purposes to get a sense of what the proper values should look like.
+
 Path: `/domains/is-my.id/steve.json`
 ```json
 {
@@ -78,9 +81,12 @@ Path: `/domains/is-my.id/steve.json`
     "email": "steve@example.com"
   },
   "records": {
+    "A": [ "1.0.0.1", "1.1.1.1" ],
+    "AAAA": [ "2606:4700:4700::1111", "2606:4700:4700::1001" ],
     "CNAME": "your-site.example.com",
     "MX": [ "mx1.example.com", "mx2.example.com" ],
-    "TXT": [ "part1", "part2" ]
+    "TXT": [ "part1", "part2", "part3", "bla bla" ],
+    "REDIRECT": "https://example.com"
   },
   "proxied": true
 }
