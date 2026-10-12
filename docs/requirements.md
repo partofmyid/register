@@ -35,7 +35,7 @@ Your website **MUST NOT** contain the following:
 - Game cheats/hacks/exploits
 - Violations of Indonesian laws and regulations
 
-> [!NOTE]
+> [!WARNING]
 > This list is not exhaustive and may be updated in the future.
 
 ## Vibe Coded / AI Generated Websites

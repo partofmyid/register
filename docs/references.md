@@ -28,7 +28,7 @@ File name in `/domains/<apex>/<subdomain>.json` must follow these rules:
 
 ## JSON Schema
 
-> [!NOTE]
+> [!CAUTION]
 > These are the only supported keys for the JSON schema. Including any other key not listed here may trigger a PR check fail.
 
 ### `owner` (required)
