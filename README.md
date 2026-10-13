@@ -18,8 +18,13 @@
 _PS: If you want a more detailed guide, check out our quickstart guide below!_
 
 ## Important Links
+
 - [Quickstart Guide](https://part-of.my.id/docs/quickstart)
 - [Main Website](https://part-of.my.id/)
+
+## Report Abuse
+
+If you find any subdomains violating our [Terms of Service](https://part-of.my.id/docs/terms), please report them by penning an [issue](https://github.com/partofmyid/register/issues/new?labels=report-abuse&template=report.md&title=Report+abuse) or emailing at `support@part-of.my.id`.
 
 ## Announcements
 <!-- ANNOUNCEMENTS_START -->
