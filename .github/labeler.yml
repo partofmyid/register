@@ -6,4 +6,4 @@ domains:
 non-domains:
 - all:
   - changed-files:
-    - any-glob-to-any-file: 'domains/**/*'
+    - any-glob-to-any-file: '!domains/**/*'
