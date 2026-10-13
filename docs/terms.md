@@ -1,4 +1,4 @@
-# Website & Usage Requirements
+# Terms of Service
 
 This document outlines the requirements for registering subdomains. Feel free to open an issue if you have any questions or concerns about these requirements.
 
