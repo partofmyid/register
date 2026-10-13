@@ -1,5 +1,5 @@
 > [!TIP]
-> You can also use the website to guide you in registering the subdomain, start by going to the [search page](/query/your-name)
+> You can also use the website to guide you in registering the subdomain, start by going to the [search page](/query)
 
 > [!NOTE]
 > TLDR:
