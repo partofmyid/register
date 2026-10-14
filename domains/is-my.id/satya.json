@@ -1,1 +1,10 @@
-{"owner":{"username":"seesatya"},"records":{"REDIRECT":"https://satyajit.is-a.dev"},"proxied":true,"description":"personal website"}
+{
+  "owner": {
+    "username": "seesatya"
+  },
+  "records": {
+    "REDIRECT": "https://satyajit.is-a.dev"
+  },
+  "proxied": true,
+  "description": "personal website"
+}
