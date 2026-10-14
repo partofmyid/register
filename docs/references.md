@@ -54,9 +54,11 @@ Fields:
 - `MX` record ordering determines priority, with the first entry having the highest priority order.
 - Mixing `CNAME` with any other record is unsupported **without** enabling `proxied` status.
 - Mixing `CNAME` with `A`/`AAAA` record is not supported regardless of `proxied` status.
+- `CNAME` must be a valid hostname FQDN and cannot contain protocols (`https://`) or paths (`/path/to/anything`)
 - Mixing `REDIRECT` with `A`/`AAAA`/`CNAME` is not supported regardless of `proxied` status.
 - `REDIRECT` requires `proxied` status to route requests through Cloudflare.
 - `REDIRECT` is not a real DNS record, it's a Cloudflare Single Redirect rule using HTTP 302 Temporary status code.
+- `REDIRECT` record must contain a full URL including the protocol (e.g., `https://example.com`).
 - An `AAAA` record containing `100::` is automatically added to `REDIRECT` records for Cloudflare routing.
 
 ### `proxied` (optional)
