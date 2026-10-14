@@ -38,7 +38,7 @@ Your website **MUST NOT** contain the following:
 > [!WARNING]
 > This list is not exhaustive and may be updated in the future.
 
-## Vibe Coded / AI Generated Websites
+### Vibe Coded / AI Generated Websites
 
 While we generally allow this, all content written within your website **must be human written**. Using AI for coding the UI and scripts is allowed, but text, posts, images, and other content must be made by a human.
 
