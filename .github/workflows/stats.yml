@@ -33,6 +33,6 @@ jobs:
           git add stats
 
           if [ -n "$(git status --porcelain)" ]; then
-              git commit -m "[automated] prettify files"
+              git commit -m "[automated] update stats"
               git push
           fi
