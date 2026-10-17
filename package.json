@@ -1,9 +1,14 @@
 {
   "name": "register",
-  "type": "module",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "oxfmt": "^0.73.0"
   },
   "peerDependencies": {
     "typescript": "^5"
