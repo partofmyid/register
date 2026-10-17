@@ -32,6 +32,9 @@ domains/is-my.id/satr14.json
 
 Next, you'll need to **write your DNS record in our JSON schema**. You can find this in the [documentation](/docs/references). Please make sure your JSON is valid and properly formatted.
 
+> [!TIP]
+> While our CI does it automatically for you, it's still a good practice to prettify your JSON before committing. Makes it easier for PR reviewers to read and understand your records.
+
 Here's what a valid file would look like for Cloudflare pages:
 ```json
 {
@@ -48,7 +51,10 @@ After you finish writing, commit your changes to a new branch and start a pull r
 
 ## Opening a pull request
 
-Now you should be in the "Comparing changes" page. From here, click on "Create pull request". Please make sure to **fill in the PR template checklist and website preview/subdomain purpose description**. Failure to do so will result in your PR getting closed.
+Now you should be in the "Comparing changes" page. From here, click on "Create pull request".
+
+> [!CAUTION]
+> Please make sure to **fill in the PR template checklist and website preview/subdomain purpose description**. Failure to do so will result in your PR getting closed.
 
 After a while, a maintainer will review and merge your PR. It may take a while for GitHub Actions to deploy your subdomain and for Cloudflare to propagate your DNS records. You can check the Actions tab to see if your subdomain is deployed.
 
