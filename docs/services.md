@@ -11,6 +11,7 @@ This document lists the **tested and known working** hosting and services with o
 | Cloudflare Pages | Yes | |
 | Render | Yes | |
 | Redirect Pizza | Yes | Alternatively, use `REDIRECT` records. |
+| Cloudflare Tunnels | **No** | |
 | Vercel | **No** | Requires [PSL](https://publicsuffix.org/) |
 | Netlify | **No** | Requires [PSL](https://publicsuffix.org/) |
 
