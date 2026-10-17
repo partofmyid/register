@@ -1,10 +1,10 @@
 {
-    "description": "redirect to part-of.my.id",
-    "owner": {
-        "username": "partofmyid"
-    },
-    "records": {
-      "REDIRECT": "https://part-of.my.id"
-    },
-    "proxied": true
+  "description": "redirect to part-of.my.id",
+  "owner": {
+    "username": "partofmyid"
+  },
+  "records": {
+    "REDIRECT": "https://part-of.my.id"
+  },
+  "proxied": true
 }

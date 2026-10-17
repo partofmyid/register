@@ -1,11 +1,11 @@
 {
-    "description": "redirect to part-of.my.id",
-    "owner": {
-        "username": "partofmyid"
-    },
-    "records": {
-      "REDIRECT": "https://part-of.my.id",
-      "TXT": [ "google-site-verification=11KjCCUzZu3yo5mHjROjRukTDHa92lC7WL7T4rLz7Dw" ]
-    },
-    "proxied": true
+  "description": "redirect to part-of.my.id",
+  "owner": {
+    "username": "partofmyid"
+  },
+  "records": {
+    "REDIRECT": "https://part-of.my.id",
+    "TXT": ["google-site-verification=11KjCCUzZu3yo5mHjROjRukTDHa92lC7WL7T4rLz7Dw"]
+  },
+  "proxied": true
 }

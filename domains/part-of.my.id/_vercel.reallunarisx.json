@@ -3,8 +3,6 @@
     "username": "LunarisXOffical"
   },
   "records": {
-    "TXT": [
-      "vc-domain-verify=reallunarisx.part-of.my.id,eb89acab3adcd3ee3acd"
-    ]
+    "TXT": ["vc-domain-verify=reallunarisx.part-of.my.id,eb89acab3adcd3ee3acd"]
   }
 }
