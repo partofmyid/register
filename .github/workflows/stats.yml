@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: ${{ github.ref }}-domains-sync
+  cancel-in-progress: false
+
 jobs:
   sync:
     name: Count & Update
