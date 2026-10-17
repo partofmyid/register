@@ -34,7 +34,7 @@ function getDomainsList(directory) {
 function commitsFor(domain) {
   /** @type {DomainModifier[]} */
   var commits = [];
-  var domains = getDomainsList('../domains/' + domain);
+  var domains = getDomainsList('../../domains/' + domain);
   
   if (domain in extraCommits) commits = commits.concat(extraCommits[domain] || []);
 
