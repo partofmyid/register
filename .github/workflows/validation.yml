@@ -40,7 +40,7 @@ jobs:
         with:
           version: 4.44.1
       - name: Check DNS Records
-        run: dnscontrol check --config ./scripts/dnsconfig.js
+        run: dnscontrol check --config ./scripts/bin/dnsconfig.js
 
   tests:
     name: Bun Tests

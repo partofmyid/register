@@ -1,5 +1,5 @@
 // @ts-check
-/// <reference path="./lib/types-dnscontrol.d.ts"/>
+/// <reference path="../lib/types-dnscontrol.d.ts"/>
 
 /** @type {Object<string, DomainModifier[]>} */
 var extraCommits = {
@@ -83,7 +83,7 @@ function commitsFor(domain) {
   return commits;
 }
 
-var apexDomains = require("./apexdomains.json");
+var apexDomains = require("../apexdomains.json");
 apexDomains.forEach(function (domain) {
   D(domain, NewRegistrar("none"), DnsProvider(NewDnsProvider("cloudflare", {
     manage_single_redirects: true,

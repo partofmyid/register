@@ -7,7 +7,7 @@ on:
     paths:
       - "domains/**"
       - ".github/workflows/deploy.yml"
-      - "scripts/dnsconfig.js"
+      - "scripts/bin/dnsconfig.js"
 
 concurrency:
   group: ${{ github.ref }}-publish
@@ -30,4 +30,4 @@ jobs:
         with:
           version: 4.44.1
       - name: Push DNS Records
-        run: dnscontrol push --config ./scripts/dnsconfig.js
+        run: dnscontrol push --config ./scripts/bin/dnsconfig.js
