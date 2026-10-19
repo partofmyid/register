@@ -41,7 +41,6 @@ jobs:
           version: 4.44.1
       - name: Check DNS Records
         run: dnscontrol check --config ./scripts/bin/dnsconfig.js
-
   tests:
     name: Bun Tests
     runs-on: ubuntu-latest
@@ -57,3 +56,6 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.pull_request.number || inputs.pr_number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check formatting
+        run: bun run fmt:check
+        continue-on-error: true
