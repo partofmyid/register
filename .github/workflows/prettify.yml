@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  sync:
+  fmt:
     name: Run OxFmt
     runs-on: ubuntu-latest
     steps:
