@@ -11,7 +11,7 @@
 > 6. ???
 > 7. Profit. Enjoy your new subdomain!
 
-# Quickstart Registration Guide
+# Quickstart Guide
 
 This is a short and concise tutorial on how to create a pull request with your desired DNS records on a subdomain. Note that **we have requirements and standards for whatever content you host** on your subdomain. Please refer to the [Terms of Service](/docs/terms).
 

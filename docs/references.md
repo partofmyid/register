@@ -1,4 +1,4 @@
-# Schema & Structure Reference
+# Schema & Structure
 
 This document contains the JSON schema and filesystem structure for registering new subdomains and updating records.
 

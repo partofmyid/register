@@ -1,4 +1,4 @@
-# List of Supported Services
+# Supported Services
 
 This document lists the **tested and known working** hosting and services with our subdomain service along with limitations and unsupported services.
 
