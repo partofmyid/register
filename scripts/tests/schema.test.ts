@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test';
 import { forEachDomainFile, getSubdomainFromFile } from '../lib/files';
-import { ARRAY_RECORDS, STRING_RECORDS, RECORDS_REGEX } from '../lib/schema';
+import { ARRAY_RECORDS, STRING_RECORDS, RECORDS_REGEX, EMAIL_REGEX } from '../lib/schema';
 
 test('json is valid and parses', async () => {
   await forEachDomainFile(async ({ fullPath }) => {
@@ -17,6 +17,11 @@ test('schema and records are valid', async () => {
     for (const type of Object.keys(domainFile.records)) expect([...ARRAY_RECORDS, ...STRING_RECORDS] as string[], `Unknown Record Type: ${type} in ${fullPath}`).toContain(type);
           
     expect(domainFile.owner.username, `A GitHub Username Must Be Provided: ${fullPath}`).toBeString();
+    if (domainFile.owner.email) {
+      expect(domainFile.owner.email, `An Email Must Be A String: ${fullPath}`).toBeString();
+      expect(domainFile.owner.email, `An Valid Email Must Be Provided: ${fullPath}`).toMatch(EMAIL_REGEX);
+    }
+    
     expect(domainFile.records, `Records Must Be An Object: ${fullPath}`).toBeObject();
     expect(domainFile.records, `At Least 1 Record Type Must Be Set: ${fullPath}`).toContainAnyKeys([...ARRAY_RECORDS, ...STRING_RECORDS]);
     
