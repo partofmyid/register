@@ -47,7 +47,7 @@ We support a variety of DNS record types, including `A`, `AAAA`, `CNAME`, `MX`, 
 
 While all of our DNS records are publicly viewable and hosted on our [GitHub repository](https://github.com/partofmyid/register), automated checks make sure that only your GitHub account is authorized to make changes via Pull Requests. Our domains are **hosted on Cloudflare** so rest assured your subdomain won't go offline anytime soon. We also actively maintain the repositories and keep an eye on Pull Requests.
 
-## Pull Requests? What's that?
+### Pull Requests? What's that?
 
 Pull Request (or PRs for short) is a way for you to propose your code changes to a repository. In our case, it's a way for you to request to create/update/delete your subdomain and records. While automated checks will verify your records are valid, your website will undergo review to make sure it complies with our [Terms of Service](/docs/terms).
 
