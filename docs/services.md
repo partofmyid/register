@@ -16,7 +16,7 @@ This document lists the **tested and known working** hosting and services with o
 | Netlify | **No** | Requires [PSL](https://publicsuffix.org/) |
 
 > [!NOTE]
-> This list is not exhaustive, it only contains services tested and working hosting services. If you have a service that is not listed here, feel free to open an issue to request it to be added.
+> This list is not exhaustive, it only lists tested and known-working hosting services. If you have a service that is not listed here, feel free to open an issue to request it to be added.
 
 ## PSL Restrictions
 

@@ -3,7 +3,7 @@
 
 # What Is This?
 
-This is **a free subdomain service** that allows you to have a nice better looking subdomain instead of using hosting provider defaults. So instead of using say:
+This is **a free subdomain service** that allows you to have a nicer, better-looking subdomain instead of using hosting provider defaults. So instead of using say:
 ```
 satr14.github.io
 satr14.pages.dev
@@ -31,14 +31,14 @@ We support a variety of DNS record types. Including `A`, `AAAA`, `CNAME`, `MX`, 
 
 ## Is this all safe and reliable?
 
-While all of our DNS records are publicly viewable and hosted on our [GitHub repository](https://github.com/partofmyid/register), CI checks makes sure that only your GitHub account is authorized to make changes via Pull Requests. Our domains are **hosted on Cloudflare** so rest assured your subdomain wont go offline anytime soon. We also actively maintain the repositories and keep an eye on Pull Requests.
+While all of our DNS records are publicly viewable and hosted on our [GitHub repository](https://github.com/partofmyid/register), CI checks make sure that only your GitHub account is authorized to make changes via Pull Requests. Our domains are **hosted on Cloudflare** so rest assured your subdomain wont go offline anytime soon. We also actively maintain the repositories and keep an eye on Pull Requests.
 
 ## Pull Requests? What's that?
 
-Pull Request (or PRs for short) are a way for you to propose your code changes to a repository. In our case, it's a way for you to request to create/update/delete your subdomain and records. Your website and record changes will undergo review to make sure it complies with out [Terms of Service](/docs/terms). Once your Pull Request is approved and merged, GitHub Actions will deploy your DNS records onto Cloudflare.
+Pull Request (or PRs for short) are a way for you to propose your code changes to a repository. In our case, it's a way for you to request to create/update/delete your subdomain and records. Your website and record changes will undergo review to make sure it complies with our [Terms of Service](/docs/terms). Once your Pull Request is approved and merged, GitHub Actions will deploy your DNS records onto Cloudflare.
 
 <!--## But is this gonna last?-->
 
-## So where do I begin? 
+## So where do I begin?
 
 Start by looking at our [quickstart guide](/docs/quickstart), it will guide you through forking the repository, creating the JSON domain file, and creating a pull request.

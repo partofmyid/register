@@ -36,7 +36,7 @@ File name in `/domains/<apex>/<subdomain>.json` must follow these rules:
 Contact information in case action is required for your subdomain. GitHub username is the absolute bare minimum and **must match** the account you are making the PR with. It's recommended that you also include other contact methods such as `email` and `discord`.
 
 > [!CAUTION]
-> All domain files are publicly viewable. Please dont use your personal/private accounts for owner contacts.
+> All domain files are publicly viewable. Please don't use your personal/private accounts for owner contacts.
 
 Fields:
 - `username`: A string containing your GitHub username.

@@ -24,4 +24,4 @@ After your PR is merged, you have to wait for GitHub Actions to push your record
 
 ## Can I be a maintainer / PR reviewer?
 
-Not for the time being, the project is rather small at the time I'm writing this. If we do need more people then we will handpick them. You can raise your chances on getting picked by helping on reviewing PRs and help guiding newbies.
+Not for the time being, the project is rather small at the time I'm writing this. If we do need more people then we will handpick them. You can raise your chances of getting picked by helping on reviewing PRs and help guiding newbies.
