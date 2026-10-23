@@ -19,6 +19,7 @@ _PS: If you want a more detailed guide, check out our quickstart guide below!_
 
 ## Important Links
 
+- [What Is This?](https://part-of.my.id/docs/domains101)
 - [Quickstart Guide](https://part-of.my.id/docs/quickstart)
 - [Main Website](https://part-of.my.id/)
 
