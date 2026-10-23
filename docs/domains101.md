@@ -3,25 +3,25 @@
 
 # What Is This?
 
-This is **a free subdomain service** that allows you to have a nicer, better-looking subdomain instead of using defaults from hosting providers. So instead of using say:
+This is **a free subdomain service** that allows you to have a nicer, better-looking subdomain instead of using the default URLs that hosting providers give you. Hosting providers like GitHub Pages or Cloudflare Pages let you publish a website for free, but the URL they assign you is not the best. So instead of using say:
 ```
 satr14.github.io
 satr14.pages.dev
 ```
 
-You can use something much better looking:
+You can get something much better looking:
 ```
 satr14.part-of.my.id
 satr14.is-my.id
 ```
 
-**These subdomains are free**. No hidden fees, all paid and managed by us.
+**These subdomains are free**. Unlike regular domains which cost a yearly fee, no hidden fees here. All paid and managed by us.
 
 ## Wait, so what's the difference with a regular domain?
 
 Regular domains are paid by you, the user. You pay the registrar a yearly fee for access to your domain. For part-of.my.id, you get access to a **subdomain** on one of our available domains. Best part of all is that **we pay for the fees** and provide you access for free, no strings attached. You can set DNS records to your subdomains by creating JSON files with your record values.
 
-A subdomain is part of a domain. In part-of.my.id, we give you access to subdomains
+A subdomain is a prefix of a domain. For example, `satr14` is the subdomain in `satr14.part-of.my.id`. Instead of buying your own domain, we give you access to a subdomain on one of ours.
 
 ## DNS records? What's that?
 
@@ -29,17 +29,19 @@ Think of it like a phone book for the internet, every website's domain like `exa
 
 When your browser wants to visit a website, it goes to a DNS server to request the address for that website. The DNS server responds with an IP address for that website which your browser uses to make a connection. Without DNS, you would need to manually type IP address numbers which would be very hard to memorize.
 
+This is relevant to you because when you register a subdomain with us, you are essentially creating DNS records that tell the internet where your website lives. Without those records, your subdomain would point nowhere.
+
 ## So... what records do you support?
 
-We support a variety of DNS record types. Including `A`, `AAAA`, `CNAME`, `MX`, `TXT`, and many more in the future. All our subdomains are hosted on Cloudflare. Meaning, we support record proxying (also known as **orange clouding**). We also have support for **single page redirect rules** via a `REDIRECT` pseudo-record.
+We support a variety of DNS record types, including `A`, `AAAA`, `CNAME`, `MX`, `TXT`, and many more in the future. All our subdomains are hosted on Cloudflare, meaning we support record proxying (also known as **orange clouding**). We also have support for **single page redirect rules** via a `REDIRECT` pseudo-record.
 
 ## But you mentioned JSON? Who is that?
 
-Javascript Object Notaion (or JSON for short) is a way to define key-value pairs. For part-of.my.id, it's a way for you to describe your DNS records and your ownership contacts. Automated scripts parse JSON files in our repository and determine what records to deploy to which subdomains.
+JavaScript Object Notation (or JSON for short) is a way to define key-value pairs. For part-of.my.id, it's a way for you to describe your DNS records and your ownership contacts. Automated scripts parse JSON files in our repository and determine what records to deploy to which subdomains.
 
 ## Is this all safe and reliable?
 
-While all of our DNS records are publicly viewable and hosted on our [GitHub repository](https://github.com/partofmyid/register), automated checks make sure that only your GitHub account is authorized to make changes via Pull Requests. Our domains are **hosted on Cloudflare** so rest assured your subdomain wont go offline anytime soon. We also actively maintain the repositories and keep an eye on Pull Requests.
+While all of our DNS records are publicly viewable and hosted on our [GitHub repository](https://github.com/partofmyid/register), automated checks make sure that only your GitHub account is authorized to make changes via Pull Requests. Our domains are **hosted on Cloudflare** so rest assured your subdomain won't go offline anytime soon. We also actively maintain the repositories and keep an eye on Pull Requests.
 
 ## Pull Requests? What's that?
 
@@ -49,7 +51,7 @@ Once your Pull Request is approved and merged, automated scripts will deploy you
 
 ## Who is this for?
 
-If you can't afford an actual domain, part-of.my.id is a way for you to get a better-looking web address for your website. We made this primarily for individuals who likes web development but lack the funds for buying a domains.
+If you can't afford an actual domain, part-of.my.id is a way for you to get a better-looking web address for your website. We made this primarily for individuals who like web development but lack the funds for buying a domain.
 
 <!--## But is this gonna last?-->
 
