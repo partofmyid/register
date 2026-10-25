@@ -30,7 +30,7 @@ jobs:
           bun-version: v1.3.13
       - name: Install dependencies
         run: bun ci
-      - name: Generate statistics
+      - name: Format files
         run: bun run fmt
       - name: Commit changes
         run: |
