@@ -1,0 +1,10 @@
+{
+  "description": "My personal site",
+  "owner": {
+    "username": "whitedragon303"
+  },
+  "records": {
+    "CNAME": "whitedragon303.pages.dev"
+  },
+  "proxied": false
+}
