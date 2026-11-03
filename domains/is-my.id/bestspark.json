@@ -1,0 +1,11 @@
+{
+  "description": "games site",
+  "owner": {
+    "username": "BestSpark687090",
+    "email": "bestspark@bestspark.org"
+  },
+  "records": {
+    "A": [ "15.204.67.205" ]
+  },
+  "proxied": true
+}
