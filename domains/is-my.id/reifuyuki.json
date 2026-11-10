@@ -1,10 +1,10 @@
 {
-    "description": "Personal website portofolio, hosted in cloudflare pages..",
-    "owner": {
+  "description": "Personal website portofolio, hosted in cloudflare pages..",
+  "owner": {
     "username": "Jirankun"
-    },
-    "records": {
-        "REDIRECT": "https://zhyllanfyllah.my.id"
-    },
-    "proxied": true
+  },
+  "records": {
+    "REDIRECT": "https://zhyllanfyllah.my.id"
+  },
+  "proxied": true
 }
