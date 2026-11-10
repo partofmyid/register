@@ -40,5 +40,5 @@ jobs:
 
           if [ -n "$(git status --porcelain)" ]; then
               git commit -m "[automated] prettify files"
-              git push
+              git pull --rebase; git push
           fi

@@ -38,5 +38,5 @@ jobs:
 
           if [ -n "$(git status --porcelain)" ]; then
               git commit -m "[automated] update stats"
-              git push
+              git pull --rebase; git push
           fi
