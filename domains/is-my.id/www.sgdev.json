@@ -5,5 +5,5 @@
   "records": {
     "REDIRECT": "https://sgdev.is-my.id"
   },
-  "proxied": false
+  "proxied": true
 }
